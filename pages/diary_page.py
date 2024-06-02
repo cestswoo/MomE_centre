@@ -102,7 +102,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-# SQLite 데이터베이스에 일기 데이터를 저장하는 함수
 def save_diary_to_db(username, date, diary, sentiment, message):
     try:
         conn = sqlite3.connect('data.db')
@@ -112,12 +111,13 @@ def save_diary_to_db(username, date, diary, sentiment, message):
             VALUES (?, ?, ?, ?, ?)
         ''', (username, date, diary, str(sentiment), message))
         conn.commit()
+
     except sqlite3.OperationalError as e:
         st.error(f"An error occurred while saving the diary: {e}")
     finally:
         conn.close()
 
-# SQLite 데이터베이스에서 특정 사용자의 일기 데이터를 불러오는 함수
+
 def load_diary_data(username):
     conn = sqlite3.connect('data.db')
     cursor = conn.cursor()
@@ -127,13 +127,14 @@ def load_diary_data(username):
     except sqlite3.OperationalError as e:
         st.error(f"An error occurred while loading the diary: {e}")
         rows = []
+
     conn.close()
-    return pd.DataFrame(rows, columns=['Date', 'Diary', 'Sentiment', 'Message'])
+    return pd.DataFrame(rows, columns=['date', 'Diary', 'Sentiment', 'Message'])
 
 # Streamlit 앱 메인 함수
 def main():
     # SQLite 데이터베이스 초기화
-    init_db()
+    #init_db()
 
     # CSS 스타일 추가
     st.markdown(
@@ -259,7 +260,7 @@ def main():
                 probabilities = analyze_sentiment_bert(user_input)
                 sentiment_probs, result_message = interpret_sentiment(probabilities)
 
-                save_diary_to_db(st.session_state['logged_in_user'], datetime.now().strftime('%Y-%m-%d %H:%M:%S'), user_input, sentiment_probs, result_message)
+                save_diary_to_db(st.session_state.get('logged_in_user'), datetime.now().strftime('%Y-%m-%d %H:%M:%S'), user_input, sentiment_probs, result_message)
 
                 st.session_state['sentiment_probs'] = sentiment_probs
                 st.session_state['result_message'] = result_message
@@ -301,27 +302,34 @@ def main():
             else:
                 st.write("아직 분석 결과가 없습니다. 먼저 '일기 작성' 탭에서 분석을 진행하세요.")
 
+
         with tabs[2]:
+            # 지난 일기 탭 내용
             st.write("### 지난 일기")
-            diary_data = load_diary_data(st.session_state['logged_in_user'])
-            
+            username = st.session_state.get('logged_in_user')
+            #print(username)
+            if not username:
+                st.error("로그인이 필요합니다.")
+                return
+
+            diary_data = load_diary_data(username)
+           
             if not diary_data.empty:
-                selected_date = st.selectbox("날짜 선택", diary_data['Date'].unique())
+                selected_date = st.selectbox("날짜 선택", diary_data['date'].unique())
                 
-                if selected_date:
-                    entry = diary_data[diary_data['Date'] == selected_date].iloc[0]
-                    st.write(f"**일기 내용 ({selected_date})**:")
-                    st.write(entry['Diary'])
-                    st.write("**감정 확률 분포**:")
-                    sentiment_probs = eval(entry['Sentiment'])
-                    for sentiment, prob in sentiment_probs.items():
-                        st.write(f"{sentiment}: {prob:.2%}")
-                    st.write(f"**선택된 메시지**: {entry['Message']}")
+                if selected_date: 
+                    selected_diary = diary_data[diary_data['date'] == selected_date]
+                    for idx, row in selected_diary.iterrows():
+                        st.write(f"#### {row['date']}")
+                        st.write(f"**일기 내용:** {row['Diary']}")
+                        st.write(f"**분석 결과:** {row['Sentiment']}")
+                        st.write(f"**추가 메시지:** {row['Message']}")
             else:
-                st.write("아직 저장된 일기가 없습니다.")
+                st.write("저장된 일기가 없습니다.")
     else:
         st.error("로그인 후 이용해주세요")
-
+ 
+# 앱 실행
 with st.sidebar:
     menu = option_menu("MomE", ['Home','Dashboard','Diary','육아 SNS','To do list', '하루 자가진단', 'LogOut'],
                         icons=['bi bi-house-fill','bi bi-grid-1x2-fill','book-half','Bi bi-star-fill','Bi bi-calendar-check' ,'bi bi-capsule-pill', 'box-arrow-in-right'],
