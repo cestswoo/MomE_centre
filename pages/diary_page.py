@@ -84,11 +84,10 @@ topics = [
 def recommend_topics(topics, num=6):
     return random.sample(topics, num)
 
-# SQLite 데이터베이스 초기화 함수
+# SQLite 데이터베이스 초기화 함수 (존재하지 않을 경우 테이블 생성)
 def init_db():
     conn = sqlite3.connect('data.db')
     cursor = conn.cursor()
-    cursor.execute('DROP TABLE IF EXISTS diary')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS diary (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -111,12 +110,10 @@ def save_diary_to_db(username, date, diary, sentiment, message):
             VALUES (?, ?, ?, ?, ?)
         ''', (username, date, diary, str(sentiment), message))
         conn.commit()
-
     except sqlite3.OperationalError as e:
         st.error(f"An error occurred while saving the diary: {e}")
     finally:
         conn.close()
-
 
 def load_diary_data(username):
     conn = sqlite3.connect('data.db')
@@ -127,14 +124,13 @@ def load_diary_data(username):
     except sqlite3.OperationalError as e:
         st.error(f"An error occurred while loading the diary: {e}")
         rows = []
-
     conn.close()
     return pd.DataFrame(rows, columns=['date', 'Diary', 'Sentiment', 'Message'])
 
 # Streamlit 앱 메인 함수
 def main():
     # SQLite 데이터베이스 초기화
-    #init_db()
+    init_db()
 
     # CSS 스타일 추가
     st.markdown(
@@ -254,7 +250,7 @@ def main():
                                 </div>''', unsafe_allow_html=True) 
             st.write("")
 
-            user_input = st.text_area('',placeholder="여기에 일기를 작성해 주세요.", height=300)
+            user_input = st.text_area('', placeholder="여기에 일기를 작성해 주세요.", height=300)
             
             if st.button("분석하기"):
                 probabilities = analyze_sentiment_bert(user_input)
@@ -302,12 +298,10 @@ def main():
             else:
                 st.write("아직 분석 결과가 없습니다. 먼저 '일기 작성' 탭에서 분석을 진행하세요.")
 
-
         with tabs[2]:
             # 지난 일기 탭 내용
             st.write("### 지난 일기")
             username = st.session_state.get('logged_in_user')
-            #print(username)
             if not username:
                 st.error("로그인이 필요합니다.")
                 return
