@@ -24,7 +24,7 @@ tokenizer, model = load_model_and_tokenizer()
 def load_sentiword_dict(file_path):
     senti_dict = {}
     with open(file_path, 'r', encoding='utf-8') as file:
-        for line in file:
+        for line in file):
             parts = line.strip().split('\t')
             if len(parts) == 2:
                 word, score = parts
@@ -137,15 +137,8 @@ def main():
         """
         <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
         * {
-            font-family: 'Nanum Square', sans-serif;
-        }
-        .title {
-            font-family: 'Nanum Gothic', sans-serif;
-        }
-        .subtitle {
-            font-family: 'Nanum Gothic', sans-serif;
+            font-family: 'NanumSquare', sans-serif !important;
         }
         body {
             background-color: #FFFFFF;
@@ -243,7 +236,7 @@ def main():
         with tabs[0]:
             st.markdown(
                 '''
-                  <div class="subtitle">일기 주제 추천해주세요</div>
+                  <div class="subtitle">일기 주제 추천</div>
         
                 ''',unsafe_allow_html=True
             )   
