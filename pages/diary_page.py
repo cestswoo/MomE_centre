@@ -24,7 +24,7 @@ tokenizer, model = load_model_and_tokenizer()
 def load_sentiword_dict(file_path):
     senti_dict = {}
     with open(file_path, 'r', encoding='utf-8') as file:
-        for line in file):
+        for line in file:
             parts = line.strip().split('\t')
             if len(parts) == 2:
                 word, score = parts
