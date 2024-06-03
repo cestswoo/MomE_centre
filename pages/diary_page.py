@@ -135,10 +135,11 @@ def main():
     # CSS 스타일 추가
     st.markdown(
         """
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Nanum+Pen+Script&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
         * {
-            font-family: 'Nanum Pen Script', cursive;
+            font-family: 'Nanum Square', sans-serif;
         }
         .title {
             font-family: 'Nanum Gothic', sans-serif;
