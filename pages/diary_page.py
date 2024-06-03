@@ -243,7 +243,7 @@ def main():
         with tabs[0]:
             st.markdown(
                 '''
-                  <div class="subtitle">일기 주제 추천</div>
+                  <div class="subtitle">일기 주제 추천해주세요</div>
         
                 ''',unsafe_allow_html=True
             )   
