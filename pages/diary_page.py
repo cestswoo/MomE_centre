@@ -137,10 +137,18 @@ def main():
         """
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Nanum+Pen+Script&display=swap');
+        * {
+            font-family: 'Nanum Pen Script', cursive;
+        }
+        .title {
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+        .subtitle {
+            font-family: 'Nanum Gothic', sans-serif;
+        }
         body {
             background-color: #FFFFFF;
             color: #000000;
-            font-family: 'Nanum Pen Script', cursive;
         }
         .stApp{
             background: #F1E2DD;
@@ -194,7 +202,6 @@ def main():
             font-size: 24px;
         }
         .title{
-            font-family: 'Nanum Gothic', sans-serif;
             font-size: 60px;
             font-weight: bold;
             text-align: start;
@@ -204,7 +211,6 @@ def main():
             color: #4A4A4A;
         }
         .subtitle{
-            font-family: 'Nanum Gothic', sans-serif;
             font-size: 25px;
             font-weight:bold;
             text-align: start;
