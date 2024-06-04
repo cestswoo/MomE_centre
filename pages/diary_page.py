@@ -7,6 +7,7 @@ import sqlite3
 from datetime import datetime
 from streamlit_option_menu import option_menu
 import plotly.express as px
+from email_service import send_email_summary
 
 # 모델과 토크나이저 로드
 model_name = 'nlptown/bert-base-multilingual-uncased-sentiment'
@@ -274,7 +275,9 @@ def main():
                 for sentiment, prob in st.session_state['sentiment_probs'].items():
                     st.write(f"{sentiment}: {prob:.2%}")
                 st.write(f"선택된 메시지: {st.session_state['result_message']}")
-                
+                if st.button("남편에게 요약 보내기"):
+                    send_email_summary(sentiment_probs, result_message)
+                    st.success("요약이 성공적으로 전송 되었습니다.")
                 st.write("### 감정 분포")
                 # 원형 차트로 변경
                 custom_colors = ['#A8E6CF','#DCEDC1','#E0E0E0','#FFAAA5','#FF8B94']  # 원하는 색상 리스트
