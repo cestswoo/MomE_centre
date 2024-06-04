@@ -154,7 +154,7 @@ def main():
         unsafe_allow_html=True
     )
     st.title("MOMents")
-    st.markdown("<h6 style='margin-top: -8px'>| 소중한 순간들을 기록해보세요!", unsafe_allow_html=True)
+    st.markdown("<h6 style='margin-top: -8px'>| 소중한 순간들의 기록을 남겨 보세요!", unsafe_allow_html=True)
     st.write("")
 
     upgrade_post_table()
