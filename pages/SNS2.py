@@ -142,6 +142,17 @@ def delete_post(post_id):
     st.success("게시물이 성공적으로 삭제되었습니다.")
 
 def main():
+    st.markdown(
+        """
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+        <style>
+        * {
+            font-family: 'NanumSquare', sans-serif !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     st.title("육아 SNS")
     st.markdown("<h6 style='margin-top: -8px'>| 육아 동지들과 함께 일상을 공유해요!", unsafe_allow_html=True)
     st.write("")
