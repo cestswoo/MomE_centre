@@ -161,7 +161,7 @@ with tab3:
             st.write(video_info["description"])
 
 with st.sidebar:
-    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', '육아 SNS', 'To do list', '하루 자가진단', 'LogOut'],
+    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'MOMents', 'To do list', '하루 자가진단', 'LogOut'],
                         icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'Bi bi-calendar-check', 'bi bi-capsule-pill', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=1,
                         styles={
@@ -174,7 +174,7 @@ with st.sidebar:
         st.switch_page("pages/home.py")
     elif menu == 'Diary':
         st.switch_page("pages/diary_page.py")
-    elif menu == '육아 SNS':
+    elif menu == 'MOMents':
         st.switch_page("pages/SNS2.py")
     elif menu == 'To do list':
         st.switch_page("pages/daily_schedule.py")
