@@ -1,4 +1,3 @@
-import requests
 import streamlit as st
 from transformers import BertTokenizer, BertForSequenceClassification
 import torch
@@ -8,15 +7,9 @@ import sqlite3
 from datetime import datetime
 from streamlit_option_menu import option_menu
 import plotly.express as px
-
-# Textbelt를 사용한 SMS 전송 함수
-def send_sms(body, to):
-    response = requests.post('https://textbelt.com/text', {
-        'phone': to,
-        'message': body[:160],  # 메시지를 160자로 자릅니다
-        'key': 'textbelt',  # 무료 키
-    })
-    return response.json()
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # 모델과 토크나이저 로드
 model_name = 'nlptown/bert-base-multilingual-uncased-sentiment'
@@ -137,6 +130,29 @@ def load_diary_data(username):
     conn.close()
     return pd.DataFrame(rows, columns=['date', 'Diary', 'Sentiment', 'Message'])
 
+def send_email(subject, content, recipient_email):
+    sender_email = "eseungwo0123@gmail.com"
+    sender_password = "tpzglsofchulupuw"  # 여기에는 앱 비밀번호를 입력합니다
+    
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = recipient_email
+    msg['Subject'] = subject
+    
+    msg.attach(MIMEText(content, 'plain'))
+    
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+        text = msg.as_string()
+        server.sendmail(sender_email, recipient_email, text)
+        server.quit()
+        return True
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        return False
+
 # Streamlit 앱 메인 함수
 def main():
     # SQLite 데이터베이스 초기화
@@ -229,7 +245,7 @@ def main():
             margin: 7px;
             display: flex;
             flex-direction: column;
-           	align-items: center;
+            align-items: center;
             text-align: center;
         }
 
@@ -239,7 +255,7 @@ def main():
     )
 
     if 'logged_in' in st.session_state and st.session_state['logged_in']:
-        st.image('https://via.placeholder.com/150', caption='Diary Title Image')  # 대체 이미지 사용
+        st.image('media/diaryTitleImg.jpg')
         
         tabs = st.tabs(["일기 작성", "분석 결과", "지난 일기"])
 
@@ -309,15 +325,17 @@ def main():
                 else:
                     st.write("일기에서 감성 단어를 찾을 수 없습니다.")
 
-                recipient_phone = st.text_input("남편의 전화번호를 국제번호와 함께 입력하세요 (+821012345678 형식)", "")
+                recipient_email = st.text_input("남편의 이메일 주소를 입력하세요", "")
                 if st.button("요약 보내기"):
-                    sms_content = f"감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}"
-                    response = send_sms(sms_content, recipient_phone)
-                    if response['success']:
+                    email_content = f"""
+                    일기 내용: {st.session_state['user_input']}
+                    감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
+                    추가 메시지: {st.session_state['result_message']}
+                    """
+                    if send_email("감정 분석 요약", email_content, recipient_email):
                         st.success("요약이 성공적으로 전송되었습니다.")
                     else:
-                        st.error(f"요약 전송에 실패했습니다: {response.get('error', 'Unknown error')}")
-
+                        st.error("요약 전송에 실패했습니다.")
             else:
                 st.write("아직 분석 결과가 없습니다. 먼저 '일기 작성' 탭에서 분석을 진행하세요.")
 
@@ -348,9 +366,9 @@ def main():
 
 # 앱 실행
 with st.sidebar:
-    menu = option_menu("MomE", ['Home','Dashboard','Diary','MOMents','하루 자가진단', 'LogOut'],
+    menu = option_menu("MomE", ['Home','Dashboard','Diary','Mom:ents','하루 자가진단', 'LogOut'],
                         icons=['bi bi-house-fill','bi bi-grid-1x2-fill','book-half','Bi bi-star-fill' ,'bi bi-capsule-pill', 'box-arrow-in-right'],
-                       	menu_icon="baby", default_index=2,
+                        menu_icon="baby", default_index=2,
                         styles={
                             "icon": {"font-size": "23px"},
                             "title": {"font-weight": "bold"}
@@ -360,7 +378,7 @@ if menu =='Home':
     st.switch_page("pages/home.py")
 elif menu =='Dashboard':
     st.switch_page("pages/dashboard_page.py")
-elif menu == 'MOMents':
+elif menu == 'Mom:ents':
     st.switch_page("pages/SNS2.py")
 elif menu =='하루 자가진단': 
     st.switch_page("pages/self_diagnosis.py")
