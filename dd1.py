@@ -10,7 +10,7 @@ def create_usertable():
     c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT,password TEXT)')
 
 def add_userdata(username,password):
-    c.execute('INSERT INTO userstable(username,password) VALUES (?,?)')
+    c.execute('INSERT INTO userstable(username,password) VALUES (?,?)',(username,password))
     conn.commit()
 
 def login_user(username,password):
@@ -31,19 +31,6 @@ def check_hashes(password,hashed_text):
         return hashed_text
     return False
 
-# CSS 스타일 추가
-st.markdown(
-    """
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
-    <style>
-    * {
-        font-family: 'NanumSquare', sans-serif !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 st.title("MomE")
 st.markdown("<h6 style='margin-top: -8px'>| MomEase : 엄마의 편안함</h2>", unsafe_allow_html=True)
 
@@ -53,6 +40,10 @@ if 'logged_in' not in st.session_state:
 if 'logged_in_user' not in st.session_state:
     st.session_state['logged_in_user'] = ''
 
+# if st.session_state['logged_in']: 
+#     st.write(f"환영합니다, {st.session_state['logged_in_user']}님!")
+#     st.switch_page("pages/home.py")
+# else:
 tab1, tab2 = st.tabs(["Login", "Sign up"])
 
 with tab1:
@@ -66,8 +57,8 @@ with tab1:
         if result:
             st.session_state['logged_in_user'] = username  # Save logged in username in session state
             st.session_state['logged_in'] = True
-            st.success(f"환영합니다, {username}님!")
-            st.experimental_rerun()  # 페이지 리로드
+            st.switch_page("pages/home.py")
+            # st.experimental_rerun()  # 페이지 리로드
         else:
             st.warning("아이디/비밀번호가 틀렸습니다!")
 
