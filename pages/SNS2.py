@@ -202,7 +202,7 @@ if __name__ == "__main__":
     main()
 
 with st.sidebar:
-    menu = option_menu("MomE", ['Home','Dashboard','Diary', 'MOMEnts','To do list','하루 자가진단','LogOut'],
+    menu = option_menu("MomE", ['Home','Dashboard','Diary', 'MOMents','To do list','하루 자가진단','LogOut'],
                         icons=['bi bi-house-fill','bi bi-grid-1x2-fill','book-half','Bi bi-star-fill','Bi bi-calendar-check', 'bi bi-capsule-pill', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=3,
                         styles={
