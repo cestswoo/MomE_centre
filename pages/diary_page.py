@@ -42,16 +42,16 @@ def analyze_sentiment_bert(text):
 
 # 감성 점수 해석 및 메시지 반환 함수
 def interpret_sentiment(probabilities):
-    sentiments = ['매우 부정적', '부정적', '중립', '긍정적', '매우 긍정적']
+    sentiments = ['매우 긍정적', '긍정적', '중립', '부정적', '매우 부정적']
     sentiment_probs = dict(zip(sentiments, probabilities))
     max_sentiment = max(sentiment_probs, key=sentiment_probs.get)
 
     messages = {
-        '매우 부정적': ['오늘은 정말 힘든 하루였겠네요. 다음에는 분명 좋은 일들이 생길 거예요.', '하루를 마무리하기까지 정말 힘든 시간을 보내셨겠네요. 내일은 분명 더 나은 날이 될 거예요.', '어려운 하루를 보내셨겠어요. 하지만 그런 날들도 우리를 성장시키고 더 강하게 만들어 줍니다.'],
-        '부정적': ['오늘은 정말 힘드셨을 테지만, 이런 날들도 지나갈 거예요.', '고된 하루를 보내셨겠네요. 내일은 분명히 더 나은 날이 될 거예요.', '어려운 하루를 보내셨을 텐데, 내일은 조금 더 나은 날이 될 거예요.'],
-        '중립': ['평범한 하루였겠네요. 가끔은 그런 일상의 조용한 순간들이 가장 소중한 법이죠.', '일상적인 하루를 보내셨겠어요. 때로는 평온함이 가장 큰 축복이 될 수 있어요.', '무탈한 하루를 보내셨네요. 가벼운 일상 속에서도 소중한 순간들을 발견할 수 있어요.'],
+        '매우 긍정적': ['정말 멋진 하루를 보내셨겠네요! 이런 순간이 계속 이어지길 바랄게요.', '최고의 하루를 보내셨군요! 이 기쁨이 더 오래 이어지길 기대할게요.', '놀라운 하루를 보내셨군요! 이런 순간이 더 자주 찾아오길 기대할게요.'],
         '긍정적': ['좋은 하루를 보내셨군요! 오늘은 그런 하루였나 봐요.', '행복한 하루를 보내셨겠어요! 이런 날들이 계속되길 바랄게요.', '좋은 하루를 보내셨네요! 감사한 마음으로 잠자리에 들 수 있을 거예요.'],
-        '매우 긍정적': ['정말 멋진 하루를 보내셨겠네요! 이런 순간이 계속 이어지길 바랄게요.', '최고의 하루를 보내셨군요! 이 기쁨이 더 오래 이어지길 기대할게요.', '놀라운 하루를 보내셨군요! 이런 순간이 더 자주 찾아오길 기대할게요.']
+        '중립': ['평범한 하루였겠네요. 가끔은 그런 일상의 조용한 순간들이 가장 소중한 법이죠.', '일상적인 하루를 보내셨겠어요. 때로는 평온함이 가장 큰 축복이 될 수 있어요.', '무탈한 하루를 보내셨네요. 가벼운 일상 속에서도 소중한 순간들을 발견할 수 있어요.'],
+        '부정적': ['오늘은 정말 힘드셨을 테지만, 이런 날들도 지나갈 거예요.', '고된 하루를 보내셨겠네요. 내일은 분명히 더 나은 날이 될 거예요.', '어려운 하루를 보내셨을 텐데, 내일은 조금 더 나은 날이 될 거예요.'],
+        '매우 부정적': ['오늘은 정말 힘든 하루였겠네요. 다음에는 분명 좋은 일들이 생길 거예요.', '하루를 마무리하기까지 정말 힘든 시간을 보내셨겠네요. 내일은 분명 더 나은 날이 될 거예요.', '어려운 하루를 보내셨겠어요. 하지만 그런 날들도 우리를 성장시키고 더 강하게 만들어 줍니다.']
     }
 
     random_message = random.choice(messages[max_sentiment])
@@ -283,19 +283,18 @@ def main():
                 
                 found_words = find_sentiwords(st.session_state['user_input'], sentiword_dict)
                 if found_words:
-                    negative_words = [word for word, score in found_words if score < 0]
                     positive_words = [word for word, score in found_words if score > 0]
+                    negative_words = [word for word, score in found_words if score < 0]
 
                     st.write("### 일기에서 발견된 감성 단어")
-                    if negative_words:
-                        st.write(f"사용한 부정 단어: {', '.join(negative_words)}")
-                    else:
-                        st.write("사용한 부정 단어가 없습니다.")
-                    
                     if positive_words:
                         st.write(f"사용한 긍정 단어: {', '.join(positive_words)}")
                     else:
                         st.write("사용한 긍정 단어가 없습니다.")
+                    if negative_words:
+                        st.write(f"사용한 부정 단어: {', '.join(negative_words)}")
+                    else:
+                        st.write("사용한 부정 단어가 없습니다.")
                 else:
                     st.write("일기에서 감성 단어를 찾을 수 없습니다.")
             else:
