@@ -207,7 +207,7 @@ if homeImg:
                 <div class="adText title-font">We Care<br>Your Mind</div>
             </div>
             <div class="mainContainer">
-                <div class="contentIndex title-font">About Us</div>
+                <div class="contentIndex title-font">What we do</div>
                 <div class="divider"></div>
                 <div class="aboutUsContent body-font">
                     MomE은 산후우울증을 겪었거나 겪고 있는 엄마와 가족들을 위한 특별한 공간입니다.<br>
