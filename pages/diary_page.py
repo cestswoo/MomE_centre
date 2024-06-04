@@ -13,7 +13,7 @@ import plotly.express as px
 def send_sms(body, to):
     response = requests.post('https://textbelt.com/text', {
         'phone': to,
-        'message': body,
+        'message': body[:160],  # 메시지를 160자로 자릅니다
         'key': 'textbelt',  # 무료 키
     })
     return response.json()
@@ -239,7 +239,7 @@ def main():
     )
 
     if 'logged_in' in st.session_state and st.session_state['logged_in']:
-        st.image('media/diaryTitleImg.jpg')
+        st.image('https://via.placeholder.com/150', caption='Diary Title Image')  # 대체 이미지 사용
         
         tabs = st.tabs(["일기 작성", "분석 결과", "지난 일기"])
 
@@ -316,11 +316,14 @@ def main():
                     감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
                     추가 메시지: {st.session_state['result_message']}
                     """
-                    response = send_sms(sms_content, recipient_phone)
-                    if response['success']:
-                        st.success("요약이 성공적으로 전송되었습니다.")
+                    if len(sms_content) > 160:
+                        st.warning("요약 내용이 너무 깁니다. 요약 내용을 줄여주세요.")
                     else:
-                        st.error(f"요약 전송에 실패했습니다: {response.get('error', 'Unknown error')}")
+                        response = send_sms(sms_content, recipient_phone)
+                        if response['success']:
+                            st.success("요약이 성공적으로 전송되었습니다.")
+                        else:
+                            st.error(f"요약 전송에 실패했습니다: {response.get('error', 'Unknown error')}")
 
             else:
                 st.write("아직 분석 결과가 없습니다. 먼저 '일기 작성' 탭에서 분석을 진행하세요.")
