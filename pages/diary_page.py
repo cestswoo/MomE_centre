@@ -7,6 +7,9 @@ import sqlite3
 from datetime import datetime
 from streamlit_option_menu import option_menu
 import plotly.express as px
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # 모델과 토크나이저 로드
 model_name = 'nlptown/bert-base-multilingual-uncased-sentiment'
@@ -67,7 +70,7 @@ def find_sentiwords(text, senti_dict):
 
 # 주제 리스트 정의
 topics = [
-    '일주일 중 가장 기억에 남는 순간에 대해 써 보세요.', '여태까지 당연시해 왔지만 사실 숨겨져 있었던 재능이 있다면 무엇일까요?', '친구들이 놀랄 만한 나의 좋은 점은 무엇인가요?',
+    '일주일 중 가장 기억에 남는 순간에 대해 써 보세요.', '여태까지 당연시해 왔지만 사실 숨겨져 있었던 재능이 있다면 무엇인가요?', '친구들이 놀랄 만한 나의 좋은 점은 무엇인가요?',
     '최근 경험한 것 중 가장 좋았거나 경외심을 불러일으켰던 순간은 무엇인가요?', '최근의 일들을 되돌아 보고 이번 주에 즐거움을 준 것에 대해 적어보세요.',
     '혼자서 일할 때와 다른 사람과 함께 일할 때 언제 더 창의적이라고 느끼나요? 왜 그런다고 생각하나요?', '어렸을 때 가장 즐겼던 예술 활동이나 다른 창의적인 활동에 대해 적어 보세요',
     '최근에 영감을 받았던 경험을 떠올려 보세요. 어떤 것으로 인해 영감을 받았는지 생각해 보세요.', '아는 사람 중 가장 창의력이 풍부한 사람은 누구인가요? 그 사람의 창의력에 대해 적어보세요.',
@@ -126,6 +129,29 @@ def load_diary_data(username):
         rows = []
     conn.close()
     return pd.DataFrame(rows, columns=['date', 'Diary', 'Sentiment', 'Message'])
+
+def send_email(subject, content, recipient_email):
+    sender_email = "your_email@gmail.com"
+    sender_password = "your_app_password"  # 여기에는 앱 비밀번호를 입력합니다
+    
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = recipient_email
+    msg['Subject'] = subject
+    
+    msg.attach(MIMEText(content, 'plain'))
+    
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+        text = msg.as_string()
+        server.sendmail(sender_email, recipient_email, text)
+        server.quit()
+        return True
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        return False
 
 # Streamlit 앱 메인 함수
 def main():
@@ -298,6 +324,18 @@ def main():
                         st.write("사용한 긍정 단어가 없습니다.")
                 else:
                     st.write("일기에서 감성 단어를 찾을 수 없습니다.")
+
+                recipient_email = st.text_input("남편의 이메일 주소를 입력하세요", "")
+                if st.button("요약 보내기"):
+                    email_content = f"""
+                    일기 내용: {st.session_state['user_input']}
+                    감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
+                    추가 메시지: {st.session_state['result_message']}
+                    """
+                    if send_email("감정 분석 요약", email_content, recipient_email):
+                        st.success("요약이 성공적으로 전송되었습니다.")
+                    else:
+                        st.error("요약 전송에 실패했습니다.")
             else:
                 st.write("아직 분석 결과가 없습니다. 먼저 '일기 작성' 탭에서 분석을 진행하세요.")
 
@@ -325,7 +363,7 @@ def main():
                 st.write("저장된 일기가 없습니다.")
     else:
         st.error("로그인 후 이용해주세요")
- 
+
 # 앱 실행
 with st.sidebar:
     menu = option_menu("MomE", ['Home','Dashboard','Diary','MOMents','하루 자가진단', 'LogOut'],
