@@ -6,11 +6,11 @@ import os
 # Define and apply custom fonts using Google Fonts
 st.markdown(
     """
-    <style>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
-    * {
-        font-family: 'NanumSquare', sans-serif !important;
-    }
+    <style>
+        * {
+            font-family: 'NanumSquare', sans-serif !important;
+        }
     .stApp {
         background: #FFF9EF;
     }
