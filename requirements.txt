@@ -8,4 +8,7 @@ matplotlib
 numpy
 plotly
 streamlit-calendar
-email_service
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
