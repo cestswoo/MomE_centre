@@ -348,7 +348,7 @@ else:
 
 # Sidebar menu
 with st.sidebar:
-    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'MOMents', '하루 자가진단', 'LogOut'],
+    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'Mom:Ents', '하루 자가진단', 'LogOut'],
                         icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=0,
                         styles={
@@ -361,7 +361,7 @@ with st.sidebar:
         st.switch_page("pages/dashboard_page.py")
     elif menu == 'Diary':
         st.switch_page('pages/diary_page.py')
-    elif menu == 'MOMents':
+    elif menu == 'Mom:Ents':
         st.switch_page('pages/SNS2.py')
     elif menu == '하루 자가진단':
         st.switch_page('pages/self_diagnosis.py')
