@@ -65,7 +65,11 @@ def question_block(text, answer_option, key):
 # Styling
 st.markdown(
     """
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <style>
+        * {
+            font-family: 'NanumSquare', sans-serif !important;
+        }
         .header {
             color: #FF69B4;
             font-size: 36px;
