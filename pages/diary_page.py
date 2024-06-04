@@ -131,8 +131,8 @@ def load_diary_data(username):
     return pd.DataFrame(rows, columns=['date', 'Diary', 'Sentiment', 'Message'])
 
 def send_email(subject, content, recipient_email):
-    sender_email = "your_email@gmail.com"
-    sender_password = "your_app_password"  # 여기에는 앱 비밀번호를 입력합니다
+    sender_email = "eseungwo0123@gmail.com"
+    sender_password = "tpzglsofchulupuw"  # 여기에는 앱 비밀번호를 입력합니다
     
     msg = MIMEMultipart()
     msg['From'] = sender_email
