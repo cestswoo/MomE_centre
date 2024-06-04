@@ -239,7 +239,7 @@ def main():
     )
 
     if 'logged_in' in st.session_state and st.session_state['logged_in']:
-        st.image('https://via.placeholder.com/150', caption='Diary Title Image')  # 대체 이미지 사용
+        st.image('media/diaryTitleImg.jpg')
         
         tabs = st.tabs(["일기 작성", "분석 결과", "지난 일기"])
 
