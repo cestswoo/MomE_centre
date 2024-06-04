@@ -137,7 +137,11 @@ def main():
     # CSS 스타일 추가
     st.markdown(
         """
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
         <style>
+        * {
+            font-family: 'NanumSquare', sans-serif !important;
+        }
         body {
             background-color: #f0f2f6;
         }
