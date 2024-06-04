@@ -7,15 +7,19 @@ import os
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic:wght@400;700&display=swap');
-
-    .title-font {
-        font-family: 'Nanum Pen Script', cursive;
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    * {
+        font-family: 'NanumSquare', sans-serif !important;
     }
+    # @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Gothic:wght@400;700&display=swap');
 
-    .body-font {
-        font-family: 'Nanum Gothic', sans-serif;
-    }
+    # .title-font {
+    #     font-family: 'Nanum Pen Script', cursive;
+    # }
+
+    # .body-font {
+    #     font-family: 'Nanum Gothic', sans-serif;
+    # }
 
     .stApp {
         background: #FFF9EF;
