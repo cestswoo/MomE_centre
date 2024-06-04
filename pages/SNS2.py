@@ -154,7 +154,7 @@ def main():
         unsafe_allow_html=True
     )
     st.title("MOMents")
-    st.markdown("<h6 style='margin-top: -8px'>| 육아 동지들과 함께 일상을 공유해요!", unsafe_allow_html=True)
+    st.markdown("<h6 style='margin-top: -8px'>| 소중한 순간들을 기록해보세요!", unsafe_allow_html=True)
     st.write("")
 
     upgrade_post_table()
