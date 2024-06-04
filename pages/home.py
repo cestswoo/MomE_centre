@@ -18,7 +18,7 @@ st.markdown(
     }
 
     .stApp {
-        background: #F1E2DD;
+        background: #FFF9EF;
     }
     .Container {
         width: 710px;
@@ -100,7 +100,7 @@ st.markdown(
     .divider {
         width: 250px;
         height: 1px;
-        background-color: black;
+        background-color: #000000;
     }
     .serviceComponent {
         position: relative;
@@ -110,7 +110,7 @@ st.markdown(
         width: 302px;
         height: 240px;
         border-radius: 30px;
-        background-color: #F6F6F6;
+        background-color: #EDF0F5;
         display: flex;
         flex-direction: column;
         align-items: start;
@@ -128,7 +128,7 @@ st.markdown(
         position: relative;
         width: 2px;
         height: 42px;
-        background-color: #000000;
+        background-color: #091F5B;
         margin-right: 10px;
     }
     .title {
@@ -142,7 +142,7 @@ st.markdown(
         font-family: 'Nanum Pen Script', cursive;
     }
     .serviceDetail {
-        color: black;
+        color: 091F5B;
         font-weight: 800px;
         margin-left: 30px;
         position: relative;
