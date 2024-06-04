@@ -320,7 +320,8 @@ def main():
                     if response['success']:
                         st.success("요약이 성공적으로 전송되었습니다.")
                     else:
-                        st.error("요약 전송에 실패했습니다.")
+                        st.error(f"요약 전송에 실패했습니다: {response.get('error', 'Unknown error')}")
+
             else:
                 st.write("아직 분석 결과가 없습니다. 먼저 '일기 작성' 탭에서 분석을 진행하세요.")
 
