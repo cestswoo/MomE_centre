@@ -311,19 +311,12 @@ def main():
 
                 recipient_phone = st.text_input("남편의 전화번호를 국제번호와 함께 입력하세요 (+821012345678 형식)", "")
                 if st.button("요약 보내기"):
-                    sms_content = f"""
-                    일기 내용: {st.session_state['user_input']}
-                    감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
-                    추가 메시지: {st.session_state['result_message']}
-                    """
-                    if len(sms_content) > 160:
-                        st.warning("요약 내용이 너무 깁니다. 요약 내용을 줄여주세요.")
+                    sms_content = f"감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}"
+                    response = send_sms(sms_content, recipient_phone)
+                    if response['success']:
+                        st.success("요약이 성공적으로 전송되었습니다.")
                     else:
-                        response = send_sms(sms_content, recipient_phone)
-                        if response['success']:
-                            st.success("요약이 성공적으로 전송되었습니다.")
-                        else:
-                            st.error(f"요약 전송에 실패했습니다: {response.get('error', 'Unknown error')}")
+                        st.error(f"요약 전송에 실패했습니다: {response.get('error', 'Unknown error')}")
 
             else:
                 st.write("아직 분석 결과가 없습니다. 먼저 '일기 작성' 탭에서 분석을 진행하세요.")
