@@ -75,7 +75,7 @@ st.markdown(
         position: absolute;
         top: 50%;
         width: 707px;
-        height: 2150px;
+        height: 1800px;
         background-color: white;
         border-radius: 30px 30px 30px 30px;
     }
