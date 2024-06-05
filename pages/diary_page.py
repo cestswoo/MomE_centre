@@ -280,11 +280,8 @@ def main():
             st.write("")
 
             user_input = st.text_area('', placeholder="여기에 일기를 작성해 주세요.", height=300)
-            email_input_visible = False
+            tag_husband = st.checkbox("남편에게 알림 보내기")
             
-            if "@남편" in user_input:
-                email_input_visible = True
-
             if st.button("분석하기"):
                 probabilities = analyze_sentiment_bert(user_input)
                 sentiment_probs, result_message = interpret_sentiment(probabilities)
@@ -297,23 +294,19 @@ def main():
 
                 st.success("분석이 완료되었습니다. '분석 결과' 탭을 확인하세요.")
 
-                if email_input_visible:
-                    with st.form(key='email_form'):
-                        recipient_email = st.text_input("남편의 이메일 주소를 입력하세요", "")
-                        send_email_button = st.form_submit_button(label='전송')
-                        
-                        if send_email_button:
-                            if recipient_email:
-                                email_content = f"""
-                                감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
-                                추가 메시지: {st.session_state['result_message']}
-                                """
-                                if send_email("감정 분석 알림", email_content, recipient_email):
-                                    st.success("알림이 성공적으로 전송되었습니다.")
-                                else:
-                                    st.error("알림 전송에 실패했습니다.")
-                            else:
-                                st.error("남편의 이메일 주소를 입력하세요.")
+                if tag_husband:
+                    recipient_email = st.text_input("남편의 이메일 주소를 입력하세요", "")
+                    if recipient_email:
+                        email_content = f"""
+                        감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
+                        추가 메시지: {st.session_state['result_message']}
+                        """
+                        if send_email("감정 분석 알림", email_content, recipient_email):
+                            st.success("알림이 성공적으로 전송되었습니다.")
+                        else:
+                            st.error("알림 전송에 실패했습니다.")
+                    else:
+                        st.error("남편의 이메일 주소를 입력하세요.")
         
         with tabs[1]:
             if 'sentiment_probs' in st.session_state:
