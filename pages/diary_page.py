@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
 import datetime
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -11,6 +10,8 @@ from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
+from streamlit_option_menu import option_menu
+import plotly.express as px
 
 # 모델과 토크나이저 로드
 model_name = 'nlptown/bert-base-multilingual-uncased-sentiment'
