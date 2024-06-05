@@ -368,7 +368,7 @@ def main():
                         st.error("요약 전송에 실패했습니다.")
 
                 if st.button("구글 캘린더에 기록하기"):
-                    event_date = datetime.datetime.now()
+                    event_date = datetime.now()
                     event_summary = f"일기 감정 분석 ({event_date.strftime('%Y-%m-%d')})"
                     event_description = f"""
                     일기 내용: {st.session_state['user_input']}
