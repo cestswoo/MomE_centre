@@ -330,7 +330,7 @@ def main():
                 st.write("감정 확률 분포:")
                 for sentiment, prob in st.session_state['sentiment_probs'].items():
                     st.write(f"{sentiment}: {prob:.2%}")
-                st.write(f"선택된 메시지: {st.session_state['result_message']}")
+                st.write(f"{st.session_state['result_message']}")
                 
                 st.write("### 감정 분포")
                 # 원형 차트로 변경
