@@ -327,12 +327,14 @@ def main():
         with tabs[1]:
             if 'sentiment_probs' in st.session_state:
                 st.write(f"#### {st.session_state['result_message']}")
+                st.divider()
                 
                 st.write("#### 감정 분포")
                 # 원형 차트로 변경
                 custom_colors = ['#A8E6CF','#DCEDC1','#E0E0E0','#FFAAA5','#FF8B94']  # 원하는 색상 리스트
                 fig = px.pie(values=list(st.session_state['sentiment_probs'].values()), names=list(st.session_state['sentiment_probs'].keys()), color_discrete_sequence=custom_colors)
                 st.plotly_chart(fig)
+                st.divider()
 
                 st.write("### 내가 쓴 일기 분석결과:")
                 for sentiment, prob in st.session_state['sentiment_probs'].items():
@@ -342,7 +344,7 @@ def main():
                 if found_words:
                     negative_words = [word for word, score in found_words if score < 0]
                     positive_words = [word for word, score in found_words if score > 0]
-
+                        
                     st.write("### 일기에서 발견된 감성 단어")
                     if negative_words:
                         st.write(f"사용한 부정 단어: {', '.join(negative_words)}")
