@@ -389,7 +389,7 @@ def main():
                 if selected_date: 
                     selected_diary = diary_data[diary_data['date'] == selected_date]
                     for idx, row in selected_diary.iterrows():
-                        st.write(f"#### {row['date']}")
+                        st.write(f"#### {row['date']}")
                         st.write(f"**일기 내용:** {row['Diary']}")
                         st.write(f"**분석 결과:** {row['Sentiment']}")
                         st.write(f"**ㄴ** {row['Message']}")
