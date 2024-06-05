@@ -92,6 +92,10 @@ st.markdown(
         * {
             font-family: 'NanumSquare', sans-serif !important;
         }
+        .stApp {
+            background: #D0E4FF;
+        }
+        
         .header {
             color: #FF69B4;
             font-size: 36px;
