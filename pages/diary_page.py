@@ -10,7 +10,6 @@ import plotly.express as px
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-import json
 
 # 모델과 토크나이저 로드
 model_name = 'nlptown/bert-base-multilingual-uncased-sentiment'
@@ -112,7 +111,7 @@ def save_diary_to_db(username, date, diary, sentiment, message):
         cursor.execute('''
             INSERT INTO diary (username, date, diary, sentiment, message)
             VALUES (?, ?, ?, ?, ?)
-        ''', (username, date, diary, json.dumps(sentiment, ensure_ascii=False), message))
+        ''', (username, date, diary, str(sentiment), message))
         conn.commit()
     except sqlite3.OperationalError as e:
         st.error(f"An error occurred while saving the diary: {e}")
@@ -392,11 +391,11 @@ def main():
                     for idx, row in selected_diary.iterrows():
                         st.write(f"#### {row['date']}")
                         st.write(f"**일기 내용:** {row['Diary']}")
-                        
-                        sentiment = json.loads(row['Sentiment'])
-                        sentiment_percentage = {k: f"{v:.2%}" for k, v in sentiment.items()}
-                        st.write(f"**분석 결과:** {sentiment_percentage}")
-                        st.write(f"**메시지:** {row['Message']}")
+                        st.write("**분석 결과:**")
+                        sentiment_probs = eval(row['Sentiment'])
+                        for sentiment, prob in sentiment_probs.items():
+                            st.write(f"{sentiment}: {prob:.2%}")
+                        st.write(f"**ㄴ** {row['Message']}")
             else:
                 st.write("저장된 일기가 없습니다.")
     else:
