@@ -290,29 +290,28 @@ def main():
 
 
 
-            col1, col2 = st.columns(2)
-            with col1:
-                q1 = question_block(f"**1. 우스운 것이 눈에 잘 띄고 웃을 수 있었다.**", answer_option, key='q1')
-                st.divider()
-                q3 = question_block(f"**3. 일이 잘못되면 필요 이상으로 자신을 탓해왔다.**", answer_option, key='q3')
-                st.divider()
-                q5 = question_block(f"**5. 별 이유 없이 겁먹거나 공포에 휩싸였다.**", answer_option, key='q5')
-                st.divider()
-                q7 = question_block(f"**7. 너무나 불안한 기분이 들어 잠을 잘 못 잤다.**", answer_option, key='q7')
-                st.divider()
-                q9 = question_block(f"**9. 너무나 불행한 기분이 들어 울었다.**", answer_option, key='q9')
-                
-            with col2:
-                q2 = question_block(f'**2. 즐거운 기대감에 어떤 일을 손꼽아 기다렸다.**', answer_option, key='q2')
-                st.divider()
-                q4 = question_block(f"**4. 별 이유 없이 불안해지거나 걱정이 되었다.**", answer_option, key='q4')
-                st.divider()
-                q6 = question_block(f"**6. 처리할 일들이 쌓여만 있다.**", answer_option, key='q6')
-                st.divider()
-                q8 = question_block(f"**8. 슬프거나 비참한 느낌이 들었다.**", answer_option, key='q8')
-                st.divider()
-                q10 = question_block(f"**10. 나 자신을 해치는 생각이 들었다.**", answer_option, key='q10')
-
+     
+            q1 = question_block(f"**1. 우스운 것이 눈에 잘 띄고 웃을 수 있었다.**", answer_option, key='q1')
+            st.divider()
+            q2 = question_block(f'**2. 즐거운 기대감에 어떤 일을 손꼽아 기다렸다.**', answer_option, key='q2')
+            st.divider()
+            q3 = question_block(f"**3. 일이 잘못되면 필요 이상으로 자신을 탓해왔다.**", answer_option, key='q3')
+            st.divider()  
+            q4 = question_block(f"**4. 별 이유 없이 불안해지거나 걱정이 되었다.**", answer_option, key='q4')
+            st.divider()
+            q5 = question_block(f"**5. 별 이유 없이 겁먹거나 공포에 휩싸였다.**", answer_option, key='q5')
+            st.divider()
+            q6 = question_block(f"**6. 처리할 일들이 쌓여만 있다.**", answer_option, key='q6')
+            st.divider()
+            q7 = question_block(f"**7. 너무나 불안한 기분이 들어 잠을 잘 못 잤다.**", answer_option, key='q7')
+            st.divider()
+            q8 = question_block(f"**8. 슬프거나 비참한 느낌이 들었다.**", answer_option, key='q8')
+            st.divider()
+            q9 = question_block(f"**9. 너무나 불행한 기분이 들어 울었다.**", answer_option, key='q9')
+            st.divider()  
+            q10 = question_block(f"**10. 나 자신을 해치는 생각이 들었다.**", answer_option, key='q10')
+            st.divider()
+            
             # Show results button
             if st.button("결과 확인하기", key="edin_result"):
                 st.subheader("결과")
@@ -433,34 +432,34 @@ def main():
             # Date selection
             selected_date = st.date_input("오늘의 날짜를 선택해 주세요", value=datetime.now(), key='phq_date')
             st.write("")
+            st.write("지난 2주 동안 다음과 같은 문제를 얼마나 자주 겪었는지 해당되는 항목에 표시해주세요 ")
 
             # Answer options
             answer_option = {
                 '전혀 그렇지 않음': 0,
-                '가끔 그렇음': 1,
-                '종종 그렇음': 2,
-                '대부분 그렇음': 3
+                '며칠동안': 1,
+                '1주일 이상': 2,
+                '거의 매일': 3
             }
 
             # Questions for PHQ-9
             phq_questions = [
-                "1. 지난 2주 동안, 얼마나 자주 우울하거나 희망이 없다고 느꼈습니까?",
-                "2. 지난 2주 동안, 얼마나 자주 일에 대한 흥미나 즐거움을 느끼지 못했습니까?",
-                "3. 지난 2주 동안, 얼마나 자주 잠을 잘 이루지 못하거나 너무 많이 잤습니까?",
-                "4. 지난 2주 동안, 얼마나 자주 피곤하거나 기운이 없었습니까?",
-                "5. 지난 2주 동안, 얼마나 자주 식욕이 없거나 너무 많이 먹었습니까?",
-                "6. 지난 2주 동안, 얼마나 자주 자신이 실패자라고 느끼거나 자신이나 가족을 실망시켰다고 생각했습니까?",
-                "7. 지난 2주 동안, 얼마나 자주 신문이나 텔레비전을 보는 것에 집중하기 어려웠습니까?",
-                "8. 지난 2주 동안, 얼마나 자주 평소보다 더 느리게 움직이거나 말했습니까? 혹은 너무 안절부절 못해서 가만히 앉아 있을 수 없었습니다.",
-                "9. 지난 2주 동안, 얼마나 자주 자신이 차라리 죽는 것이 낫겠다고 생각하거나 어떤 방식으로든 자신을 해치려는 생각을 했습니까?"
+                "1. 매사에 흥미나 즐거움이 거의 없었나요?",
+                "2. 기분이 가라앉거나 우울하거나 희망이 없다고 느껴졌나요?",
+                "3. 잠들기 어렵거나 자주 깬다거나 혹은 잠을 너무 많이 주무시나요",
+                "4. 피곤하다고 느끼거나 기운이 거의 없으셨나요?",
+                "5. 식욕이 줄었거나 혹은 너무 많이 드셨나요?",
+                "6. 내 자신이 실패자로 여겨지거나, 가족을 실망시켰다고 느껴졌나요?",
+                "7. 신문이나 TV를 보는 것과 같은 일상적인 일에 집중하기 어려우셨나요?",
+                "8. 다른 사람들이 눈치 챌 정도로, 평소보다 말과 행동이 느리거나 혹은 너무 안절부절 못해서 가만히 앉아 있을 수 없었나요?",
+                "9. 차라리 죽는 것이 낫겠다고 생각하거나, 어떻게든 자해를 하려고 생각하셨나요?"
             ]
 
             # Display questions in two columns
-            col1, col2 = st.columns(2)
             phq_scores = {}
             for i, question in enumerate(phq_questions):
-                with col1 if i % 2 == 0 else col2:
-                    phq_scores[f'q{i+1}'] = question_block(f"**{question}**", answer_option, key=f'phq_q{i+1}')
+                phq_scores[f'q{i+1}'] = question_block(f"**{question}**", answer_option, key=f'phq_q{i+1}')
+                st.divider()
 
             # Show results button
             if st.button("결과 확인하기", key="phq_result"):
