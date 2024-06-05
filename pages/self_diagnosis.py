@@ -93,6 +93,9 @@ st.markdown(
         * {
             font-family: 'NanumSquare', sans-serif !important;
         }
+        .stApp{
+            background: #FFF9EF;
+        }
         .header {
             color: #FF69B4;
             font-size: 36px;
@@ -596,8 +599,15 @@ def main():
                 st.write("결과가 없습니다.")
 
     with st.sidebar:
+        st.markdown("""
+        <style>
+        [data-testid="stSidebar"] * {
+            background-color: #FFF9F0;
+        }
+        </style>
+        """, unsafe_allow_html=True)
         menu = option_menu("MomE", ['Home','Diary', "Mom'ents", '하루 자가진단', 'LogOut'],
-                            icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
+                            icons=['bi bi-house', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
                             menu_icon="baby", default_index=3,
                             styles={
                                 "icon": {"font-size": "23px"},
