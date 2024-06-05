@@ -101,16 +101,6 @@ def init_db():
             message TEXT
         )
     ''')
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS comments (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            diary_id INTEGER,
-            username TEXT,
-            comment TEXT,
-            date TEXT,
-            FOREIGN KEY(diary_id) REFERENCES diary(id)
-        )
-    ''')
     conn.commit()
     conn.close()
 
@@ -132,39 +122,13 @@ def load_diary_data(username):
     conn = sqlite3.connect('data.db')
     cursor = conn.cursor()
     try:
-        cursor.execute('SELECT id, date, diary, sentiment, message FROM diary WHERE username = ?', (username,))
+        cursor.execute('SELECT date, diary, sentiment, message FROM diary WHERE username = ?', (username,))
         rows = cursor.fetchall()
     except sqlite3.OperationalError as e:
         st.error(f"An error occurred while loading the diary: {e}")
         rows = []
     conn.close()
-    return pd.DataFrame(rows, columns=['id', 'date', 'Diary', 'Sentiment', 'Message'])
-
-def save_comment_to_db(diary_id, username, comment):
-    try:
-        conn = sqlite3.connect('data.db')
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO comments (diary_id, username, comment, date)
-            VALUES (?, ?, ?, ?)
-        ''', (diary_id, username, comment, datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
-        conn.commit()
-    except sqlite3.OperationalError as e:
-        st.error(f"An error occurred while saving the comment: {e}")
-    finally:
-        conn.close()
-
-def load_comments(diary_id):
-    conn = sqlite3.connect('data.db')
-    cursor = conn.cursor()
-    try:
-        cursor.execute('SELECT username, comment, date FROM comments WHERE diary_id = ?', (diary_id,))
-        rows = cursor.fetchall()
-    except sqlite3.OperationalError as e:
-        st.error(f"An error occurred while loading the comments: {e}")
-        rows = []
-    conn.close()
-    return rows
+    return pd.DataFrame(rows, columns=['date', 'Diary', 'Sentiment', 'Message'])
 
 def send_email(subject, content, recipient_email):
     sender_email = "eseungwo0123@gmail.com"
@@ -281,7 +245,7 @@ def main():
             margin: 7px;
             display: flex;
             flex-direction: column;
-           	align-items: center;
+            align-items: center;
             text-align: center;
         }
 
@@ -290,135 +254,121 @@ def main():
         unsafe_allow_html=True
     )
 
-    if 'logged_in' not in st.session_state:
-        st.session_state['logged_in'] = False
-
-    if not st.session_state['logged_in']:
-        st.error("로그인 후 이용해주세요.")
-        st.stop()
-
-    st.image('media/diaryTitleImg.jpg')
-    
-    tabs = st.tabs(["일기 작성", "분석 결과", "지난 일기", "남편 댓글"])
-
-    with tabs[0]:
-        st.markdown(
-            '''
-              <div class="subtitle">일기 주제 추천</div>
-    
-            ''', unsafe_allow_html=True
-        )   
-        recommended_topics = recommend_topics(topics, num=6)
-
-        topic_cols = st.columns(2)
-
-        for idx, topic in enumerate(recommended_topics):
-            with topic_cols[idx % 2]:
-                st.markdown(f'''<div class='topic-card'>
-                                    <div class='topic'>
-                                        {topic}
-                                    </div>
-                            </div>''', unsafe_allow_html=True) 
-        st.write("")
-
-        user_input = st.text_area('', placeholder="여기에 일기를 작성해 주세요.", height=300)
-        tag_husband = st.checkbox("남편에게 알림 보내기")
+    if 'logged_in' in st.session_state and st.session_state['logged_in']:
+        st.image('media/diaryTitleImg.jpg')
         
-        if st.button("분석하기"):
-            probabilities = analyze_sentiment_bert(user_input)
-            sentiment_probs, result_message = interpret_sentiment(probabilities)
+        tabs = st.tabs(["일기 작성", "분석 결과", "지난 일기"])
 
-            save_diary_to_db(st.session_state.get('logged_in_user'), datetime.now().strftime('%Y-%m-%d %H:%M:%S'), user_input, sentiment_probs, result_message)
+        with tabs[0]:
+            st.markdown(
+                '''
+                  <div class="subtitle">일기 주제 추천</div>
+        
+                ''',unsafe_allow_html=True
+            )   
+            recommended_topics = recommend_topics(topics, num=6)
 
-            st.session_state['sentiment_probs'] = sentiment_probs
-            st.session_state['result_message'] = result_message
-            st.session_state['user_input'] = user_input
+            topic_cols = st.columns(2)
 
-            st.success("분석이 완료되었습니다. '분석 결과' 탭을 확인하세요.")
+            for idx, topic in enumerate(recommended_topics):
+                with topic_cols[idx % 2]:
+                    st.markdown(f'''<div class='topic-card'>
+                                        <div class='topic'>
+                                            {topic}
+                                        </div>
+                                </div>''', unsafe_allow_html=True) 
+            st.write("")
 
-            if tag_husband:
+            user_input = st.text_area('', placeholder="여기에 일기를 작성해 주세요.", height=300)
+            
+            if st.button("분석하기"):
+                probabilities = analyze_sentiment_bert(user_input)
+                sentiment_probs, result_message = interpret_sentiment(probabilities)
+
+                save_diary_to_db(st.session_state.get('logged_in_user'), datetime.now().strftime('%Y-%m-%d %H:%M:%S'), user_input, sentiment_probs, result_message)
+
+                st.session_state['sentiment_probs'] = sentiment_probs
+                st.session_state['result_message'] = result_message
+                st.session_state['user_input'] = user_input
+
+                st.success("분석이 완료되었습니다. '분석 결과' 탭을 확인하세요.")
+
+        with tabs[1]:
+            if 'sentiment_probs' in st.session_state:
+                st.write("### 분석 결과")
+                st.write("감정 확률 분포:")
+                for sentiment, prob in st.session_state['sentiment_probs'].items():
+                    st.write(f"{sentiment}: {prob:.2%}")
+                st.write(f"선택된 메시지: {st.session_state['result_message']}")
+                
+                st.write("### 감정 분포")
+                # 원형 차트로 변경
+                custom_colors = ['#A8E6CF','#DCEDC1','#E0E0E0','#FFAAA5','#FF8B94']  # 원하는 색상 리스트
+                fig = px.pie(values=list(st.session_state['sentiment_probs'].values()), names=list(st.session_state['sentiment_probs'].keys()), title="감정 분포", color_discrete_sequence=custom_colors)
+                st.plotly_chart(fig)
+                
+                found_words = find_sentiwords(st.session_state['user_input'], sentiword_dict)
+                if found_words:
+                    negative_words = [word for word, score in found_words if score < 0]
+                    positive_words = [word for word, score in found_words if score > 0]
+
+                    st.write("### 일기에서 발견된 감성 단어")
+                    if negative_words:
+                        st.write(f"사용한 부정 단어: {', '.join(negative_words)}")
+                    else:
+                        st.write("사용한 부정 단어가 없습니다.")
+                    
+                    if positive_words:
+                        st.write(f"사용한 긍정 단어: {', '.join(positive_words)}")
+                    else:
+                        st.write("사용한 긍정 단어가 없습니다.")
+                else:
+                    st.write("일기에서 감성 단어를 찾을 수 없습니다.")
+
                 recipient_email = st.text_input("남편의 이메일 주소를 입력하세요", "")
-                if recipient_email:
+                if st.button("요약 보내기"):
                     email_content = f"""
+                    일기 내용: {st.session_state['user_input']}
                     감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
                     추가 메시지: {st.session_state['result_message']}
                     """
-                    if send_email("감정 분석 알림", email_content, recipient_email):
-                        st.success("알림이 성공적으로 전송되었습니다.")
+                    if send_email("감정 분석 요약", email_content, recipient_email):
+                        st.success("요약이 성공적으로 전송되었습니다.")
                     else:
-                        st.error("알림 전송에 실패했습니다.")
-                else:
-                    st.error("남편의 이메일 주소를 입력하세요.")
-    
-    with tabs[1]:
-        if 'sentiment_probs' in st.session_state:
-            st.write("### 분석 결과")
-            st.write("감정 확률 분포:")
-            for sentiment, prob in st.session_state['sentiment_probs'].items():
-                st.write(f"{sentiment}: {prob:.2%}")
-            st.write(f"선택된 메시지: {st.session_state['result_message']}")
-            
-            st.write("### 감정 분포")
-            # 원형 차트로 변경
-            custom_colors = ['#A8E6CF','#DCEDC1','#E0E0E0','#FFAAA5','#FF8B94']  # 원하는 색상 리스트
-            fig = px.pie(values=list(st.session_state['sentiment_probs'].values()), names=list(st.session_state['sentiment_probs'].keys()), title="감정 분포", color_discrete_sequence=custom_colors)
-            st.plotly_chart(fig)
-            
-            found_words = find_sentiwords(st.session_state['user_input'], sentiword_dict)
-            if found_words:
-                negative_words = [word for word, score in found_words if score < 0]
-                positive_words = [word for word, score in found_words if score > 0]
-
-                st.write("### 일기에서 발견된 감성 단어")
-                if negative_words:
-                    st.write(f"사용한 부정 단어: {', '.join(negative_words)}")
-                else:
-                    st.write("사용한 부정 단어가 없습니다.")
-                
-                if positive_words:
-                    st.write(f"사용한 긍정 단어: {', '.join(positive_words)}")
-                else:
-                    st.write("사용한 긍정 단어가 없습니다.")
+                        st.error("요약 전송에 실패했습니다.")
             else:
-                st.write("일기에서 감성 단어를 찾을 수 없습니다.")
-    
-    with tabs[2]:
-        # 지난 일기 탭 내용
-        st.write("### 지난 일기")
-        username = st.session_state.get('logged_in_user')
-        if not username:
-            st.error("로그인이 필요합니다.")
-            return
+                st.write("아직 분석 결과가 없습니다. 먼저 '일기 작성' 탭에서 분석을 진행하세요.")
 
-        diary_data = load_diary_data(username)
-       
-        if not diary_data.empty:
-            selected_date = st.selectbox("날짜 선택", diary_data['date'].unique())
-            
-            if selected_date: 
-                selected_diary = diary_data[diary_data['date'] == selected_date]
-                for idx, row in selected_diary.iterrows():
-                    st.write(f"#### {row['date']}")
-                    st.write(f"**일기 내용:** {row['Diary']}")
-                    st.write(f"**분석 결과:** {row['Sentiment']}")
-                    st.write(f"**추가 메시지:** {row['Message']}")
-                    comments = load_comments(row['id'])
-                    if comments:
-                        st.write("**남편의 댓글:**")
-                        for comment in comments:
-                            st.write(f"- {comment[0]}: {comment[1]} ({comment[2]})")
-                    new_comment = st.text_area(f"댓글 달기 (일기 ID: {row['id']})", key=f"comment_{row['id']}")
-                    if st.button("댓글 저장", key=f"save_comment_{row['id']}"):
-                        save_comment_to_db(row['id'], '남편', new_comment)
-                        st.success("댓글이 저장되었습니다.")
-        else:
-            st.write("저장된 일기가 없습니다.")
+        with tabs[2]:
+            # 지난 일기 탭 내용
+            st.write("### 지난 일기")
+            username = st.session_state.get('logged_in_user')
+            if not username:
+                st.error("로그인이 필요합니다.")
+                return
+
+            diary_data = load_diary_data(username)
+           
+            if not diary_data.empty:
+                selected_date = st.selectbox("날짜 선택", diary_data['date'].unique())
+                
+                if selected_date: 
+                    selected_diary = diary_data[diary_data['date'] == selected_date]
+                    for idx, row in selected_diary.iterrows():
+                        st.write(f"#### {row['date']}")
+                        st.write(f"**일기 내용:** {row['Diary']}")
+                        st.write(f"**분석 결과:** {row['Sentiment']}")
+                        st.write(f"**추가 메시지:** {row['Message']}")
+            else:
+                st.write("저장된 일기가 없습니다.")
+    else:
+        st.error("로그인 후 이용해주세요")
 
 # 앱 실행
 with st.sidebar:
     menu = option_menu("MomE", ['Home','Dashboard','Diary','Mom:ents','하루 자가진단', 'LogOut'],
                         icons=['bi bi-house-fill','bi bi-grid-1x2-fill','book-half','Bi bi-star-fill' ,'bi bi-capsule-pill', 'box-arrow-in-right'],
-                       	menu_icon="baby", default_index=2,
+                        menu_icon="baby", default_index=2,
                         styles={
                             "icon": {"font-size": "23px"},
                             "title": {"font-weight": "bold"}
