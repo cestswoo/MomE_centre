@@ -494,11 +494,11 @@ def main():
             with co1:
                 st.subheader("Test Result")
                 st.write("")
-                st.write("🙂 0-9점")
+                st.write("🙂 0-4점")
                 st.write("| 정상 범위입니다. 우울증 위험이 낮은 것으로 나타났습니다.")
-                st.write("🙁 10-14점")
+                st.write("🙁 5-9점")
                 st.write("| 경미한 우울증 증상입니다. 주의 깊은 관찰과 추가 평가가 필요할 수 있습니다.")
-                st.write("😔 15-19점")
+                st.write("😔 10-19점")
                 st.write("| 상담이 필요합니다. 우울증 위험이 높은 것으로 나타났습니다. 전문가의 상담을 받아보시는 것이 좋습니다.")
                 st.write("😢 20-27점")
                 st.write("| 치료가 시급합니다. 이 경우 반드시 정신건강 전문가의 도움을 받으셔야 합니다. 적절한 치료를 받는 것이 중요합니다.")
@@ -536,9 +536,9 @@ def main():
                     ax.axis('off')  # 축 숨기기
 
                     # Total score에 따라 이모지 추가
-                    if total_score < 10:
+                    if total_score < 5:
                         st.write(f"🙂| {date} / Total score : {total_score} |")
-                    elif 10 <= total_score < 15:
+                    elif 10 <= total_score < 10:
                         st.write(f"🙁| {date} / Total score : {total_score} |")
                     elif 15 <= total_score < 20:
                         st.write(f"😔| {date} / Total score : {total_score} |")
