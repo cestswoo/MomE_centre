@@ -416,23 +416,13 @@ def main():
 
 # 앱 실행
 with st.sidebar:
-    st.markdown("""
-        <style>
-        [data-testid="stSidebar"] {
-            background-color: #FFF9F0;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-    
-    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'MOMents', '하루 자가진단', 'LogOut'],
-                        icons=['bi bi-house', 'bi bi-grid-1x2-fill', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
-                        menu_icon="baby", default_index=0,
+    menu = option_menu("MomE", ['Home','Dashboard','Diary','Mom:ents','하루 자가진단', 'LogOut'],
+                        icons=['bi bi-house-fill','bi bi-grid-1x2-fill','book-half','Bi bi-star-fill' ,'bi bi-capsule-pill', 'box-arrow-in-right'],
+                       	menu_icon="baby", default_index=2,
                         styles={
-                            "icon": {"font-size": "19px"},
-                            "title": {"font-weight": "bold", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                            "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                            "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
-                        })   
+                            "icon": {"font-size": "23px"},
+                            "title": {"font-weight": "bold"}
+                        })
 
 if menu =='Home':
     st.switch_page("pages/home.py")
