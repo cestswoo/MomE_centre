@@ -112,7 +112,7 @@ def save_diary_to_db(username, date, diary, sentiment, message):
         cursor.execute('''
             INSERT INTO diary (username, date, diary, sentiment, message)
             VALUES (?, ?, ?, ?, ?)
-        ''', (username, date, diary, json.dumps(sentiment), message))
+        ''', (username, date, diary, json.dumps(sentiment, ensure_ascii=False), message))
         conn.commit()
     except sqlite3.OperationalError as e:
         st.error(f"An error occurred while saving the diary: {e}")
