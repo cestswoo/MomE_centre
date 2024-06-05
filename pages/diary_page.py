@@ -11,8 +11,6 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-st.image('media/diaryTitleImg.png')
-
 # 모델과 토크나이저 로드
 model_name = 'nlptown/bert-base-multilingual-uncased-sentiment'
 model_dir = "./models"
@@ -250,6 +248,8 @@ def main():
         """,
         unsafe_allow_html=True
     )
+
+    st.image('media/diaryTitleImg.png')
 
     if 'logged_in' in st.session_state and st.session_state['logged_in']:
         st.image('media/diaryTitleImg.jpg')
