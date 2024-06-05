@@ -12,8 +12,6 @@ st.markdown("""
         </style>
     """, unsafe_allow_html=True)
 
-st.image("media/snsImg.png")
-
 # 동일한 데이터베이스에 연결
 conn = sqlite3.connect('data.db', check_same_thread=False)
 c = conn.cursor()
@@ -178,6 +176,8 @@ def main():
     if not user:
         st.error("로그인이 필요합니다.")
         return
+
+    st.image("media/snsImg.png")
         
     tab1, tab2, tab3 = st.tabs(['All posts', 'Upload', 'My'])
     
