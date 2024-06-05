@@ -335,7 +335,7 @@ def main():
                 st.write("### 감정 분포")
                 # 원형 차트로 변경
                 custom_colors = ['#A8E6CF','#DCEDC1','#E0E0E0','#FFAAA5','#FF8B94']  # 원하는 색상 리스트
-                fig = px.pie(values=list(st.session_state['sentiment_probs'].values()), names=list(st.session_state['sentiment_probs'].keys()), title="감정 분포", color_discrete_sequence=custom_colors)
+                fig = px.pie(values=list(st.session_state['sentiment_probs'].values()), names=list(st.session_state['sentiment_probs'].keys()), color_discrete_sequence=custom_colors)
                 st.plotly_chart(fig)
                 
                 found_words = find_sentiwords(st.session_state['user_input'], sentiword_dict)
@@ -392,7 +392,7 @@ def main():
                         st.write(f"#### {row['date']}")
                         st.write(f"**일기 내용:** {row['Diary']}")
                         st.write(f"**분석 결과:** {row['Sentiment']}")
-                        st.write(f"**추가 메시지:** {row['Message']}")
+                        st.write(f"**ㄴ:** {row['Message']}")
             else:
                 st.write("저장된 일기가 없습니다.")
     else:
