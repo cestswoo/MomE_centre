@@ -583,7 +583,7 @@ def main():
         # Page navigation
         if menu == 'Diary':
             st.switch_page("pages/diary_page.py")
-        elif menu == 'Mom'ents':
+        elif menu == "Mom'ents":
             st.switch_page("pages/SNS2.py")
         elif menu == 'Home':
             st.switch_page("pages/home.py")
