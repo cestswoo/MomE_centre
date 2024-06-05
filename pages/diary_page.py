@@ -357,7 +357,6 @@ def main():
                         st.write("사용한 긍정 단어가 없습니다.")
                 else:
                     st.write("일기에서 감성 단어를 찾을 수 없습니다.")
-                st.divider()
                 
                 share_emotion = st.checkbox("지금 이 감정을 공유하고 싶은 사람이 있나요?")
                 
