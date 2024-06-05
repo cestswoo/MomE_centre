@@ -370,8 +370,6 @@ if homeImg:
             unsafe_allow_html=True
         )
 
-    st.divider()
-
     # 문의 및 저작권 표시
     st.markdown("""
         <div class="contact body-font">
