@@ -77,7 +77,7 @@ st.markdown(
         width: 707px;
         height: 2150px;
         background-color: white;
-        border-radius: 30px 30px 0px 0px;
+        border-radius: 30px 30px 30px 30px;
     }
     .contentIndex {
         font-weight: bold;
