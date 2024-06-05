@@ -2,6 +2,54 @@ import streamlit as st
 import hashlib
 import sqlite3
 
+st.markdown(
+    """
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">    
+    <style>
+    *{
+        font-family: 'NanumSquare', sans-serif !important;
+    }
+    .stApp{
+        background: #FFF9EF;
+    }
+    .stButton button {
+        background-color: #FFF9EF;
+        border-radius: 12px;
+        padding: 10px 24px;
+        text-align: center;
+        font-size: 20px;
+        cursor: pointer;
+        width: 325px;
+        border: none;
+    }
+    .stButton button:hover {
+        background-color: #091F5B;
+        color: #ffffff;
+       }
+    .stButton button:active {
+        background-color: #091F5B; /* 클릭된 상태에서의 배경 색상 */
+        transform: scale(0.98); /* 클릭된 상태에서의 약간의 축소 효과 */
+    }
+    .stTabs [role="tabpanel"] {
+        background-color: #ffffff; /* Change this to your desired content background color */
+        border-top: none;
+        padding: 20px;
+        border-radius: 0 0 30px 30px;
+        height: 500px;
+    }
+    .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
+        font-size:16px;
+        color: #091F5B;
+        font-family: 'NanumSquareAceb', sans-serif !important;
+    }
+     div[data-testid="stTabs"] div[role="tablist"] {
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 30px 30px 0px 0px;
+    }
+    </style>""",
+    unsafe_allow_html=True)
+
 conn = sqlite3.connect('data.db')
 c = conn.cursor()
 
