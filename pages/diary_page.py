@@ -335,7 +335,7 @@ def main():
                 fig = px.pie(values=list(st.session_state['sentiment_probs'].values()), names=list(st.session_state['sentiment_probs'].keys()), color_discrete_sequence=custom_colors)
                 st.plotly_chart(fig)
 
-                st.write("### 내가 쓴 일기 분석결과:")
+                st.write("#### 내가 쓴 일기 분석결과:")
                 for sentiment, prob in st.session_state['sentiment_probs'].items():
                     st.write(f"{sentiment}: {prob:.2%}")
                 
@@ -344,7 +344,7 @@ def main():
                     negative_words = [word for word, score in found_words if score < 0]
                     positive_words = [word for word, score in found_words if score > 0]
                         
-                    st.write("### 일기에서 발견된 감성 단어")
+                    st.write("#### 일기에서 발견된 감성 단어")
                     if negative_words:
                         st.write(f"사용한 부정 단어: {', '.join(negative_words)}")
                     else:
