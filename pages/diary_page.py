@@ -1,5 +1,5 @@
 import streamlit as st
-from datetime import datetime
+from datetime import datetime, timedelta  # datetime 모듈에서 필요한 항목만 가져오기
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -26,7 +26,7 @@ def load_model_and_tokenizer():
 tokenizer, model = load_model_and_tokenizer()
 
 # 구글 캘린더 API 설정
-SERVICE_ACCOUNT_FILE = 'mome-425411-4ee406acd843.json'  # 다운로드한 서비스 계정 파일의 경로로 변경합니다.
+SERVICE_ACCOUNT_FILE = 'path/to/service-account.json'  # 다운로드한 서비스 계정 파일의 경로로 변경합니다.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 credentials = service_account.Credentials.from_service_account_file(
@@ -173,7 +173,7 @@ def add_event_to_google_calendar(event_summary, event_description, event_date):
                 'timeZone': 'Asia/Seoul',
             },
             'end': {
-                'dateTime': (event_date + datetime.timedelta(hours=1)).isoformat(),
+                'dateTime': (event_date + timedelta(hours=1)).isoformat(),  # timedelta를 datetime에서 직접 사용
                 'timeZone': 'Asia/Seoul',
             },
         }
