@@ -10,6 +10,10 @@ from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+import os
+import pickle
 from streamlit_option_menu import option_menu
 import plotly.express as px
 
@@ -26,12 +30,29 @@ def load_model_and_tokenizer():
 tokenizer, model = load_model_and_tokenizer()
 
 # 구글 캘린더 API 설정
-SERVICE_ACCOUNT_FILE = 'client_secret_764298662459-e3pv06o8udo0nskmjhcjss4vurp9e0ua.apps.googleusercontent.com.json'  # 다운로드한 서비스 계정 파일의 경로로 변경합니다.
+CLIENT_SECRET_FILE = 'path/to/client_secret.json'  # 다운로드한 OAuth 2.0 클라이언트 ID 파일 경로로 변경합니다.
+API_NAME = 'calendar'
+API_VERSION = 'v3'
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-credentials = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-service = build('calendar', 'v3', credentials=credentials)
+def authenticate_google():
+    creds = None
+    token_path = 'token.pkl'
+    if os.path.exists(token_path):
+        with open(token_path, 'rb') as token:
+            creds = pickle.load(token)
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
+            creds = flow.run_local_server(port=0)
+        with open(token_path, 'wb') as token:
+            pickle.dump(creds, token)
+    service = build(API_NAME, API_VERSION, credentials=creds)
+    return service
+
+service = authenticate_google()
 
 # SentiWord_Dict.txt 파일 로드 함수
 def load_sentiword_dict(file_path):
