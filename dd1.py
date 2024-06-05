@@ -2,32 +2,31 @@ import streamlit as st
 import hashlib
 import sqlite3
 
-# 데이터베이스 연결 및 커서 생성
 conn = sqlite3.connect('data.db')
 c = conn.cursor()
 
 # DB Functions
 def create_usertable():
-    c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT, password TEXT, role TEXT)')
+    c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT,password TEXT)')
 
-def add_userdata(username, password, role):
-    c.execute('INSERT INTO userstable(username, password, role) VALUES (?, ?, ?)', (username, password, role))
+def add_userdata(username,password):
+    c.execute('INSERT INTO userstable(username,password) VALUES (?,?)',(username,password))
     conn.commit()
 
-def login_user(username, password):
-    c.execute('SELECT * FROM userstable WHERE username =? AND password = ?', (username, password))
+def login_user(username,password):
+    c.execute('SELECT * FROM userstable WHERE username =? AND password = ?',(username,password))
     data = c.fetchall()
     return data
 
-def get_user_role(username):
-    c.execute('SELECT role FROM userstable WHERE username = ?', (username,))
-    role = c.fetchone()
-    return role[0] if role else None
+def view_all_users():
+    c.execute('SELECT * FROM userstable')
+    data = c.fetchall()
+    return data
 
 def make_hashes(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
 
-def check_hashes(password, hashed_text):
+def check_hashes(password,hashed_text):
     if make_hashes(password) == hashed_text:
         return hashed_text
     return False
@@ -40,43 +39,38 @@ if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
 if 'logged_in_user' not in st.session_state:
     st.session_state['logged_in_user'] = ''
-if 'role' not in st.session_state:
-    st.session_state['role'] = ''
 
-if not st.session_state['logged_in']:
-    tab1, tab2 = st.tabs(["Login", "Sign up"])
+# if st.session_state['logged_in']: 
+#     st.write(f"환영합니다, {st.session_state['logged_in_user']}님!")
+#     st.switch_page("pages/home.py")
+# else:
+tab1, tab2 = st.tabs(["Login", "Sign up"])
 
-    with tab1:
-        st.subheader("로그인")
-        username = st.text_input("ID")
-        password = st.text_input("Password", type='password')
-        if st.button("로그인"):
-            create_usertable()
-            hashed_pswd = make_hashes(password)
-            result = login_user(username, check_hashes(password, hashed_pswd))
-            if result:
-                st.session_state['logged_in_user'] = username  # Save logged in username in session state
-                st.session_state['logged_in'] = True
-                st.session_state['role'] = get_user_role(username)  # Save user role in session state
-                st.success(f"환영합니다, {username}님!")
-            else:
-                st.warning("아이디/비밀번호가 틀렸습니다!")
+with tab1:
+    st.subheader("로그인")
+    username = st.text_input("ID")
+    password = st.text_input("Password", type='password')
+    if st.button("로그인"):
+        create_usertable()
+        hashed_pswd = make_hashes(password)
+        result = login_user(username, check_hashes(password, hashed_pswd))
+        if result:
+            st.session_state['logged_in_user'] = username  # Save logged in username in session state
+            st.session_state['logged_in'] = True
+            st.switch_page("pages/home.py")
+            # st.experimental_rerun()  # 페이지 리로드
+        else:
+            st.warning("아이디/비밀번호가 틀렸습니다!")
 
-    with tab2:
-        st.subheader("회원가입")
-        new_user = st.text_input("ID", key='ID')
-        new_password = st.text_input("Password", type='password', key="new_password")
-        role = st.selectbox("Role", ["산모", "남편"])
-        
-        if st.button("회원가입"):
-            create_usertable()
-            add_userdata(new_user, make_hashes(new_password), role)
-            st.success("회원가입이 완료되었습니다. 로그인 탭으로 가서 로그인하세요.")
+with tab2:
+    st.subheader("회원가입")
+    new_user = st.text_input("ID", key='ID')
+    new_password = st.text_input("Password", type='password', key="new_password")
+    
+    if st.button("회원가입"):
+        create_usertable()
+        add_userdata(new_user, make_hashes(new_password))
+        st.success("회원가입이 완료되었습니다. 로그인 탭으로 가서 로그인하세요.")
+        # st.info("Go to Login Menu to login")
 
-    st.image("https://via.placeholder.com/150", caption='Home Image')  # 대체 이미지 사용
-
-else:
-    st.success(f"환영합니다, {st.session_state['logged_in_user']}님!")
-    if st.button("서비스로 이동"):
-        st.session_state['page'] = 'service'
-        st.experimental_rerun()
+st.image("media/homeImg 1.png")
