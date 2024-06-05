@@ -161,7 +161,7 @@ st.markdown(
         border-radius: 30px;
     }
     .img3Container {
-        margin: 10px 25px 30px 0px;
+        margin: 10px 25px 40px 0px;
         border-radius: 30px;
     }
     .img4Container {
