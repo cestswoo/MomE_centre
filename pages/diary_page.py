@@ -334,7 +334,6 @@ def main():
                 custom_colors = ['#A8E6CF','#DCEDC1','#E0E0E0','#FFAAA5','#FF8B94']  # 원하는 색상 리스트
                 fig = px.pie(values=list(st.session_state['sentiment_probs'].values()), names=list(st.session_state['sentiment_probs'].keys()), color_discrete_sequence=custom_colors)
                 st.plotly_chart(fig)
-                st.divider()
 
                 st.write("### 내가 쓴 일기 분석결과:")
                 for sentiment, prob in st.session_state['sentiment_probs'].items():
