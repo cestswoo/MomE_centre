@@ -157,98 +157,7 @@ def send_email(subject, content, recipient_email):
 def main():
     # SQLite 데이터베이스 초기화
     init_db()
-
-    # CSS 스타일 추가
-    st.markdown(
-        """
-        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
-        <style>
-        .stApp{
-            background: #D0E4FF;
-            }
-        .stTabs [role="tabpanel"] {
-            background-color: #ffffff; /* Change this to your desired content background color */
-            /* border: 2px solid #4dd0e1;  */
-            border-top: none;
-            padding: 20px;
-            border-radius: 0 0 30px 30px;
-            box-shadow: 5px 5px 5px #DFDCD5;
-            height: 900px;
-        }
-        .stTabs [data-baseweb="tab-list"] 
-            button [data-testid="stMarkdownContainer"] p {
-            font-size:16px;
-            color: #091F5B;
-            font-family: 'NanumSquareAceb', sans-serif !important;
-            }
-            div[data-testid="stTabs"] button[aria-selected="true"]::after {
-                content: "";
-                display: block;
-                border-bottom: 4px solid #ffffff;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-            }
-             div[data-testid="stTabs"] div[role="tablist"] {
-                background-color: #ffffff;
-                padding: 10px;
-                border-radius: 30px 30px 0px 0px;
-            }
-            div[data-testid="stTabs"] button[aria-selected="true"] {
-                background-color: #EDF0F5;
-                color: white;
-                border-radius: 30px;
-                padding: 0pc 5px;
-            }
-            div[data-testid="stTabs"] button {
-                color: white;
-                background-color: #ffffff;
-            }
-        .subtitle{
-            font-size: 25px;
-            font-weight:bold;
-            text-align: start;
-            line-height: 1;
-            letter-spacing: 0;
-            margin-bottom: 10px;
-            color: #091F5B;
-            text-align: center;
-            margin-bottom: 20px;
-            font-family: 'NanumSquareAceb';
-        }
-        .topic-card{
-            color: #091F5B;
-            background-color: #FFF9F0;
-            box-shadow: 3px 3px 3px #DFDCD5;
-            margin:5px;
-            border-radius: 10px;
-            padding: 7px;
-            font-family: 'NanumSquareAcb', sans-serif !important;
-        }
-        .topic{
-            margin: 7px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .sidebar .sidebar-content {
-            background-color: #000000;  /* 사이드바 배경 색상 설정 */
-        }
-        .sidebar .sidebar-content .css-1d391kg {
-            background-color: #f0f2f6;
-        }
-        .contact {
-            margin: 0px 12px;
-            font-size: 10px;
-            font-family: 'Nanum Gothic', sans-serif;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
+    
     st.image('media/diaryTitleImg.png')
 
     if 'logged_in' in st.session_state and st.session_state['logged_in']:
@@ -260,7 +169,6 @@ def main():
             st.markdown(
                 '''
                   <div class="subtitle">일기 주제 추천</div>
-        
                 ''',unsafe_allow_html=True
             )   
             recommended_topics = recommend_topics(topics, num=6)
@@ -370,7 +278,7 @@ def main():
         <div class="contact">
             ⓒ MomE
         </div>
-                """, unsafe_allow_html=True
+        """, unsafe_allow_html=True
     )
 
 # 앱 실행
