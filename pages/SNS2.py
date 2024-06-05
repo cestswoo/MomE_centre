@@ -12,6 +12,8 @@ st.markdown("""
         </style>
     """, unsafe_allow_html=True)
 
+st.image("media/snsImg.png")
+
 # 동일한 데이터베이스에 연결
 conn = sqlite3.connect('data.db', check_same_thread=False)
 c = conn.cursor()
