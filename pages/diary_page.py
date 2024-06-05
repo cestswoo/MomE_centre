@@ -26,7 +26,7 @@ def load_model_and_tokenizer():
 tokenizer, model = load_model_and_tokenizer()
 
 # 구글 캘린더 API 설정
-SERVICE_ACCOUNT_FILE = 'mome-425411-4ee406acd843.json'  # 다운로드한 서비스 계정 파일의 경로로 변경합니다.
+SERVICE_ACCOUNT_FILE = 'mome-calendar-425506-faf27fa7f9d5.json'  # 다운로드한 서비스 계정 파일의 경로로 변경합니다.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 credentials = service_account.Credentials.from_service_account_file(
