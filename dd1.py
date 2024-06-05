@@ -67,7 +67,7 @@ with tab1:
             st.session_state['logged_in'] = True
             st.session_state['user_role'] = result[0][2]  # Save user role in session state
             st.success(f"환영합니다, {username}님!")
-            st.experimental_rerun()  # 페이지 리로드
+            st.rerun()  # 페이지 리로드
         else:
             st.warning("아이디/비밀번호가 틀렸습니다!")
 
