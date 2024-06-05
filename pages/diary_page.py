@@ -391,7 +391,7 @@ def main():
                     for idx, row in selected_diary.iterrows():
                         st.write(f"#### {row['date']}")
                         st.write(f"**일기 내용:** {row['Diary']}")
-                        st.write(f"**분석 결과:** {row['Sentiment']}")
+                        st.write(f"**분석 결과:** {row['sentiment_probs']}")
                         st.write(f"**ㄴ** {row['Message']}")
             else:
                 st.write("저장된 일기가 없습니다.")
