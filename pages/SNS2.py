@@ -153,7 +153,7 @@ def main():
         """,
         unsafe_allow_html=True
     )
-    st.title("Mom':'ents")
+    st.title('''Mom':'ents''')
     st.markdown("<h6 style='margin-top: -8px'>| 소중한 순간들의 기록을 남겨 보세요!", unsafe_allow_html=True)
     st.write("")
 
