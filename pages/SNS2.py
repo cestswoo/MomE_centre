@@ -144,11 +144,15 @@ def delete_post(post_id):
 def main():
     st.markdown(
         """
-        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">    
         <style>
         * {
-            font-family: 'NanumSquare', sans-serif !important;
+            font-family: 'NanumSquareAcl', sans-serif !important;
+            border-radius: 30px;
         }
+    .stApp {
+        background: #D0E4FF;
+    }
         </style>
         """,
         unsafe_allow_html=True
