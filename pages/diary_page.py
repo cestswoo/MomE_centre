@@ -163,6 +163,9 @@ def main():
         """
         <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
         <style>
+        *{
+            font-family: 'NanumSquare', sans-serif !important;
+        }
         .stApp{
             background: #D0E4FF;
             font-family: 'NanumSquareAcb';
