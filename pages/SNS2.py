@@ -148,7 +148,6 @@ def main():
         <style>
         * {
             font-family: 'NanumSquareAcl', sans-serif !important;
-            border-radius: 30px;
         }
     .stApp {
         background: #D0E4FF;
