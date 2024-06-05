@@ -10,7 +10,7 @@ st.markdown(
     <style>
     * {
         font-family: 'NanumSquareAcl', sans-serif !important;
-        border-radius: 30px;
+        background: #D0E4FF;
     }
     .stApp {
         background: #D0E4FF;
