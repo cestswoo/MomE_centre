@@ -404,7 +404,7 @@ with st.sidebar:
         }
         </style>
     """, unsafe_allow_html=True)
-    menu = option_menu("MomE", ['Home','Diary','''Mom'ents''','하루 자가진단', 'LogOut'],
+    menu = option_menu("MomE", ['Home','Diary',"Mom'ents",'하루 자가진단', 'LogOut'],
                         icons=['bi bi-house-fill', 'book-half','Bi bi-star-fill' ,'bi bi-capsule-pill', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=1,
                         styles={
@@ -416,7 +416,7 @@ with st.sidebar:
 
 if menu =='Home':
     st.switch_page("pages/home.py")
-elif menu == '''Mom'ents''':
+elif menu == "Mom'ents":
     st.switch_page("pages/SNS2.py")
 elif menu =='하루 자가진단': 
     st.switch_page("pages/self_diagnosis.py")
