@@ -226,7 +226,7 @@ with st.sidebar:
                             "icon": {"font-size": "23px"},
                             "title": {"font-weight": "bold"},
                             "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                            "container": {"background-color": "#FFF9EF", "color":"#6F96D1"}
+                            "container": {"background-color": "#D0E3FF", "color":"#FFF9EF"}
                         })
 
     # 선택된 메뉴에 따라 페이지 변경
