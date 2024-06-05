@@ -392,7 +392,7 @@ with st.sidebar:
                         styles={
                             "icon": {"font-size": "19px"},
                             "title": {"font-weight": "bold", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                            "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
+                            "nav-link-selected": {"font-size":"17px","background-color": "#FFF9EF", "color":"#091F5B","font-weight":"bold",},
                             "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
                         })
 
