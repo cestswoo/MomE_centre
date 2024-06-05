@@ -551,12 +551,21 @@ def main():
                 st.write("결과가 없습니다.")
 
     with st.sidebar:
+        st.markdown("""
+        <style>
+        [data-testid="stSidebar"] {
+            background-color: #FFF9F0;
+        }
+        </style>
+    """, unsafe_allow_html=True)
         menu = option_menu("MomE", ['Home','Diary', 'Mom:ents', '하루 자가진단', 'LogOut'],
                             icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
                             menu_icon="baby", default_index=3,
                             styles={
                                 "icon": {"font-size": "23px"},
-                                "title": {"font-weight": "bold"}
+                                "title": {"font-weight": "bold"},
+                                "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
+                                "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
                             })
 
         # Page navigation
