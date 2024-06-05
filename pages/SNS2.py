@@ -6,7 +6,7 @@ from datetime import datetime
 st.markdown("""
         <style>
         .stApp{
-            background: #D0E4FF;
+            background: #FFF9EF;
         }
 
         </style>
