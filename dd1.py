@@ -81,9 +81,6 @@ def check_hashes(password,hashed_text):
         return hashed_text
     return False
 
-st.title("MomE")
-st.markdown("<h6 style='margin-top: -8px'>| MomEase : 엄마의 편안함</h2>", unsafe_allow_html=True)
-
 # 세션 상태에 'logged_in' 상태가 없으면 초기화
 if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
@@ -124,7 +121,6 @@ with tab1:
 
 with tab2:
     col3, col4 = st.columns(2)
-    
     with col3:
         st.image("media/loginImg.png")
 
