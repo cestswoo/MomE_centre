@@ -324,18 +324,21 @@ def main():
                         st.write("사용한 긍정 단어가 없습니다.")
                 else:
                     st.write("일기에서 감성 단어를 찾을 수 없습니다.")
-
-                recipient_email = st.text_input("남편의 이메일 주소를 입력하세요", "")
-                if st.button("요약 보내기"):
-                    email_content = f"""
-                    일기 내용: {st.session_state['user_input']}
-                    감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
-                    추가 메시지: {st.session_state['result_message']}
-                    """
-                    if send_email("감정 분석 요약", email_content, recipient_email):
-                        st.success("요약이 성공적으로 전송되었습니다.")
-                    else:
-                        st.error("요약 전송에 실패했습니다.")
+                
+                share_emotion = st.checkbox("지금 이 감정을 공유하고 싶은 사람이 있나요?")
+                
+                if share_emotion:
+                    recipient_email = st.text_input("남편의 이메일 주소를 입력하세요", "")
+                    if st.button("요약 보내기"):
+                        email_content = f"""
+                        일기 내용: {st.session_state['user_input']}
+                        감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
+                        추가 메시지: {st.session_state['result_message']}
+                        """
+                        if send_email("감정 분석 요약", email_content, recipient_email):
+                            st.success("요약이 성공적으로 전송되었습니다.")
+                        else:
+                            st.error("요약 전송에 실패했습니다.")
             else:
                 st.write("아직 분석 결과가 없습니다. 먼저 '일기 작성' 탭에서 분석을 진행하세요.")
 
