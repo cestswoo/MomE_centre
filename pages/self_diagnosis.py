@@ -5,6 +5,7 @@ from datetime import datetime
 import pandas as pd
 import altair as alt
 import matplotlib.pyplot as plt
+import plotly.express as px
 
 # Initialize SQLite database
 def init_db():
@@ -92,10 +93,6 @@ st.markdown(
         * {
             font-family: 'NanumSquare', sans-serif !important;
         }
-        .stApp {
-            background: #D0E4FF;
-        }
-        
         .header {
             color: #FF69B4;
             font-size: 36px;
@@ -133,15 +130,7 @@ def main():
     
     # Sidebar menu
     with st.sidebar:
-        st.markdown("""
-        <style>
-        [data-testid="stSidebar"] {
-            background-color: #FFF9F0;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-        
-        selected_menu = option_menu("하루 자가검진", ['산후우울증이란', 'K-EPDS', 'PHQ-9'],
+        selected_menu = option_menu("MomE", ['산후우울증이란', 'K-EPDS', 'PHQ-9'],
                                     icons=['book', 'clipboard-data', 'clipboard-check'],
                                     menu_icon="baby", default_index=0,
                                     styles={
@@ -282,13 +271,18 @@ def main():
     # 에딘버러 tab
     elif selected_menu == 'K-EPDS':
         st.header('K-EPDS')
-        st.write("여기에 검사에 대한 정보 들어갈거에유")
+        st.write("K-EPDS(Korean version of Edinburgh Postnatal Depression Scale)는 현재 가장 많이 사용되고 있는 산후우울증 선별 검사도구입니다. 일반적인 우울검사보다 산후우울증을 경험하면서 겪게 되는 증상들을 평가하고 있습니다. Cox 등에 의해 1987년 개발되었고 우리나라에서는 김용구 등에 의해 2005년 번안되고 표준화 된 검사도구입니다.  ")
+        st.write("")
         sub_tab1, sub_tab2 = st.tabs(['검사', '검사결과'])
     
 
         # Self-diagnosis tab
         with sub_tab1:
             # Date selection
+            st.write("[ Test 실시 방법 ]")
+            st.write("- 문항을 너무 오래 생각하지 말고 즉각적으로 솔직하게 응답하시면 됩니다.\n - 현재 기분이 아니라 지난 2주일 동안 기분​​을 가장 잘 나타낸다고 생각되는 문항의 번호를 선택하시면 됩니다.")
+            st.divider()
+
             selected_date = st.date_input("오늘의 날짜를 선택해 주세요", value=datetime.now())
             st.write("")
 
@@ -300,7 +294,7 @@ def main():
                 '대부분 그렇음': 3
             }
 
-
+            
 
      
             q1 = question_block(f"**1. 우스운 것이 눈에 잘 띄고 웃을 수 있었다.**", answer_option, key='q1')
@@ -390,17 +384,29 @@ def main():
                     # 날짜를 datetime 형식으로 변환
                     result_df["날짜"] = pd.to_datetime(result_df["날짜"])
                     
-                    # 날짜별 총점 추이 차트 생성
-                    line_chart = alt.Chart(result_df).mark_line().encode(
-                        x='날짜:T',
+                    # Altair 차트 만들기
+                    line = alt.Chart(result_df).mark_line().encode(
+                        x=alt.X('yearmonthdate(날짜):T', title='날짜', axis=alt.Axis(format='%Y-%m-%d')),
                         y='총점:Q',
-                        tooltip=['날짜:T', '총점:Q']
+                        tooltip=[alt.Tooltip('yearmonthdate(날짜):T', title='날짜', format='%Y-%m-%d'), '총점:Q']
                     ).properties(
                         title=''
                     )
+
+                    points = alt.Chart(result_df).mark_point().encode(
+                        x=alt.X('yearmonthdate(날짜):T', title='날짜', axis=alt.Axis(format='%Y-%m-%d')),
+                        y='총점:Q',
+                        tooltip=[alt.Tooltip('yearmonthdate(날짜):T', title='날짜', format='%Y-%m-%d'), '총점:Q']
+                    ).properties(
+                        title=''
+                    )
+
+                    combined_chart = line + points
+
+                    # Streamlit에 차트 표시
                     st.write("")
                     st.write("")
-                    st.altair_chart(line_chart, use_container_width=True)
+                    st.altair_chart(combined_chart, use_container_width=True)
                     st.write("")
                     st.write("")
                     # 각 번호별 점수에 따른 색깔 설정
@@ -436,15 +442,19 @@ def main():
     # PHQ-9 tab
     elif selected_menu == 'PHQ-9':
         st.title("PHQ-9")
-        st.write("여기에 검사에 대한 정보 들어갈거에유")
+        st.write("우울증을 진단하기 위한 다양한 선별도구 중 PHQ-9(Patient Health QuestionnairePatient Health Questionnaire)는 1999년 Spitzer등에 의해 개발되었습니다. PHQ는 자가보고식 질문지로, 주요우울장애의 진단을 위한 9개의 문항으로 구성되어 있습니다. 기존의 우울증 선별도구에 비해 문항 수가 적어 검사에 소요되는 시간이 짧으면서 우수한 민감도와 특이도를 가진다고 보고되어, 임상에서의 사용이 용이한 것으로 제시되었습니다.")
+        st.write("")
         sub_tab1, sub_tab2 = st.tabs(['검사', '검사결과'])
 
         # PHQ-9 tab
         with sub_tab1:
+            st.write("[ Test 실시 방법 ]")
+            st.write("- 문항을 너무 오래 생각하지 말고 즉각적으로 솔직하게 응답하시면 됩니다.\n - 현재 기분이 아니라 지난 2주일 동안 기분​​을 가장 잘 나타낸다고 생각되는 문항의 번호를 선택하시면 됩니다.")
+            st.divider()
             # Date selection
             selected_date = st.date_input("오늘의 날짜를 선택해 주세요", value=datetime.now(), key='phq_date')
             st.write("")
-            st.write("지난 2주 동안 다음과 같은 문제를 얼마나 자주 겪었는지 해당되는 항목에 표시해주세요 ")
+           # st.write("지난 2주 동안 다음과 같은 문제를 얼마나 자주 겪었는지 해당되는 항목에 표시해주세요 ")
 
             # Answer options
             answer_option = {
@@ -527,9 +537,32 @@ def main():
             if results:
                 result_df = pd.DataFrame(results, columns=["날짜", "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "총점"])
                 st.subheader("Result Record")
-                # 날짜별 추이 플랏
-                st.line_chart(result_df.set_index("날짜")["총점"])
+                # Altair 차트 만들기
+                line = alt.Chart(result_df).mark_line().encode(
+                    x=alt.X('날짜:T', title='날짜', axis=alt.Axis(format='%Y-%m-%d')),
+                    y='총점:Q',
+                    tooltip=[alt.Tooltip('날짜:T', title='날짜', format='%Y-%m-%d'), '총점:Q']
+                ).properties(
+                    title=''
+                )
 
+                points = alt.Chart(result_df).mark_point().encode(
+                    x=alt.X('날짜:T', title='날짜', axis=alt.Axis(format='%Y-%m-%d')),
+                    y='총점:Q',
+                    tooltip=[alt.Tooltip('날짜:T', title='날짜', format='%Y-%m-%d'), '총점:Q']
+                ).properties(
+                    title=''
+                )
+
+                combined_chart = line + points
+
+                # Streamlit에 차트 표시
+                st.write("")
+                st.write("")
+                st.altair_chart(combined_chart, use_container_width=True)
+                st.write("")
+                st.write("")
+        
                 # 각 번호별 점수에 따른 색깔 설정
                 colors = ['#baef9d', '#e8ef9d', '#efd39d', '#efae9d']  # 연두색, 노란색, 주황색, 빨간색
 
@@ -563,21 +596,12 @@ def main():
                 st.write("결과가 없습니다.")
 
     with st.sidebar:
-        st.markdown("""
-        <style>
-        [data-testid="stSidebar"] {
-            background-color: #FFF9F0;
-        }
-        </style>
-    """, unsafe_allow_html=True)
         menu = option_menu("MomE", ['Home','Diary', "Mom'ents", '하루 자가진단', 'LogOut'],
-                            icons=['bi bi-house', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
+                            icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
                             menu_icon="baby", default_index=3,
                             styles={
                                 "icon": {"font-size": "23px"},
-                                "title": {"font-weight": "bold"},
-                                "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                                "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
+                                "title": {"font-weight": "bold"}
                             })
 
         # Page navigation
