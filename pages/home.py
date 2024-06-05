@@ -75,7 +75,7 @@ st.markdown(
         position: absolute;
         top: 50%;
         width: 707px;
-        height: 1800px;
+        height: 2000px;
         background-color: white;
         border-radius: 30px 30px 30px 30px;
     }
@@ -369,6 +369,8 @@ if homeImg:
             """,
             unsafe_allow_html=True
         )
+
+    st.divider()
 
     # 문의 및 저작권 표시
     st.markdown("""
