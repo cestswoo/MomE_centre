@@ -289,12 +289,12 @@ if homeImg:
             unsafe_allow_html=True
         )
 
-        Img_02 = load_image(Img2_path)
+        Img_04 = load_image(Img4_path)
         if Img_02:
             st.markdown(
                 f'''
                 <div class="img2Container">
-                    <img src="data:image/jpg;base64,{Img_02}"/>
+                    <img src="data:image/jpg;base64,{Img_04}"/>
                 </div>
                 ''',
                 unsafe_allow_html=True
@@ -332,12 +332,12 @@ if homeImg:
             unsafe_allow_html=True
         )
 
-        Img_01 = load_image(Img1_path)
+        Img_03 = load_image(Img3_path)
         if Img_01:
             st.markdown(
                 f'''
                 <div class="imgContainer">
-                    <img src="data:image/jpg;base64,{Img_01}" />
+                    <img src="data:image/jpg;base64,{Img_03}" />
                 </div>
                 ''',
                 unsafe_allow_html=True
