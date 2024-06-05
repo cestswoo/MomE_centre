@@ -9,23 +9,23 @@ st.markdown(
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <style>
         * {
-            font-family: 'NanumSquare', sans-serif !important;
+            font-family: 'NanumSquareAcl', sans-serif !important;
         }
     .stApp {
-        background: #FFF9EF;
+        background: #D0E4FF;
     }
     .Container {
         width: 710px;
         width: 100%; /* 부모 컨테이너 너비 */
-        height: 100vh; /* 부모 컨테이너 높이 */
+        height: 105vh; /* 부모 컨테이너 높이 */
         overflow: hidden;
         border-radius: 30px;
+        margin-top: 20px;
     }
     .homeImg {
         position: relative; /* 내부 요소 고정 */
         width: 707px;
         height: 471px;
-        border-radius: 30px;
     }
     .textContainer {
         position: absolute;
@@ -41,30 +41,32 @@ st.markdown(
     }
     .logo {
         font-size: 60px;
-        font-weight: bold;
+        font-weight: 100;
         color: white;
-        font-family: 'Nanum Pen Script', cursive;
+        font-family: "Inter", sans-serif;
     }
     .logo-below {
         position: absolute; /* 위치 고정 */
-        top: 80%;
-        left: 1%;
+        top: 65%;
+        left: 11%;
         width: 120px;
         font-size: 13px;
-        font-weight: lighter;
+        font-weight: 100;
         color: white;
+        font-family: "Inter", sans-serif;
     }
     .adText {
         position: absolute; /* 위치 고정 */
-        top: 28%;
-        left: 30%;
+        top: 45%;
+        left: 27%;
         transform: translateX(-50%);
         width: 229px;
         height: 95px;
         font-size: 40px;
         font-weight: 400px;
         color: white;
-        font-family: 'Nanum Pen Script', cursive;
+        font-family: "Inter", sans-serif;
+        line-height: 1.2;
     }
     .mainContainer {
         display: flex;
@@ -89,28 +91,37 @@ st.markdown(
         text-align: center;
         margin: 15px 0px;
         font-size: 17px;
-        font-family: 'Nanum Gothic', sans-serif;
+        font-family: 'NanumSquareAcl', sans-serif !important;
     }
     .divider {
         width: 250px;
         height: 1px;
         background-color: #000000;
     }
-    .serviceComponent {
-        position: relative;
-        margin-left: 22.5px;
-        margin-right: 50px;
-        margin-bottom: 24px;
-        width: 302px;
-        height: 240px;
-        border-radius: 30px;
-        background-color: #EDF0F5;
+    .service1, .service2, .service3{
         display: flex;
         flex-direction: column;
         align-items: start;
+        border-radius: 30px;
+        background-color: #EDF0F5;
+        margin-bottom:20px;
+    }
+    .service1 {
+        margin-left: 25px;
+        width: 315px;
+        height: 275px;
+    }
+    .service2{
+        width: 320px;
+        height: 317px;
+    }
+    .service3{
+        margin-left:25px;
+        width: 315px;
+        height: 307px;
     }
     .titleContainer {
-        margin: 30px 0px 20px 35px;
+        margin: 25px 20px;
         position: relative;
         width: 200;
         height: 56px;
@@ -121,37 +132,33 @@ st.markdown(
     .titleBar {
         position: relative;
         width: 2px;
-        height: 42px;
+        height: 45px;
         background-color: #091F5B;
-        margin-right: 10px;
+        margin-right: 7px;
     }
     .title {
-        margin-top: 4px;
+        margin-top: 3px;
         margin-right: 40px;
-        position: relative;
         font-size: 20px;
-        font-weight: bold;
-        color: black;
+        color: #091F5B;
         line-height: 1.2;
-        font-family: 'Nanum Pen Script', cursive;
+        font-family: 'NanumSquareExtraBold', sans-serif !important; ;
     }
     .serviceDetail {
-        color: 091F5B;
-        font-weight: 800px;
-        margin-left: 30px;
-        position: relative;
+        margin-left: 20px;
+        margin-bottom: 20px;
         font-size: 16px;
         text-align: start;
         line-height: 1.4;
-        width: 240px;
+        width: 300px;
         height: 50px;
-        font-family: 'Nanum Gothic', sans-serif;
     }
-    .imgContainer {
-        width: 302px;
-        height: 420px;
-        margin-left: 25px;
-        margin-bottom: 20px;
+    .imgContainer{
+        margin: 40px 0px;
+    }
+    .img2Container {
+        margin: 20px 0px 20px 25px;
+        border-radius: 30px;
     }
     .copyRightDivider {
         width: 600px;
@@ -163,6 +170,13 @@ st.markdown(
         margin: 0px 12px;
         font-size: 10px;
         font-family: 'Nanum Gothic', sans-serif;
+    }
+    .whatWeDoText{
+        font-weight: bold;
+        font-size: 20px;
+        margin-top: 50px;
+        color: black;
+        font-family: 'Nanum Pen Script', cursive;
     }
     </style>
     """,
@@ -191,19 +205,19 @@ Img4_path = './media/Img4.jpg'
 homeImg = load_image(image_path)
 if homeImg:
     st.markdown(f'''
-        <div class="Container body-font">
+        <div class="Container">
             <div class="homeImg">
                 <img src="data:image/jpg;base64,{homeImg}" />
                 <div class="textContainer">
-                    <div class="logo title-font">MomE</div>
-                    <div class="logo-below body-font">Always here for you</div>
+                    <div class="logo">MomE</div>
                 </div>
-                <div class="adText title-font">We Care<br>Your Mind</div>
+                <div class="adText">We Care<br>Your Mind</div>
+                <div class="logo-below">Always here for you</div>
             </div>
             <div class="mainContainer">
-                <div class="contentIndex title-font">What we do</div>
+                <div class="contentIndex">About Us</div>
                 <div class="divider"></div>
-                <div class="aboutUsContent body-font">
+                <div class="aboutUsContent">
                     MomE은 산후우울증을 겪었거나 겪고 있는 엄마와 가족들을 위한 특별한 공간입니다.<br>
                     당신의 여정에 함께하며 희망과 회복의 길로 안내합니다. <br><br>
                     산후우울증은 많은 엄마들이 경험하는 어려운 감정입니다. <br>
@@ -212,7 +226,7 @@ if homeImg:
                     MomE와 함께하세요.
                 </div>
                 <div class="divider"></div>
-                <div class="contentIndex title-font">Our Service</div>
+                <div class="whatWeDoText">What we do</div>
             </div>
         </div>
     ''', unsafe_allow_html=True)
