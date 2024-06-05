@@ -364,7 +364,7 @@ def main():
                         email_content = f"""
                         일기 내용: {st.session_state['user_input']}
                         감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
-                        추가 메시지: {st.session_state['result_message']}
+                        {st.session_state['result_message']}
                         """
                         if send_email("감정 분석 요약", email_content, recipient_email):
                             st.success("요약이 성공적으로 전송되었습니다.")
@@ -391,7 +391,7 @@ def main():
                     for idx, row in selected_diary.iterrows():
                         st.write(f"#### {row['date']}")
                         st.write(f"**일기 내용:** {row['Diary']}")
-                        st.write(f"**분석 결과:** {col['Sentiment']}")
+                        st.write(f"**분석 결과:** {row['Sentiment']}")
                         st.write(f"**ㄴ** {row['Message']}")
             else:
                 st.write("저장된 일기가 없습니다.")
