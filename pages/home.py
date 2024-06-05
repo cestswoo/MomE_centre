@@ -396,7 +396,7 @@ with st.sidebar:
                             "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
                         })
 
-# Page navigation
+    # Page navigation
     if menu == 'Dashboard':
         st.switch_page("pages/dashboard_page.py")
     elif menu == 'Diary':
