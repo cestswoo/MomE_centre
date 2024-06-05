@@ -19,7 +19,7 @@ st.markdown(
         text-align: center;
         font-size: 20px;
         cursor: pointer;
-        width: 325px;
+        width: 100%;
         border: none;
     }
     .stButton button:hover {
