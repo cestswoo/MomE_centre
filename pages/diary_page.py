@@ -206,21 +206,20 @@ def main():
                 background-color: #ffffff;
             }
         .stButton button {
-            background-color: #FFF9F0;
-            color: #344EAC;
-            font-weight:bold;
+            background-color: #FFF9EF !important;
             border-radius: 12px;
             padding: 10px 24px;
             text-align: center;
-            display: inline-block;
             font-size: 20px;
             cursor: pointer;
-            width: 200px;
-            font-family: 'NanumSquareAceb', sans-serif !important;
-       }
-       .stButton button:hover {
-           background-color: #FFEEEE;
-       }
+            width: 30%;
+            border: none;
+            color: #091F5B !important;
+        }
+        .stButton button:hover {
+            background-color: #091F5B !important;
+            color: #ffffff !important;
+        }
         .subtitle{
             font-size: 25px;
             font-weight:bold;
