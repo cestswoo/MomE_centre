@@ -339,7 +339,6 @@ def main():
                 st.write("### 내가 쓴 일기 분석결과:")
                 for sentiment, prob in st.session_state['sentiment_probs'].items():
                     st.write(f"{sentiment}: {prob:.2%}")
-                st.divider()
                 
                 found_words = find_sentiwords(st.session_state['user_input'], sentiword_dict)
                 if found_words:
