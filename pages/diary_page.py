@@ -165,73 +165,48 @@ def main():
         """
         <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
         <style>
-        * {
-            font-family: 'NanumSquare', sans-serif !important;
-        }
-        body {
-            background-color: #FFFFFF;
-            color: #000000;
-        }
         .stApp{
-            background: #F1E2DD;
+            background: #D0E4FF;
             }
-            /* Customize tab content background */
         .stTabs [role="tabpanel"] {
             background-color: #ffffff; /* Change this to your desired content background color */
+            /* border: 2px solid #4dd0e1;  */
             border-top: none;
             padding: 20px;
-            border-radius: 0 0 10px 10px;
+            border-radius: 0 0 30px 30px;
             box-shadow: 5px 5px 5px #DFDCD5;
-            height: 750px;
+            height: 900px;
+        }
+        .stTabs [data-baseweb="tab-list"] 
+            button [data-testid="stMarkdownContainer"] p {
+            font-size:16px;
+            color: #091F5B;
+            font-family: 'NanumSquareAceb', sans-serif !important;
             }
-        .reportview-container .main .block-container {
-            max-width: 80%;
-            margin: auto;
-            padding: 2rem;
-        }
-        .stTextArea textarea {
-            height: 300px !important;
-            font-size: 16px;
-        }
-        .stButton button {
-            background-color: #FEF8F6;
-            color: black;
-            border: none;
-            border-radius: 12px;
-            padding: 10px 24px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        .stButton button:hover {
-            background-color: #FFEEEE;
-        }
-        .stDataFrame {
-            font-size: 16px;
-        }
-        .topic-card{
-            background-color: #FEF8F6;
-            font-weight: normal;
-            box-shadow: 5px 5px 5px #DFDCD5;
-            margin:5px;
-            border-radius: 10px;
-            padding: 7px;}
-        }
-        .stMarkdown h1 {
-            font-size: 24px;
-        }
-        .title{
-            font-size: 60px;
-            font-weight: bold;
-            text-align: start;
-            width: 50px;
-            line-height: 1;
-            letter-spacing: 0;
-            color: #4A4A4A;
-        }
+            div[data-testid="stTabs"] button[aria-selected="true"]::after {
+                content: "";
+                display: block;
+                border-bottom: 4px solid #ffffff;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+            }
+             div[data-testid="stTabs"] div[role="tablist"] {
+                background-color: #ffffff;
+                padding: 10px;
+                border-radius: 30px 30px 0px 0px;
+            }
+            div[data-testid="stTabs"] button[aria-selected="true"] {
+                background-color: #EDF0F5;
+                color: white;
+                border-radius: 30px;
+                padding: 0pc 5px;
+            }
+            div[data-testid="stTabs"] button {
+                color: white;
+                background-color: #ffffff;
+            }
         .subtitle{
             font-size: 25px;
             font-weight:bold;
@@ -239,9 +214,19 @@ def main():
             line-height: 1;
             letter-spacing: 0;
             margin-bottom: 10px;
-            color: #4A4A4A;
+            color: #091F5B;
             text-align: center;
             margin-bottom: 20px;
+            font-family: 'NanumSquareAceb';
+        }
+        .topic-card{
+            color: #091F5B;
+            background-color: #FFF9F0;
+            box-shadow: 3px 3px 3px #DFDCD5;
+            margin:5px;
+            border-radius: 10px;
+            padding: 7px;
+            font-family: 'NanumSquareAcb', sans-serif !important;
         }
         .topic{
             margin: 7px;
@@ -250,7 +235,17 @@ def main():
             align-items: center;
             text-align: center;
         }
-
+        .sidebar .sidebar-content {
+            background-color: #000000;  /* 사이드바 배경 색상 설정 */
+        }
+        .sidebar .sidebar-content .css-1d391kg {
+            background-color: #f0f2f6;
+        }
+        .contact {
+            margin: 0px 12px;
+            font-size: 10px;
+            font-family: 'Nanum Gothic', sans-serif;
+        }
         </style>
         """,
         unsafe_allow_html=True
@@ -369,14 +364,33 @@ def main():
     else:
         st.error("로그인 후 이용해주세요")
 
+    st.write("")
+    st.markdown(
+        f"""
+        <div class="contact">
+            ⓒ MomE
+        </div>
+                """, unsafe_allow_html=True
+    )
+
 # 앱 실행
 with st.sidebar:
-    menu = option_menu("MomE", ['Home','Diary','Mom:ents','하루 자가진단', 'LogOut'],
-                        icons=['bi bi-house-fill', 'book-half','Bi bi-star-fill' ,'bi bi-capsule-pill', 'box-arrow-in-right'],
-                        menu_icon="baby", default_index=1,
+    st.markdown("""
+        <style>
+        [data-testid="stSidebar"] {
+            background-color: #FFF9F0;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'MOMents', '하루 자가진단', 'LogOut'],
+                        icons=['bi bi-house', 'bi bi-grid-1x2-fill', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
+                        menu_icon="baby", default_index=0,
                         styles={
-                            "icon": {"font-size": "23px"},
-                            "title": {"font-weight": "bold"}
+                            "icon": {"font-size": "19px"},
+                            "title": {"font-weight": "bold", "font-family":"'NanumSquareAceb', sans-serif !important"},
+                            "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
+                            "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
                         })
 
 if menu =='Home':
