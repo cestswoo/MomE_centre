@@ -326,7 +326,7 @@ def main():
 
         with tabs[1]:
             if 'sentiment_probs' in st.session_state:
-                st.write(f"{st.session_state['result_message']}")
+                st.write(f"### {st.session_state['result_message']}")
                 
                 st.write("## 감정 분포")
                 # 원형 차트로 변경
