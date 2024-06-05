@@ -86,7 +86,7 @@ if 'logged_in_user' not in st.session_state:
 #     st.write(f"환영합니다, {st.session_state['logged_in_user']}님!")
 #     st.switch_page("pages/home.py")
 # else:
-tab1, tab2 = st.tabs(["Login", "Sign up"])
+tab1, tab2 = st.tabs(["로그인", "회원가입"])
 
 with tab1:
     col1, col2 = st.columns(2)
