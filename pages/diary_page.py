@@ -416,9 +416,17 @@ def main():
 
 # 앱 실행
 with st.sidebar:
-    menu = option_menu("MomE", ['Home','Dashboard','Diary','Mom:ents','하루 자가진단', 'LogOut'],
-                        icons=['bi bi-house-fill','bi bi-grid-1x2-fill','book-half','Bi bi-star-fill' ,'bi bi-capsule-pill', 'box-arrow-in-right'],
-                       	menu_icon="baby", default_index=2,
+    role = st.session_state['user_role']
+    if role == '산모':
+        menu_items = ['Home', 'Dashboard', 'Diary', 'Mom:ents', '하루 자가진단', 'LogOut']
+        icons = ['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right']
+    else:
+        menu_items = ['Home', 'Mom:ents', 'LogOut']
+        icons = ['bi bi-house-fill', 'Bi bi-star-fill', 'box-arrow-in-right']
+
+    menu = option_menu("MomE", menu_items,
+                        icons=icons,
+                        menu_icon="baby", default_index=2,
                         styles={
                             "icon": {"font-size": "23px"},
                             "title": {"font-weight": "bold"}
@@ -426,11 +434,11 @@ with st.sidebar:
 
 if menu =='Home':
     st.switch_page("pages/home.py")
-elif menu =='Dashboard':
+elif menu =='Dashboard' and role == '산모':
     st.switch_page("pages/dashboard_page.py")
 elif menu == 'Mom:ents':
     st.switch_page("pages/SNS2.py")
-elif menu =='하루 자가진단': 
+elif menu =='하루 자가진단' and role == '산모': 
     st.switch_page("pages/self_diagnosis.py")
 elif menu =='LogOut':
     st.switch_page('dd1.py')
