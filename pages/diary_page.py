@@ -326,9 +326,9 @@ def main():
 
         with tabs[1]:
             if 'sentiment_probs' in st.session_state:
-                st.write(f"## {st.session_state['result_message']}")
+                st.write(f"#### {st.session_state['result_message']}")
                 
-                st.write("# 감정 분포")
+                st.write("#### 감정 분포")
                 # 원형 차트로 변경
                 custom_colors = ['#A8E6CF','#DCEDC1','#E0E0E0','#FFAAA5','#FF8B94']  # 원하는 색상 리스트
                 fig = px.pie(values=list(st.session_state['sentiment_probs'].values()), names=list(st.session_state['sentiment_probs'].keys()), color_discrete_sequence=custom_colors)
