@@ -157,8 +157,102 @@ def send_email(subject, content, recipient_email):
 def main():
     # SQLite 데이터베이스 초기화
     init_db()
-    
-    st.image('media/diaryTitleImg.png')
+
+    # CSS 스타일 추가
+    st.markdown(
+        """
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+        <style>
+        * {
+            font-family: 'NanumSquare', sans-serif !important;
+        }
+        body {
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+        .stApp{
+            background: #F1E2DD;
+            }
+            /* Customize tab content background */
+        .stTabs [role="tabpanel"] {
+            background-color: #ffffff; /* Change this to your desired content background color */
+            border-top: none;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 5px 5px 5px #DFDCD5;
+            height: 750px;
+            }
+        .reportview-container .main .block-container {
+            max-width: 80%;
+            margin: auto;
+            padding: 2rem;
+        }
+        .stTextArea textarea {
+            height: 300px !important;
+            font-size: 16px;
+        }
+        .stButton button {
+            background-color: #FEF8F6;
+            color: black;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .stButton button:hover {
+            background-color: #FFEEEE;
+        }
+        .stDataFrame {
+            font-size: 16px;
+        }
+        .topic-card{
+            background-color: #FEF8F6;
+            font-weight: normal;
+            box-shadow: 5px 5px 5px #DFDCD5;
+            margin:5px;
+            border-radius: 10px;
+            padding: 7px;}
+        }
+        .stMarkdown h1 {
+            font-size: 24px;
+        }
+        .title{
+            font-size: 60px;
+            font-weight: bold;
+            text-align: start;
+            width: 50px;
+            line-height: 1;
+            letter-spacing: 0;
+            color: #4A4A4A;
+        }
+        .subtitle{
+            font-size: 25px;
+            font-weight:bold;
+            text-align: start;
+            line-height: 1;
+            letter-spacing: 0;
+            margin-bottom: 10px;
+            color: #4A4A4A;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .topic{
+            margin: 7px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
     if 'logged_in' in st.session_state and st.session_state['logged_in']:
         st.image('media/diaryTitleImg.jpg')
@@ -169,6 +263,7 @@ def main():
             st.markdown(
                 '''
                   <div class="subtitle">일기 주제 추천</div>
+        
                 ''',unsafe_allow_html=True
             )   
             recommended_topics = recommend_topics(topics, num=6)
@@ -272,33 +367,14 @@ def main():
     else:
         st.error("로그인 후 이용해주세요")
 
-    st.write("")
-    st.markdown(
-        f"""
-        <div class="contact">
-            ⓒ MomE
-        </div>
-        """, unsafe_allow_html=True
-    )
-
 # 앱 실행
 with st.sidebar:
-    st.markdown("""
-        <style>
-        [data-testid="stSidebar"] {
-            background-color: #FFF9F0;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-    
-    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'MOMents', '하루 자가진단', 'LogOut'],
-                        icons=['bi bi-house', 'bi bi-grid-1x2-fill', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
-                        menu_icon="baby", default_index=0,
+    menu = option_menu("MomE", ['Home','Diary','Mom:ents','하루 자가진단', 'LogOut'],
+                        icons=['bi bi-house-fill', 'book-half','Bi bi-star-fill' ,'bi bi-capsule-pill', 'box-arrow-in-right'],
+                        menu_icon="baby", default_index=1,
                         styles={
-                            "icon": {"font-size": "19px"},
-                            "title": {"font-weight": "bold", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                            "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                            "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
+                            "icon": {"font-size": "23px"},
+                            "title": {"font-weight": "bold"}
                         })
 
 if menu =='Home':
