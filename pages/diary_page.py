@@ -30,7 +30,7 @@ def load_model_and_tokenizer():
 tokenizer, model = load_model_and_tokenizer()
 
 # 구글 캘린더 API 설정
-CLIENT_SECRET_FILE = 'path/to/client_secret.json'  # 다운로드한 OAuth 2.0 클라이언트 ID 파일 경로로 변경합니다.
+CLIENT_SECRET_FILE = 'client_secret_764298662459-e3pv06o8udo0nskmjhcjss4vurp9e0ua.apps.googleusercontent.com.json'  # 다운로드한 OAuth 2.0 클라이언트 ID 파일 경로로 변경합니다.
 API_NAME = 'calendar'
 API_VERSION = 'v3'
 SCOPES = ['https://www.googleapis.com/auth/calendar']
