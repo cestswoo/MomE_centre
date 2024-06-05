@@ -7,14 +7,14 @@ c = conn.cursor()
 
 # DB Functions
 def create_usertable():
-    c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT,password TEXT)')
+    c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT,password TEXT,role TEXT)')
 
-def add_userdata(username,password):
-    c.execute('INSERT INTO userstable(username,password) VALUES (?,?)',(username,password))
+def add_userdata(username, password, role):
+    c.execute('INSERT INTO userstable(username,password,role) VALUES (?,?,?)', (username, password, role))
     conn.commit()
 
-def login_user(username,password):
-    c.execute('SELECT * FROM userstable WHERE username =? AND password = ?',(username,password))
+def login_user(username, password):
+    c.execute('SELECT * FROM userstable WHERE username =? AND password = ?', (username, password))
     data = c.fetchall()
     return data
 
@@ -26,7 +26,7 @@ def view_all_users():
 def make_hashes(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
 
-def check_hashes(password,hashed_text):
+def check_hashes(password, hashed_text):
     if make_hashes(password) == hashed_text:
         return hashed_text
     return False
@@ -39,11 +39,9 @@ if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
 if 'logged_in_user' not in st.session_state:
     st.session_state['logged_in_user'] = ''
+if 'user_role' not in st.session_state:
+    st.session_state['user_role'] = ''
 
-# if st.session_state['logged_in']: 
-#     st.write(f"환영합니다, {st.session_state['logged_in_user']}님!")
-#     st.switch_page("pages/home.py")
-# else:
 tab1, tab2 = st.tabs(["Login", "Sign up"])
 
 with tab1:
@@ -57,8 +55,8 @@ with tab1:
         if result:
             st.session_state['logged_in_user'] = username  # Save logged in username in session state
             st.session_state['logged_in'] = True
+            st.session_state['user_role'] = result[0][2]  # Save the role in session state
             st.switch_page("pages/home.py")
-            # st.experimental_rerun()  # 페이지 리로드
         else:
             st.warning("아이디/비밀번호가 틀렸습니다!")
 
@@ -66,11 +64,11 @@ with tab2:
     st.subheader("회원가입")
     new_user = st.text_input("ID", key='ID')
     new_password = st.text_input("Password", type='password', key="new_password")
-    
+    role = st.selectbox("회원 유형", ["산모", "남편"])
+
     if st.button("회원가입"):
         create_usertable()
-        add_userdata(new_user, make_hashes(new_password))
+        add_userdata(new_user, make_hashes(new_password), role)
         st.success("회원가입이 완료되었습니다. 로그인 탭으로 가서 로그인하세요.")
-        # st.info("Go to Login Menu to login")
 
 st.image("media/homeImg 1.png")
