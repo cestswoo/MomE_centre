@@ -160,6 +160,10 @@ st.markdown(
         margin: 20px 0px 20px 25px;
         border-radius: 30px;
     }
+    .img3Container {
+        margin: 0px 0px 30px 25px;
+        border-radius: 30px;
+    }
     .img4Container {
         margin: 50px 0px 20px 25px;
         border-radius: 30px;
@@ -337,10 +341,10 @@ if homeImg:
         )
 
         Img_03 = load_image(Img3_path)
-        if Img_01:
+        if Img_03:
             st.markdown(
                 f'''
-                <div class="imgContainer">
+                <div class="img3Container">
                     <img src="data:image/jpg;base64,{Img_03}" />
                 </div>
                 ''',
