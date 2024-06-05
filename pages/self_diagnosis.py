@@ -239,16 +239,14 @@ def main():
 with st.sidebar:
     menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'Mom:ents', '하루 자가진단', 'LogOut'],
                         icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
-                        menu_icon="baby", default_index=4,
+                        menu_icon="baby", default_index=3,
                         styles={
                             "icon": {"font-size": "23px"},
                             "title": {"font-weight": "bold"}
                         })
 
     # Page navigation
-    if menu == 'Dashboard':
-        st.switch_page("pages/dashboard_page.py")
-    elif menu == 'Diary':
+    if menu == 'Diary':
         st.switch_page("pages/diary_page.py")
     elif menu == 'Mom:ents':
         st.switch_page("pages/SNS2.py")
