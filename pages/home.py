@@ -409,14 +409,14 @@ with st.sidebar:
                             "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
                         })       
 
-#     # Page navigation
-#     if menu == 'Dashboard':
-#         st.switch_page("pages/dashboard_page.py")
-#     elif menu == 'Diary':
-#         st.switch_page('pages/diary_page.py')
-#     elif menu == 'Mom:ents':
-#         st.switch_page('pages/SNS2.py')
-#     elif menu == '하루 자가진단':
-#         st.switch_page('pages/self_diagnosis.py')
-#     elif menu == 'LogOut':
-#         st.switch_page('dd1.py')
+     # Page navigation
+     if menu == 'Dashboard':
+         st.switch_page("pages/dashboard_page.py")
+     elif menu == 'Diary':
+         st.switch_page('pages/diary_page.py')
+     elif menu == 'Mom:ents':
+         st.switch_page('pages/SNS2.py')
+     elif menu == '하루 자가진단':
+         st.switch_page('pages/self_diagnosis.py')
+     elif menu == 'LogOut':
+         st.switch_page('dd1.py')
