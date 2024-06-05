@@ -369,8 +369,6 @@ if homeImg:
             """,
             unsafe_allow_html=True
         )
-    for i in range(18):
-        st.write('')
 
     st.divider()
 
