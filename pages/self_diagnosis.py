@@ -237,8 +237,8 @@ def main():
 
 # Sidebar menu
 with st.sidebar:
-    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'Mom:ents', '하루 자가진단', 'LogOut'],
-                        icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
+    menu = option_menu("MomE", ['Home', 'Diary', 'Mom:ents', '하루 자가진단', 'LogOut'],
+                        icons=['bi bi-house-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=3,
                         styles={
                             "icon": {"font-size": "23px"},
