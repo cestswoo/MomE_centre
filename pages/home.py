@@ -386,8 +386,8 @@ with st.sidebar:
         </style>
     """, unsafe_allow_html=True)
     
-    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'MOMents', '하루 자가진단', 'LogOut'],
-                        icons=['bi bi-house', 'bi bi-grid-1x2-fill', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
+    menu = option_menu("MomE", ['Home', 'Diary', 'MOMents', '하루 자가진단', 'LogOut'],
+                        icons=['bi bi-house', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=0,
                         styles={
                             "icon": {"font-size": "19px"},
@@ -397,9 +397,7 @@ with st.sidebar:
                         })
 
     # Page navigation
-    if menu == 'Dashboard':
-        st.switch_page("pages/dashboard_page.py")
-    elif menu == 'Diary':
+    if menu == 'Diary':
         st.switch_page('pages/diary_page.py')
     elif menu == 'Mom:ents':
         st.switch_page('pages/SNS2.py')
