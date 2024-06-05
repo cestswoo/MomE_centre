@@ -202,18 +202,16 @@ if __name__ == "__main__":
     main()
 
 with st.sidebar:
-    menu = option_menu("MomE", ['Home','Dashboard','Diary', 'Mom:ents','하루 자가진단','LogOut'],
-                        icons=['bi bi-house-fill','bi bi-grid-1x2-fill','book-half','Bi bi-star-fill','bi bi-capsule-pill', 'box-arrow-in-right'],
-                        menu_icon="baby", default_index=3,
+    menu = option_menu("MomE", ['Home','Diary', 'Mom:ents','하루 자가진단','LogOut'],
+                        icons=['bi bi-house-fill', 'book-half','Bi bi-star-fill','bi bi-capsule-pill', 'box-arrow-in-right'],
+                        menu_icon="baby", default_index=2,
                         styles={
                             "icon": {"font-size": "23px"},
                             "title": {"font-weight": "bold"}  # MomE 글씨를 볼드체로 변경
                         })
 
     # 선택된 메뉴에 따라 페이지 변경
-    if menu == 'Dashboard':
-        st.switch_page("pages/dashboard_page.py")
-    elif menu == 'Diary':
+    if menu == 'Diary':
         st.switch_page("pages/diary_page.py")
     elif menu == '하루 자가진단':
         st.switch_page("pages/self_diagnosis.py")
