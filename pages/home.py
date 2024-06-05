@@ -239,17 +239,50 @@ if homeImg:
     row1, row2 = st.columns(2)
 
     with row1:
+        st.markdown(
+                f"""
+                <div class="service1">
+                    <div class="titleContainer">
+                        <div class="titleBar"></div>
+                        <div class="title">일기장 감정 <br>분석 서비스</div>
+                    </div>
+                    <p class="serviceDetail">
+                        일기장을 작성할 때 사용한 단어들을 분석해<br>
+                        특정 단어 사용의 빈도 수 정보를 제공합니다.<br><br>
+                        시간이 지남에 따라 나의 감정 표현의 변화를<br>
+                        관찰하며, 자신의 감정을 한층 더 깊이
+                        이해할<br>수 있습니다.
+                    </p>
+                </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        Img_02 = load_image(Img2_path)
+        if Img_02:
+            st.markdown(
+                f'''
+                <div class="img2Container">
+                    <img src="data:image/jpg;base64,{Img_02}" />
+                </div>
+                ''',
+                unsafe_allow_html=True
+            )
+
         st.markdown(f"""
-            <div class="serviceComponent body-font">
+            <div class="service3">
                 <div class="titleContainer">
                     <div class="titleBar"></div>
-                    <div class="title title-font"> 육아 일기장<br>서비스</div>
+                    <div class="title"> 육아 SNS<br>서비스</div>
                 </div>
                 <div class="serviceDetail">
-                    산모가 육아 일기를 작성하며
-                    자신의 마음도 함께 돌아볼 수 있는
-                    서비스를 제공합니다.<br><br>
-                    가족과 함께 일상을 공유해보세요.
+                    육아의 소중한 순간을 담아 사람들과<br>
+                    나눌 수 있는 공간을 만들었습니다.<br><br>
+                    아이와 함께했던 특별한 순간들을 기록하고<br>
+                    공유해보세요. 경험과 조언을 교환하고<br>
+                    서로의 이야기에 귀 기울이며 함께 성장할<br>
+                    수 있습니다. 부모로서의 여정을 함께<br>
+                    걸어가며 소중한 인연을 만들어보세요.
                 </div>
             </div>
             """,
@@ -260,34 +293,7 @@ if homeImg:
         if Img_02:
             st.markdown(
                 f'''
-                <div class="imgContainer">
-                    <img src="data:image/jpg;base64,{Img_02}" />
-                </div>
-                ''',
-                unsafe_allow_html=True
-            )
-
-        st.markdown(f"""
-            <div class="serviceComponent body-font">
-                <div class="titleContainer">
-                    <div class="titleBar"></div>
-                    <div class="title title-font"> 산후우울증<br>바로알기</div>
-                </div>
-                <div class="serviceDetail">
-                    산후우울증<br>(postpartum depression)<br>
-                    에 대한 원인, 증상,치료 등<br>
-                    기본정보 제공합니다.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        Img_04 = load_image(Img4_path)
-        if Img_04:
-            st.markdown(
-                f'''
-                <div class="imgContainer">
+                <div class="img2Container">
                     <img src="data:image/jpg;base64,{Img_04}"/>
                 </div>
                 ''',
@@ -307,46 +313,56 @@ if homeImg:
             )
 
         st.markdown(f"""
-            <div class="serviceComponent body-font">
+            <div class="service2">
                 <div class="titleContainer">
                     <div class="titleBar"></div>
-                    <div class="title title-font">일기장 감정 <br>분석 서비스</div>
+                    <div class="title">산후우울증 자가검진<br>테스트</div>
                 </div>
-                <div class="serviceDetail">
-                    일기장 단어 분석을 통해<br>감정 변화를 추적하고 긍정적인<br>피드백을 제공하여 더 건강한 육아를 할 수 있도록 지원합니다.
-                </div>
+                <p class="serviceDetail">
+                    산후우울증 자가진단 테스트로 마음의 건강을<br>체크하세요.<br><br>
+                    에딘버러 산후우울증 척도(K-EPDS)를 근거로<br>
+                    한 산후우울증을 자가검진 할 수 있는 서비스를<br>
+                    제공합니다. 자가 검진 테스트 결과를
+                    바탕으로 <br>
+                    시각화된 데이터를 확인하여 마음의
+                    상태를<br>  쉽게 확인할 수 있습니다.
+                </p>
             </div>
             """,
             unsafe_allow_html=True
         )
 
-        Img_03 = load_image(Img3_path)
-        if Img_03:
+        Img_01 = load_image(Img1_path)
+        if Img_01:
             st.markdown(
                 f'''
                 <div class="imgContainer">
-                    <img src="data:image/jpg;base64,{Img_03}" />
+                    <img src="data:image/jpg;base64,{Img_01}" />
                 </div>
                 ''',
                 unsafe_allow_html=True
             )
 
-        st.markdown(f"""
-            <div class="serviceComponent body-font">
-                <div class="titleContainer">
-                    <div class="titleBar"></div>
-                    <div class="title title-font"> 산후우울증 자가진단<br>테스트</div>
+        st.markdown(
+                f"""
+                <div class="service2">
+                    <div class="titleContainer">
+                        <div class="titleBar"></div>
+                        <div class="title">가족과의 공유</div>
+                    </div>
+                    <p class="serviceDetail">
+                        일기장을 작성할 때 사용한 단어들을 분석해<br>
+                        특정 단어 사용의 빈도 수 정보를 제공합니다.<br><br>
+                        시간이 지남에 따라 나의 감정 표현의 변화를<br>
+                        관찰하며, 자신의 감정을 한층 더 깊이
+                        이해할<br>수 있습니다.
+                    </p>
                 </div>
-                <div class="serviceDetail">
-                    에딘버러 산후우울증 척도<br>
-                    K-EPDS를 이용하여 산후 우울증<br>
-                    자가진단 및 시각화 데이터를<br>
-                    제공합니다.
-                </div>
-            </div>
             """,
             unsafe_allow_html=True
         )
+    for i in range(18):
+        st.write('')
 
     st.divider()
 
@@ -362,15 +378,25 @@ else:
 
 # Sidebar menu
 with st.sidebar:
-    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'Mom:ents', '하루 자가진단', 'LogOut'],
-                        icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
+    st.markdown("""
+        <style>
+        [data-testid="stSidebar"] {
+            background-color: #FFF9F0;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'MOMents', '하루 자가진단', 'LogOut'],
+                        icons=['bi bi-house', 'bi bi-grid-1x2-fill', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=0,
                         styles={
-                            "icon": {"font-size": "23px"},
-                            "title": {"font-weight": "bold"}
+                            "icon": {"font-size": "19px"},
+                            "title": {"font-weight": "bold", "font-family":"'NanumSquareAceb', sans-serif !important"},
+                            "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
+                            "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
                         })
 
-    # Page navigation
+# Page navigation
     if menu == 'Dashboard':
         st.switch_page("pages/dashboard_page.py")
     elif menu == 'Diary':
