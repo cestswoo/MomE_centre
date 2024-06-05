@@ -1,15 +1,15 @@
 import streamlit as st
-from transformers import BertTokenizer, BertForSequenceClassification
-import torch
-import random
-import pandas as pd
-import sqlite3
-from datetime import datetime
-from streamlit_option_menu import option_menu
-import plotly.express as px
+import datetime
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import random
+import pandas as pd
+import sqlite3
+from transformers import BertTokenizer, BertForSequenceClassification
+import torch
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
 
 # 모델과 토크나이저 로드
 model_name = 'nlptown/bert-base-multilingual-uncased-sentiment'
@@ -22,6 +22,14 @@ def load_model_and_tokenizer():
     return tokenizer, model
 
 tokenizer, model = load_model_and_tokenizer()
+
+# 구글 캘린더 API 설정
+SERVICE_ACCOUNT_FILE = 'path/to/service-account.json'  # 다운로드한 서비스 계정 파일의 경로로 변경합니다.
+SCOPES = ['https://www.googleapis.com/auth/calendar']
+
+credentials = service_account.Credentials.from_service_account_file(
+    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+service = build('calendar', 'v3', credentials=credentials)
 
 # SentiWord_Dict.txt 파일 로드 함수
 def load_sentiword_dict(file_path):
@@ -151,6 +159,26 @@ def send_email(subject, content, recipient_email):
         return True
     except Exception as e:
         st.error(f"An error occurred: {e}")
+        return False
+
+def add_event_to_google_calendar(event_summary, event_description, event_date):
+    try:
+        event = {
+            'summary': event_summary,
+            'description': event_description,
+            'start': {
+                'dateTime': event_date.isoformat(),
+                'timeZone': 'Asia/Seoul',
+            },
+            'end': {
+                'dateTime': (event_date + datetime.timedelta(hours=1)).isoformat(),
+                'timeZone': 'Asia/Seoul',
+            },
+        }
+        event = service.events().insert(calendarId='primary', body=event).execute()
+        return True
+    except Exception as e:
+        st.error(f"An error occurred while adding the event to Google Calendar: {e}")
         return False
 
 # Streamlit 앱 메인 함수
@@ -336,6 +364,20 @@ def main():
                         st.success("요약이 성공적으로 전송되었습니다.")
                     else:
                         st.error("요약 전송에 실패했습니다.")
+
+                if st.button("구글 캘린더에 기록하기"):
+                    event_date = datetime.datetime.now()
+                    event_summary = f"일기 감정 분석 ({event_date.strftime('%Y-%m-%d')})"
+                    event_description = f"""
+                    일기 내용: {st.session_state['user_input']}
+                    감정 확률 분포: {', '.join([f'{k}: {v:.2%}' for k, v in st.session_state['sentiment_probs'].items()])}
+                    추가 메시지: {st.session_state['result_message']}
+                    """
+                    if add_event_to_google_calendar(event_summary, event_description, event_date):
+                        st.success("감정 분석 결과가 구글 캘린더에 기록되었습니다.")
+                    else:
+                        st.error("구글 캘린더에 기록하는 데 실패했습니다.")
+
             else:
                 st.write("아직 분석 결과가 없습니다. 먼저 '일기 작성' 탭에서 분석을 진행하세요.")
 
