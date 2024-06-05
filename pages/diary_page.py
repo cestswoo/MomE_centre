@@ -327,7 +327,7 @@ def main():
         with tabs[1]:
             if 'sentiment_probs' in st.session_state:
                 st.write("### 분석 결과")
-                st.write("감정 확률 분포:")
+                st.write("내가 쓴 일기 분석결과:")
                 for sentiment, prob in st.session_state['sentiment_probs'].items():
                     st.write(f"{sentiment}: {prob:.2%}")
                 st.write(f"{st.session_state['result_message']}")
