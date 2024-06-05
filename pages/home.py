@@ -3,6 +3,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import os
 
+# Define and apply custom fonts using Google Fonts
 st.markdown(
     """
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
@@ -347,16 +348,8 @@ else:
 
 # Sidebar menu
 with st.sidebar:
-    role = st.session_state['user_role']
-    if role == '산모':
-        menu_items = ['Home', 'Dashboard', 'Diary', 'Mom:ents', '하루 자가진단', 'LogOut']
-        icons = ['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right']
-    else:
-        menu_items = ['Home', 'Mom:ents', 'LogOut']
-        icons = ['bi bi-house-fill', 'Bi bi-star-fill', 'box-arrow-in-right']
-
-    menu = option_menu("MomE", menu_items,
-                        icons=icons,
+    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'Mom:ents', '하루 자가진단', 'LogOut'],
+                        icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=0,
                         styles={
                             "icon": {"font-size": "23px"},
@@ -364,13 +357,13 @@ with st.sidebar:
                         })
 
     # Page navigation
-    if menu == 'Dashboard' and role == '산모':
+    if menu == 'Dashboard':
         st.switch_page("pages/dashboard_page.py")
-    elif menu == 'Diary' and role == '산모':
-        st.switch_page("pages/diary_page.py")
+    elif menu == 'Diary':
+        st.switch_page('pages/diary_page.py')
     elif menu == 'Mom:ents':
-        st.switch_page("pages/SNS2.py")
-    elif menu == '하루 자가진단' and role == '산모':
-        st.switch_page("pages/self_diagnosis.py")
+        st.switch_page('pages/SNS2.py')
+    elif menu == '하루 자가진단':
+        st.switch_page('pages/self_diagnosis.py')
     elif menu == 'LogOut':
         st.switch_page('dd1.py')
