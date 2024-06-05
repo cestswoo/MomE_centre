@@ -570,7 +570,7 @@ def main():
         }
         </style>
     """, unsafe_allow_html=True)
-        menu = option_menu("MomE", ['Home','Diary', 'Mom:ents', '하루 자가진단', 'LogOut'],
+        menu = option_menu("MomE", ['Home','Diary', 'Mom'ents', '하루 자가진단', 'LogOut'],
                             icons=['bi bi-house', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
                             menu_icon="baby", default_index=3,
                             styles={
@@ -583,7 +583,7 @@ def main():
         # Page navigation
         if menu == 'Diary':
             st.switch_page("pages/diary_page.py")
-        elif menu == 'Mom:ents':
+        elif menu == 'Mom'ents':
             st.switch_page("pages/SNS2.py")
         elif menu == 'Home':
             st.switch_page("pages/home.py")
