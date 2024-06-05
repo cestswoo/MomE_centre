@@ -4,39 +4,35 @@ import sqlite3
 
 st.markdown(
     """
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">    
+  <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">    
     <style>
     * {
         font-family: 'NanumSquare', sans-serif !important;
-        color: #091F5B;
     }
     .stApp{
         background: #FFF9EF;
     }
     .stButton button {
             background-color: #FFF9EF;
-            color: #344EAC;
-            font-weight:bold;
             border-radius: 12px;
             padding: 10px 24px;
             text-align: center;
             font-size: 20px;
             cursor: pointer;
             width: 325px;
-            font-family: 'NanumSquareExtraBold', ;
             border: none;
        }
-       .stButton button:hover {
-           background-color: #091F5B;
-           color: white;
+    .stButton button:hover {
+        background-color: #091F5B;
+        color: #ffffff;
        }
-       .stTabs [role="tabpanel"] {
-    background-color: #ffffff; /* Change this to your desired content background color */
-    border-top: none;
-    padding: 20px;
-    border-radius: 0 0 30px 30px;
-    height: 500px;
-}
+    .stTabs [role="tabpanel"] {
+            background-color: #ffffff; /* Change this to your desired content background color */
+            border-top: none;
+            padding: 20px;
+            border-radius: 0 0 30px 30px;
+            height: 500px;
+        }
     .stTabs [data-baseweb="tab-list"] 
     button [data-testid="stMarkdownContainer"] p {
     font-size:16px;
@@ -48,7 +44,6 @@ st.markdown(
         padding: 10px;
         border-radius: 30px 30px 0px 0px;
     }
-
             </style>""",
     unsafe_allow_html=True)
 
