@@ -173,7 +173,7 @@ def main():
             padding: 20px;
             border-radius: 0 0 30px 30px;
             box-shadow: 5px 5px 5px #DFDCD5;
-            height: 1080px;
+            height: 1100px;
         }
         .stTabs [data-baseweb="tab-list"] 
             button [data-testid="stMarkdownContainer"] p {
