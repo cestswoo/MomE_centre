@@ -144,14 +144,11 @@ def delete_post(post_id):
 def main():
     st.markdown(
         """
-        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">    
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
         <style>
         * {
-            font-family: 'NanumSquareAcl', sans-serif !important;
+            font-family: 'NanumSquare', sans-serif !important;
         }
-    .stApp {
-        background: #D0E4FF;
-    }
         </style>
         """,
         unsafe_allow_html=True
@@ -205,23 +202,13 @@ if __name__ == "__main__":
     main()
 
 with st.sidebar:
-    st.markdown("""
-        <style>
-        [data-testid="stSidebar"] {
-            background-color: #FFF9F0;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-    
-    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'MOMents', '하루 자가진단', 'LogOut'],
-                        icons=['bi bi-house', 'bi bi-grid-1x2-fill', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
-                        menu_icon="baby", default_index=0,
+    menu = option_menu("MomE", ['Home','Dashboard','Diary', 'Mom:ents','하루 자가진단','LogOut'],
+                        icons=['bi bi-house-fill','bi bi-grid-1x2-fill','book-half','Bi bi-star-fill','bi bi-capsule-pill', 'box-arrow-in-right'],
+                        menu_icon="baby", default_index=3,
                         styles={
-                            "icon": {"font-size": "19px"},
-                            "title": {"font-weight": "bold", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                            "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                            "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
-                        })       
+                            "icon": {"font-size": "23px"},
+                            "title": {"font-weight": "bold"}  # MomE 글씨를 볼드체로 변경
+                        })
 
     # 선택된 메뉴에 따라 페이지 변경
     if menu == 'Dashboard':
