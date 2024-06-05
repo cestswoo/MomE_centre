@@ -129,7 +129,15 @@ def main():
     
     # Sidebar menu
     with st.sidebar:
-        selected_menu = option_menu("MomE", ['산후우울증이란', 'K-EPDS', 'PHQ-9'],
+        st.markdown("""
+        <style>
+        [data-testid="stSidebar"] {
+            background-color: #FFF9F0;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        selected_menu = option_menu("하루 자가검진", ['산후우울증이란', 'K-EPDS', 'PHQ-9'],
                                     icons=['book', 'clipboard-data', 'clipboard-check'],
                                     menu_icon="baby", default_index=0,
                                     styles={
@@ -559,7 +567,7 @@ def main():
         </style>
     """, unsafe_allow_html=True)
         menu = option_menu("MomE", ['Home','Diary', 'Mom:ents', '하루 자가진단', 'LogOut'],
-                            icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
+                            icons=['bi bi-house', 'bi bi-grid-1x2-fill', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
                             menu_icon="baby", default_index=3,
                             styles={
                                 "icon": {"font-size": "23px"},
