@@ -7,7 +7,14 @@ c = conn.cursor()
 
 # DB Functions
 def create_usertable():
-    c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT, password TEXT, role TEXT)')
+    c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT, password TEXT)')
+
+def upgrade_usertable():
+    try:
+        c.execute('ALTER TABLE userstable ADD COLUMN role TEXT')
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass  # 컬럼이 이미 존재하면 오류를 무시합니다.
 
 def add_userdata(username, password, role):
     c.execute('INSERT INTO userstable(username, password, role) VALUES (?, ?, ?)', (username, password, role))
@@ -31,6 +38,10 @@ def check_hashes(password, hashed_text):
         return hashed_text
     return False
 
+# 초기 테이블 생성 및 업그레이드
+create_usertable()
+upgrade_usertable()
+
 st.title("MomE")
 st.markdown("<h6 style='margin-top: -8px'>| MomEase : 엄마의 편안함</h6>", unsafe_allow_html=True)
 
@@ -49,7 +60,6 @@ with tab1:
     username = st.text_input("ID")
     password = st.text_input("Password", type='password')
     if st.button("로그인"):
-        create_usertable()
         hashed_pswd = make_hashes(password)
         result = login_user(username, check_hashes(password, hashed_pswd))
         if result:
@@ -68,9 +78,7 @@ with tab2:
     role = st.selectbox("회원 유형 선택", ["산모", "남편"], key="role")
     
     if st.button("회원가입"):
-        create_usertable()
         add_userdata(new_user, make_hashes(new_password), role)
         st.success("회원가입이 완료되었습니다. 로그인 탭으로 가서 로그인하세요.")
         
 st.image("media/homeImg 1.png")
-
