@@ -3,6 +3,15 @@ import sqlite3
 from streamlit_option_menu import option_menu
 from datetime import datetime
 
+st.markdown("""
+        <style>
+        .stApp{
+            background: #D0E4FF;
+        }
+
+        </style>
+    """, unsafe_allow_html=True)
+
 # 동일한 데이터베이스에 연결
 conn = sqlite3.connect('data.db', check_same_thread=False)
 c = conn.cursor()
@@ -202,12 +211,22 @@ if __name__ == "__main__":
     main()
 
 with st.sidebar:
+    st.markdown("""
+        <style>
+        [data-testid="stSidebar"] {
+            background-color: #FFF9F0;
+            "font-family":"'NanumSquareAceb', sans-serif !important"
+        }
+        </style>
+    """, unsafe_allow_html=True)
     menu = option_menu("MomE", ['Home','Diary', "Mom'ents",'하루 자가진단','LogOut'],
-                        icons=['bi bi-house-fill', 'book-half','Bi bi-star-fill','bi bi-capsule-pill', 'box-arrow-in-right'],
+                        icons=['bi bi-house', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=2,
                         styles={
                             "icon": {"font-size": "23px"},
                             "title": {"font-weight": "bold"}  # MomE 글씨를 볼드체로 변경
+                            "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
+                            "container": {"background-color": "#FFF9EF", "color":"#6F96D1"}
                         })
 
     # 선택된 메뉴에 따라 페이지 변경
