@@ -160,6 +160,10 @@ st.markdown(
         margin: 20px 0px 20px 25px;
         border-radius: 30px;
     }
+    .img4Container {
+        margin: 50px 0px 20px 25px;
+        border-radius: 30px;
+    }
     .copyRightDivider {
         width: 600px;
         height: 1.7px;
@@ -290,10 +294,10 @@ if homeImg:
         )
 
         Img_04 = load_image(Img4_path)
-        if Img_02:
+        if Img_04:
             st.markdown(
                 f'''
-                <div class="img2Container">
+                <div class="img4Container">
                     <img src="data:image/jpg;base64,{Img_04}"/>
                 </div>
                 ''',
