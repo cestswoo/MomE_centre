@@ -378,7 +378,7 @@ with st.sidebar:
                         menu_icon="baby", default_index=1,
                         styles={
                             "icon": {"font-size": "23px"},
-                            "title": {"font-weight": "bold"}
+                            "title": {"font-weight": "bold"},
                             "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
                             "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
                         })
