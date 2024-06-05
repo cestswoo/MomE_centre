@@ -6,26 +6,26 @@ import os
 # Define and apply custom fonts using Google Fonts
 st.markdown(
     """
-        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">    
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <style>
-    * {
-        font-family: 'NanumSquareAcl', sans-serif !important;
-    }
+        * {
+            font-family: 'NanumSquare', sans-serif !important;
+        }
     .stApp {
-        background: #D0E4FF;
+        background: #FFF9EF;
     }
     .Container {
         width: 710px;
         width: 100%; /* 부모 컨테이너 너비 */
-        height: 105vh; /* 부모 컨테이너 높이 */
+        height: 100vh; /* 부모 컨테이너 높이 */
         overflow: hidden;
         border-radius: 30px;
-        margin-top: 20px;
     }
     .homeImg {
         position: relative; /* 내부 요소 고정 */
         width: 707px;
         height: 471px;
+        border-radius: 30px;
     }
     .textContainer {
         position: absolute;
@@ -41,33 +41,31 @@ st.markdown(
     }
     .logo {
         font-size: 60px;
-        font-weight: 100;
+        font-weight: bold;
         color: white;
-        font-family: "Inter", sans-serif;
+        font-family: 'Nanum Pen Script', cursive;
     }
     .logo-below {
         position: absolute; /* 위치 고정 */
-        top: 65%;
-        left: 11%;
+        top: 80%;
+        left: 1%;
         width: 120px;
         font-size: 13px;
-        font-weight: 100;
+        font-weight: lighter;
         color: white;
-        font-family: "Inter", sans-serif;
     }
     .adText {
         position: absolute; /* 위치 고정 */
-        top: 45%;
-        left: 27%;
+        top: 28%;
+        left: 30%;
         transform: translateX(-50%);
         width: 229px;
         height: 95px;
         font-size: 40px;
         font-weight: 400px;
         color: white;
-        font-family: "Inter", sans-serif;
-        line-height: 1.2;
-        }
+        font-family: 'Nanum Pen Script', cursive;
+    }
     .mainContainer {
         display: flex;
         flex-direction: column;
@@ -91,37 +89,28 @@ st.markdown(
         text-align: center;
         margin: 15px 0px;
         font-size: 17px;
-        font-family: 'NanumSquareAcl', sans-serif !important;
+        font-family: 'Nanum Gothic', sans-serif;
     }
     .divider {
         width: 250px;
         height: 1px;
         background-color: #000000;
     }
-    .service1, .service2, .service3{
+    .serviceComponent {
+        position: relative;
+        margin-left: 22.5px;
+        margin-right: 50px;
+        margin-bottom: 24px;
+        width: 302px;
+        height: 240px;
+        border-radius: 30px;
+        background-color: #EDF0F5;
         display: flex;
         flex-direction: column;
         align-items: start;
-        border-radius: 30px;
-        background-color: #EDF0F5;
-        margin-bottom:20px;
-    }
-    .service1 {
-        margin-left: 25px;
-        width: 315px;
-        height: 275px;
-    }
-    .service2{
-        width: 320px;
-        height: 317px;
-    }
-    .service3{
-        margin-left:25px;
-        width: 315px;
-        height: 307px;
     }
     .titleContainer {
-        margin: 25px 20px;
+        margin: 30px 0px 20px 35px;
         position: relative;
         width: 200;
         height: 56px;
@@ -132,34 +121,37 @@ st.markdown(
     .titleBar {
         position: relative;
         width: 2px;
-        height: 45px;
+        height: 42px;
         background-color: #091F5B;
-        margin-right: 7px;
+        margin-right: 10px;
     }
     .title {
-        margin-top: 3px;
+        margin-top: 4px;
         margin-right: 40px;
+        position: relative;
         font-size: 20px;
-        color: #091F5B;
+        font-weight: bold;
+        color: black;
         line-height: 1.2;
-        font-family: 'NanumSquareExtraBold', sans-serif !important; ;
+        font-family: 'Nanum Pen Script', cursive;
     }
     .serviceDetail {
-        margin-left: 20px;
-        margin-bottom: 20px;
+        color: 091F5B;
+        font-weight: 800px;
+        margin-left: 30px;
+        position: relative;
         font-size: 16px;
         text-align: start;
         line-height: 1.4;
-        width: 300px;
+        width: 240px;
         height: 50px;
+        font-family: 'Nanum Gothic', sans-serif;
     }
-    .imgContainer{
-        margin: 40px 25px 40px 0px;
-        
-    }
-    .img2Container {
-        margin: 20px 0px 20px 25px;
-        border-radius: 30px;
+    .imgContainer {
+        width: 302px;
+        height: 420px;
+        margin-left: 25px;
+        margin-bottom: 20px;
     }
     .copyRightDivider {
         width: 600px;
@@ -171,13 +163,6 @@ st.markdown(
         margin: 0px 12px;
         font-size: 10px;
         font-family: 'Nanum Gothic', sans-serif;
-    }
-    .whatWeDoText{
-        font-weight: bold;
-        font-size: 20px;
-        margin-top: 50px;
-        color: black;
-        font-family: 'Nanum Pen Script', cursive;
     }
     </style>
     """,
@@ -206,19 +191,19 @@ Img4_path = './media/Img4.jpg'
 homeImg = load_image(image_path)
 if homeImg:
     st.markdown(f'''
-        <div class="Container">
+        <div class="Container body-font">
             <div class="homeImg">
                 <img src="data:image/jpg;base64,{homeImg}" />
                 <div class="textContainer">
-                    <div class="logo">MomE</div>
+                    <div class="logo title-font">MomE</div>
+                    <div class="logo-below body-font">Always here for you</div>
                 </div>
-                <div class="adText">We Care<br>Your Mind</div>
-                <div class="logo-below">Always here for you</div>
+                <div class="adText title-font">We Care<br>Your Mind</div>
             </div>
             <div class="mainContainer">
-                <div class="contentIndex">About Us</div>
+                <div class="contentIndex title-font">What we do</div>
                 <div class="divider"></div>
-                <div class="aboutUsContent">
+                <div class="aboutUsContent body-font">
                     MomE은 산후우울증을 겪었거나 겪고 있는 엄마와 가족들을 위한 특별한 공간입니다.<br>
                     당신의 여정에 함께하며 희망과 회복의 길로 안내합니다. <br><br>
                     산후우울증은 많은 엄마들이 경험하는 어려운 감정입니다. <br>
@@ -227,7 +212,7 @@ if homeImg:
                     MomE와 함께하세요.
                 </div>
                 <div class="divider"></div>
-                <div class="whatWeDoText">What we do</div>
+                <div class="contentIndex title-font">Our Service</div>
             </div>
         </div>
     ''', unsafe_allow_html=True)
@@ -240,78 +225,60 @@ if homeImg:
     row1, row2 = st.columns(2)
 
     with row1:
-        st.markdown(
-                f"""
-                <div class="service1">
-                    <div class="titleContainer">
-                        <div class="titleBar"></div>
-                        <div class="title">일기장 감정 <br>분석 서비스</div>
-                    </div>
-                    <p class="serviceDetail">
-                        일기장을 작성할 때 사용한 단어들을 분석해<br>
-                        특정 단어 사용의 빈도 수 정보를 제공합니다.<br><br>
-                        시간이 지남에 따라 나의 감정 표현의 변화를<br>
-                        관찰하며, 자신의 감정을 한층 더 깊이
-                        이해할<br>수 있습니다.
-                    </p>
-                </div>
-            """,
-            unsafe_allow_html=True
-        )
-        
-        Img_02 = load_image(Img2_path)
-        if Img_02:
-            st.markdown(
-                f'''
-                <div class="img2Container">
-                    <img src="data:image/jpg;base64,{Img_02}" />
-                </div>
-                ''',
-                unsafe_allow_html=True
-            )
-            
         st.markdown(f"""
-            <div class="service3">
+            <div class="serviceComponent body-font">
                 <div class="titleContainer">
                     <div class="titleBar"></div>
-                    <div class="title"> 육아 SNS<br>서비스</div>
+                    <div class="title title-font"> 육아 일기장<br>서비스</div>
                 </div>
                 <div class="serviceDetail">
-                    육아의 소중한 순간을 담아 사람들과<br>
-                    나눌 수 있는 공간을 만들었습니다.<br><br>
-                    아이와 함께했던 특별한 순간들을 기록하고<br>
-                    공유해보세요. 경험과 조언을 교환하고<br>
-                    서로의 이야기에 귀 기울이며 함께 성장할<br>
-                    수 있습니다. 부모로서의 여정을 함께<br>
-                    걸어가며 소중한 인연을 만들어보세요.
+                    산모가 육아 일기를 작성하며
+                    자신의 마음도 함께 돌아볼 수 있는
+                    서비스를 제공합니다.<br><br>
+                    가족과 함께 일상을 공유해보세요.
                 </div>
             </div>
             """,
             unsafe_allow_html=True
         )
-        
+
         Img_02 = load_image(Img2_path)
         if Img_02:
             st.markdown(
                 f'''
-                <div class="img2Container">
+                <div class="imgContainer">
                     <img src="data:image/jpg;base64,{Img_02}" />
                 </div>
                 ''',
                 unsafe_allow_html=True
             )
-            
 
-        # Img_04 = load_image(Img4_path)
-        # if Img_04:
-        #     st.markdown(
-        #         f'''
-        #         <div class="imgContainer">
-        #             <img src="data:image/jpg;base64,{Img_04}"/>
-        #         </div>
-        #         ''',
-        #         unsafe_allow_html=True
-        #     )
+        st.markdown(f"""
+            <div class="serviceComponent body-font">
+                <div class="titleContainer">
+                    <div class="titleBar"></div>
+                    <div class="title title-font"> 산후우울증<br>바로알기</div>
+                </div>
+                <div class="serviceDetail">
+                    산후우울증<br>(postpartum depression)<br>
+                    에 대한 원인, 증상,치료 등<br>
+                    기본정보 제공합니다.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        Img_04 = load_image(Img4_path)
+        if Img_04:
+            st.markdown(
+                f'''
+                <div class="imgContainer">
+                    <img src="data:image/jpg;base64,{Img_04}"/>
+                </div>
+                ''',
+                unsafe_allow_html=True
+            )
 
     with row2:
         Img_01 = load_image(Img1_path)
@@ -326,62 +293,52 @@ if homeImg:
             )
 
         st.markdown(f"""
-            <div class="service2">
+            <div class="serviceComponent body-font">
                 <div class="titleContainer">
                     <div class="titleBar"></div>
-                    <div class="title">산후우울증 자가검진<br>테스트</div>
+                    <div class="title title-font">일기장 감정 <br>분석 서비스</div>
                 </div>
-                <p class="serviceDetail">
-                    산후우울증 자가진단 테스트로 마음의 건강을<br>체크하세요.<br><br>
-                    에딘버러 산후우울증 척도(K-EPDS)를 근거로<br>
-                    한 산후우울증을 자가검진 할 수 있는 서비스를<br>
-                    제공합니다. 자가 검진 테스트 결과를
-                    바탕으로 <br>
-                    시각화된 데이터를 확인하여 마음의
-                    상태를<br>  쉽게 확인할 수 있습니다.
-                </p>
+                <div class="serviceDetail">
+                    일기장 단어 분석을 통해<br>감정 변화를 추적하고 긍정적인<br>피드백을 제공하여 더 건강한 육아를 할 수 있도록 지원합니다.
+                </div>
             </div>
             """,
             unsafe_allow_html=True
         )
-        
-        Img_01 = load_image(Img1_path)
-        if Img_01:
+
+        Img_03 = load_image(Img3_path)
+        if Img_03:
             st.markdown(
                 f'''
                 <div class="imgContainer">
-                    <img src="data:image/jpg;base64,{Img_01}" />
+                    <img src="data:image/jpg;base64,{Img_03}" />
                 </div>
                 ''',
                 unsafe_allow_html=True
             )
-        
-        st.markdown(
-                f"""
-                <div class="service2">
-                    <div class="titleContainer">
-                        <div class="titleBar"></div>
-                        <div class="title">가족과의 공유</div>
-                    </div>
-                    <p class="serviceDetail">
-                        일기장을 작성할 때 사용한 단어들을 분석해<br>
-                        특정 단어 사용의 빈도 수 정보를 제공합니다.<br><br>
-                        시간이 지남에 따라 나의 감정 표현의 변화를<br>
-                        관찰하며, 자신의 감정을 한층 더 깊이
-                        이해할<br>수 있습니다.
-                    </p>
+
+        st.markdown(f"""
+            <div class="serviceComponent body-font">
+                <div class="titleContainer">
+                    <div class="titleBar"></div>
+                    <div class="title title-font"> 산후우울증 자가진단<br>테스트</div>
                 </div>
+                <div class="serviceDetail">
+                    에딘버러 산후우울증 척도<br>
+                    K-EPDS를 이용하여 산후 우울증<br>
+                    자가진단 및 시각화 데이터를<br>
+                    제공합니다.
+                </div>
+            </div>
             """,
             unsafe_allow_html=True
         )
-    for i in range(18):
-        st.write('')
 
     st.divider()
 
     # 문의 및 저작권 표시
     st.markdown("""
-        <div class="contact">
+        <div class="contact body-font">
             MomE ｜ 주소 경기도 용인시 처인구 외대로 81 한국외국어대학교 ｜ 이메일 susu492@naver.com<br>
             ⓒ MomE
         </div>
@@ -391,23 +348,13 @@ else:
 
 # Sidebar menu
 with st.sidebar:
-    st.markdown("""
-        <style>
-        [data-testid="stSidebar"] {
-            background-color: #FFF9F0;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-    
-    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'MOMents', '하루 자가진단', 'LogOut'],
-                        icons=['bi bi-house', 'bi bi-grid-1x2-fill', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
+    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'Mom:ents', '하루 자가진단', 'LogOut'],
+                        icons=['bi bi-house-fill', 'bi bi-grid-1x2-fill', 'book-half', 'Bi bi-star-fill', 'bi bi-capsule-pill', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=0,
                         styles={
-                            "icon": {"font-size": "19px"},
-                            "title": {"font-weight": "bold", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                            "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
-                            "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
-                        })   
+                            "icon": {"font-size": "23px"},
+                            "title": {"font-weight": "bold"}
+                        })
 
     # Page navigation
     if menu == 'Dashboard':
