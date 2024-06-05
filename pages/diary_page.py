@@ -327,9 +327,6 @@ def main():
         with tabs[1]:
             if 'sentiment_probs' in st.session_state:
                 st.write("### 분석 결과")
-                st.write("내가 쓴 일기 분석결과:")
-                for sentiment, prob in st.session_state['sentiment_probs'].items():
-                    st.write(f"{sentiment}: {prob:.2%}")
                 st.write(f"{st.session_state['result_message']}")
                 
                 st.write("### 감정 분포")
@@ -337,6 +334,10 @@ def main():
                 custom_colors = ['#A8E6CF','#DCEDC1','#E0E0E0','#FFAAA5','#FF8B94']  # 원하는 색상 리스트
                 fig = px.pie(values=list(st.session_state['sentiment_probs'].values()), names=list(st.session_state['sentiment_probs'].keys()), color_discrete_sequence=custom_colors)
                 st.plotly_chart(fig)
+
+                st.write("내가 쓴 일기 분석결과:")
+                for sentiment, prob in st.session_state['sentiment_probs'].items():
+                    st.write(f"{sentiment}: {prob:.2%}")
                 
                 found_words = find_sentiwords(st.session_state['user_input'], sentiword_dict)
                 if found_words:
@@ -416,7 +417,7 @@ with st.sidebar:
                         styles={
                             "icon": {"font-size": "23px"},
                             "title": {"font-weight": "bold"},
-                            "nav-link-selected": {"font-size":"17px","background-color": "#FFF9EF", "color":"#091F5B","font-weight":"bold",},
+                            "nav-link-selected": {"background-color": "#FFF9EF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
                             "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
                         })
 
