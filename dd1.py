@@ -7,7 +7,7 @@ st.markdown(
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">    
     <style>
     * {
-        font-family: 'NanumSquare';
+        font-family: 'NanumSquare', sans-serif !important;
         color: #091F5B;
     }
     .stApp{
