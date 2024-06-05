@@ -294,7 +294,7 @@ if homeImg:
             st.markdown(
                 f'''
                 <div class="img2Container">
-                    <img src="data:image/jpg;base64,{Img_04}"/>
+                    <img src="data:image/jpg;base64,{Img_02}"/>
                 </div>
                 ''',
                 unsafe_allow_html=True
