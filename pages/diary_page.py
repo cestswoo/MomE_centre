@@ -366,9 +366,9 @@ def main():
 
 # 앱 실행
 with st.sidebar:
-    menu = option_menu("MomE", ['Home','Dashboard','Diary','Mom:ents','하루 자가진단', 'LogOut'],
-                        icons=['bi bi-house-fill','bi bi-grid-1x2-fill','book-half','Bi bi-star-fill' ,'bi bi-capsule-pill', 'box-arrow-in-right'],
-                        menu_icon="baby", default_index=2,
+    menu = option_menu("MomE", ['Home','Diary','Mom:ents','하루 자가진단', 'LogOut'],
+                        icons=['bi bi-house-fill', 'book-half','Bi bi-star-fill' ,'bi bi-capsule-pill', 'box-arrow-in-right'],
+                        menu_icon="baby", default_index=1,
                         styles={
                             "icon": {"font-size": "23px"},
                             "title": {"font-weight": "bold"}
@@ -376,8 +376,6 @@ with st.sidebar:
 
 if menu =='Home':
     st.switch_page("pages/home.py")
-elif menu =='Dashboard':
-    st.switch_page("pages/dashboard_page.py")
 elif menu == 'Mom:ents':
     st.switch_page("pages/SNS2.py")
 elif menu =='하루 자가진단': 
