@@ -253,10 +253,10 @@ def main():
         """,
         unsafe_allow_html=True
     )
+    
+st.image('media/diaryTitleImg.png')
 
     if 'logged_in' in st.session_state and st.session_state['logged_in']:
-        
-        st.image('media/diaryTitleImg.png')
         
         tabs = st.tabs(["일기 작성", "분석 결과", "지난 일기"])
 
