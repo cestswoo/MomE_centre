@@ -2,6 +2,56 @@ import streamlit as st
 import hashlib
 import sqlite3
 
+st.markdown(
+    """
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">    
+    <style>
+    * {
+        font-family: 'NanumSquare';
+        color: #091F5B;
+    }
+    .stApp{
+        background: #FFF9EF;
+    }
+    .stButton button {
+            background-color: #FFF9EF;
+            color: #344EAC;
+            font-weight:bold;
+            border-radius: 12px;
+            padding: 10px 24px;
+            text-align: center;
+            font-size: 20px;
+            cursor: pointer;
+            width: 325px;
+            font-family: 'NanumSquareExtraBold', ;
+            border: none;
+       }
+       .stButton button:hover {
+           background-color: #091F5B;
+           color: white;
+       }
+       .stTabs [role="tabpanel"] {
+    background-color: #ffffff; /* Change this to your desired content background color */
+    border-top: none;
+    padding: 20px;
+    border-radius: 0 0 30px 30px;
+    height: 500px;
+}
+    .stTabs [data-baseweb="tab-list"] 
+    button [data-testid="stMarkdownContainer"] p {
+    font-size:16px;
+    color: #091F5B;
+    font-family: 'NanumSquareAceb', sans-serif !important;
+    }
+     div[data-testid="stTabs"] div[role="tablist"] {
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 30px 30px 0px 0px;
+    }
+
+            </style>""",
+    unsafe_allow_html=True)
+
 conn = sqlite3.connect('data.db')
 c = conn.cursor()
 
@@ -47,30 +97,48 @@ if 'logged_in_user' not in st.session_state:
 tab1, tab2 = st.tabs(["Login", "Sign up"])
 
 with tab1:
-    st.subheader("로그인")
-    username = st.text_input("ID")
-    password = st.text_input("Password", type='password')
-    if st.button("로그인"):
-        create_usertable()
-        hashed_pswd = make_hashes(password)
-        result = login_user(username, check_hashes(password, hashed_pswd))
-        if result:
-            st.session_state['logged_in_user'] = username  # Save logged in username in session state
-            st.session_state['logged_in'] = True
-            st.switch_page("pages/home.py")
-            # st.experimental_rerun()  # 페이지 리로드
-        else:
-            st.warning("아이디/비밀번호가 틀렸습니다!")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image("media/loginImg.png")
+
+    with col2:
+        st.write("")
+        st.write("")
+        st.write("")
+
+        st.subheader("안녕하세요!")
+        st.subheader("MomE입니다.")
+        username = st.text_input("ID")
+        password = st.text_input("Password", type='password')
+        if st.button("로그인"):
+            create_usertable()
+            hashed_pswd = make_hashes(password)
+            result = login_user(username, check_hashes(password, hashed_pswd))
+            if result:
+                st.session_state['logged_in_user'] = username  # Save logged in username in session state
+                st.session_state['logged_in'] = True
+                st.switch_page("pages/home.py")
+                # st.experimental_rerun()  # 페이지 리로드
+            else:
+                st.warning("아이디 혹은 비밀번호가 틀렸습니다!") #고침
 
 with tab2:
-    st.subheader("회원가입")
-    new_user = st.text_input("ID", key='ID')
-    new_password = st.text_input("Password", type='password', key="new_password")
+    col3, col4 = st.columns(2)
     
-    if st.button("회원가입"):
-        create_usertable()
-        add_userdata(new_user, make_hashes(new_password))
-        st.success("회원가입이 완료되었습니다. 로그인 탭으로 가서 로그인하세요.")
-        # st.info("Go to Login Menu to login")
+    with col3:
+        st.image("media/loginImg.png")
 
-st.image("media/homeImg 1.png")
+    with col4:
+        st.write("")
+        st.write("")
+        st.write("")
+
+        st.subheader("환영합니다!")
+        new_user = st.text_input("ID", key='ID')
+        new_password = st.text_input("Password", type='password', key="new_password")
+    
+        if st.button("회원가입"):
+            create_usertable()
+            add_userdata(new_user, make_hashes(new_password))
+            st.success("회원가입이 완료되었습니다. 로그인 탭으로 가서 로그인하세요.")
+            # st.info("Go to Login Menu to login")
