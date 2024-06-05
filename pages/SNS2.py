@@ -214,7 +214,7 @@ with st.sidebar:
     st.markdown("""
         <style>
         [data-testid="stSidebar"] {
-            background-color: #FFF9F0;
+            background-color: #D0E3FF;
             "font-family":"'NanumSquareAceb', sans-serif !important"
         }
         </style>
