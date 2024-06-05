@@ -328,7 +328,7 @@ def main():
                 share_emotion = st.checkbox("지금 이 감정을 공유하고 싶은 사람이 있나요?")
                 
                 if share_emotion:
-                    recipient_email = st.text_input("남편의 이메일 주소를 입력하세요", "")
+                    recipient_email = st.text_input("공유할 이메일 주소를 입력하세요", "")
                     if st.button("요약 보내기"):
                         email_content = f"""
                         일기 내용: {st.session_state['user_input']}
