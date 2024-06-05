@@ -205,6 +205,22 @@ def main():
                 color: white;
                 background-color: #ffffff;
             }
+        .stButton button {
+            background-color: #FFF9F0;
+            color: #344EAC;
+            font-weight:bold;
+            border-radius: 12px;
+            padding: 10px 24px;
+            text-align: center;
+            display: inline-block;
+            font-size: 20px;
+            cursor: pointer;
+            width: 200px;
+            font-family: 'NanumSquareAceb', sans-serif !important;
+       }
+       .stButton button:hover {
+           background-color: #FFEEEE;
+       }
         .subtitle{
             font-size: 25px;
             font-weight:bold;
@@ -244,6 +260,21 @@ def main():
             font-size: 10px;
             font-family: 'Nanum Gothic', sans-serif;
         }
+        .stButton button {
+            background-color: #091F5B;
+            border-radius: 12px;
+            padding: 10px 24px;
+            text-align: center;
+            font-size: 20px;
+            cursor: pointer;
+            width: 30%;
+            border: none;
+            color: #000000;
+        }
+        .stButton button:hover {
+            background-color: #091F5B;
+            color: #ffffff;
+           }
 
         </style>
         """,
