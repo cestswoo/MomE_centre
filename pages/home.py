@@ -127,57 +127,56 @@ st.markdown(
         height: 56px;
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: center.
     }
     .titleBar {
         position: relative;
         width: 2px;
         height: 45px;
         background-color: #091F5B;
-        margin-right: 7px;
+        margin-right: 7px.
     }
     .title {
         margin-top: 3px;
-        margin-right: 40px;
-        font-size: 20px;
-        color: #091F5B;
-        line-height: 1.2;
-        font-family: 'NanumSquareExtraBold', sans-serif !important; ;
+        margin-right: 40px.
+        font-size: 20px.
+        color: #091F5B.
+        line-height: 1.2.
+        font-family: 'NanumSquareExtraBold', sans-serif !important.
     }
     .serviceDetail {
-        margin-left: 20px;
-        margin-bottom: 20px;
-        font-size: 16px;
-        text-align: start;
-        line-height: 1.4;
-        width: 300px;
-        height: 50px;
+        margin-left: 20px.
+        margin-bottom: 20px.
+        font-size: 16px.
+        text-align: start.
+        line-height: 1.4.
+        width: 300px.
+        height: 50px.
     }
     .imgContainer{
-        margin: 40px 0px;
-        
+        margin: 40px 0px.
     }
     .img2Container {
-        margin: 20px 0px 20px 25px;
-        border-radius: 30px;
+        margin: 20px 0px 20px 25px.
+        border-radius: 30px.
     }
     .copyRightDivider {
-        width: 600px;
-        height: 1.7px;
-        background-color: black;
-        margin-bottom: 55px;
+        width: 600px.
+        height: 1.7px.
+        background-color: black.
+        margin-bottom: 55px.
     }
     .contact {
-        margin: 0px 12px;
-        font-size: 10px;
-        font-family: 'Nanum Gothic', sans-serif;
+        margin: 0px 12px.
+        font-size: 10px.
+        font-family: 'Nanum Gothic', sans-serif.
     }
     .whatWeDoText{
-        font-weight: bold;
-        font-size: 20px;
-        margin-top: 50px;
-        color: black;
-        font-family: 'Nanum Pen Script', cursive;
+        font-weight: bold.
+        font-size: 20px.
+        margin-top: 50px.
+        color: black.
+        font-family: 'Nanum Pen Script', cursive.
     }
     </style>
     """,
@@ -300,18 +299,6 @@ if homeImg:
                 ''',
                 unsafe_allow_html=True
             )
-            
-
-        # Img_04 = load_image(Img4_path)
-        # if Img_04:
-        #     st.markdown(
-        #         f'''
-        #         <div class="imgContainer">
-        #             <img src="data:image/jpg;base64,{Img_04}"/>
-        #         </div>
-        #         ''',
-        #         unsafe_allow_html=True
-        #     )
 
     with row2:
         Img_01 = load_image(Img1_path)
@@ -399,7 +386,7 @@ with st.sidebar:
         </style>
     """, unsafe_allow_html=True)
     
-    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'MOMents', '하루 자가진단', 'LogOut'],
+    menu = option_menu("MomE", ['Home', 'Dashboard', 'Diary', 'Mom:ents', '하루 자가진단', 'LogOut'],
                         icons=['bi bi-house', 'bi bi-grid-1x2-fill', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=0,
                         styles={
@@ -409,14 +396,14 @@ with st.sidebar:
                             "container": {"background-color": "#FFF9EF", "color":"#6F96D1"} 
                         })       
 
-     # Page navigation
+    # Page navigation
     if menu == 'Dashboard':
-         st.switch_page("pages/dashboard_page.py")
+        st.switch_page("pages/dashboard_page")
     elif menu == 'Diary':
-         st.switch_page('pages/diary_page.py')
+        st.switch_page('pages/diary_page')
     elif menu == 'Mom:ents':
-         st.switch_page('pages/SNS2.py')
+        st.switch_page('pages/SNS2')
     elif menu == '하루 자가진단':
-         st.switch_page('pages/self_diagnosis.py')
+        st.switch_page('pages/self_diagnosis')
     elif menu == 'LogOut':
-         st.switch_page('dd1.py')
+        st.switch_page('dd1')
