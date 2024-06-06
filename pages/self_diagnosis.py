@@ -124,17 +124,35 @@ def main():
             background: #FFF9EF;
         }
         .container1{
-            background-color: #EDF0F5;
+            background-color: #ffffff;
             width: 340px;
-            height:260px;
+            height:230px;
             padding: 20px;
             margin-bottom: 15px;
-            border-radius:10px;
+            border-radius:30px;
+        }
+        .titleContainer {
+            margin: 25px 20px;
+            position: relative;
+            width: 200;
+            height: 56px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .titleBar {
+            position: relative;
+            width: 2px;
+            height: 45px;
+            background-color: #091F5B;
+            margin-right: 7px;
         }
         .servTitle {
             font-weight: bold;
             font-size: 25px;
             color: #091F5B;
+            margin-top: 3px;
+            font-family: 'NanumSquareExtraBold', sans-serif !important; ;
         }
     </style>
     """,
@@ -155,14 +173,17 @@ def main():
             st.markdown(
                 """
                 <div class="container1">
-                    <p class="servTitle"> 산후 우울증이란?</p>
+                    <div class="titleContainer">
+                        <div class="titleBar"></div>
+                        <p class="servTitle"> 산후 우울증이란?</p>
+                    </div>
                     산후우울증은 임신 마지막 달부터 출산 후 4주 이내에
-                우울증 증상(우울, 불안초조, 불면, 죄책감 등)이 발생해
-                그 증상이 2주 이상 지속되는 것을 말합니다.
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+                    우울증 증상(우울, 불안초조, 불면, 죄책감 등)이 발생해
+                    그 증상이 2주 이상 지속되는 것을 말합니다.
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
         tab1, tab2, tab3 = st.tabs(['산후 우울증 예방법', '산후 우울증 극복기', '남편의 역할'])
 
