@@ -92,7 +92,8 @@ def viewmy(posts):
         col1, col2 = st.columns([1, 1])
         with col1:
             if st.button("수정", key=f"edit_post_{post_id}"):
-                edit_posts, edit_image, edit_timestamp, edit_ispublic = edit_post(post_id, image, post, timestamp, is_public)
+                st.session_state[f"edit_post_{post_id}"] = True
+
         with col2:
             if st.button("삭제", key=f"delete_post_{post_id}"):
                 delete_post(post_id)
@@ -113,27 +114,34 @@ def viewmy(posts):
         st.markdown(f'<p style="text-align: right;">{timestamp}</p>', unsafe_allow_html=True)
         st.markdown("---")
 
-def edit_post(post_id, image, post, timestamp, is_public):
-    edited_image = None
+        if st.session_state.get(f"edit_post_{post_id}", False):
+            edit_post(post_id, image, post, is_public)
+
+def edit_post(post_id, image, post, is_public):
     edited_post = st.text_area("게시물 수정", value=post, key=f"edit2_post_{post_id}")
     edited_is_public = st.checkbox("전체 공개로 수정", value=bool(is_public), key=f"edit_public_post_{post_id}")
     
-    if image:
-        edited_image = st.file_uploader("이미지를 수정하세요.", type=['png', 'jpg', 'jpeg'], 
-                                        accept_multiple_files=False, key=f"edit_image_post_{post_id}")
-    if edited_image is None:
+    edited_image = st.file_uploader("이미지를 수정하세요.", type=['png', 'jpg', 'jpeg'], accept_multiple_files=False, key=f"edit_image_post_{post_id}")
+    if edited_image is not None:
+        edited_image = edited_image.read()
+    else:
         edited_image = image
 
     if st.button("저장", key=f"save_post_{post_id}"):
         new_post = edited_post
         new_is_public = 1 if edited_is_public else 0
-        update_post(post_id, new_post, new_is_public)
+        update_post(post_id, new_post, new_is_public, edited_image)
         st.success("게시물이 성공적으로 수정되었습니다.")
+        st.session_state[f"edit_post_{post_id}"] = False
         st.rerun()
-    return post, image, timestamp, is_public
 
-def update_post(post_id, new_post, new_is_public):
-    c.execute('UPDATE poststable SET post = ?, is_public = ? WHERE rowid = ?', (new_post, new_is_public, post_id))
+def update_post(post_id, new_post, new_is_public, new_image):
+    if new_image is not None:
+        c.execute('UPDATE poststable SET post = ?, is_public = ?, image = ? WHERE rowid = ?', 
+                  (new_post, new_is_public, new_image, post_id))
+    else:
+        c.execute('UPDATE poststable SET post = ?, is_public = ? WHERE rowid = ?', 
+                  (new_post, new_is_public, post_id))
     conn.commit()
 
 def delete_post(post_id):
