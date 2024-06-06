@@ -3,15 +3,6 @@ import sqlite3
 from streamlit_option_menu import option_menu
 from datetime import datetime
 
-st.markdown("""
-        <style>
-        .stApp{
-            background: #FFF9EF;
-        }
-
-        </style>
-    """, unsafe_allow_html=True)
-
 # 동일한 데이터베이스에 연결
 conn = sqlite3.connect('data.db', check_same_thread=False)
 c = conn.cursor()
@@ -155,6 +146,9 @@ def main():
         """
         <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
         <style>
+        .stApp{
+            background: #FFF9EF;
+        }
         * {
             font-family: 'NanumSquare', sans-serif !important;
         }
@@ -174,19 +168,14 @@ def main():
                 width: 100%;
             }
              div[data-testid="stTabs"] div[role="tablist"] {
-                background-color: #ffffff;
+                background-color: #FFF9EF;
                 padding: 10px;
-                border-radius: 30px 30px 0px 0px;
             }
             div[data-testid="stTabs"] button[aria-selected="true"] {
                 background-color: #EDF0F5;
                 color: white;
                 border-radius: 30px;
                 padding: 0pc 5px;
-            }
-            div[data-testid="stTabs"] button {
-                color: white;
-                background-color: #ffffff;
             }
         </style>
         """,
