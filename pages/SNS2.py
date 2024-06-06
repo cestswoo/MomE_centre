@@ -158,15 +158,6 @@ def main():
             color: #091F5B;
             font-family: 'NanumSquareAceb', sans-serif !important;
             }
-            div[data-testid="stTabs"] button[aria-selected="true"]::after {
-                content: "";
-                display: block;
-                border-bottom: 4px solid #ffffff;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-            }
              div[data-testid="stTabs"] div[role="tablist"] {
                 background-color: #FFF9EF;
                 padding: 10px;
