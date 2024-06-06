@@ -126,13 +126,10 @@ def main():
         .container1{
             background-color: #ffffff;
             width: 340px;
-            height:230px;
-            padding: 20px;
-            margin-bottom: 15px;
+            height:240px;
             border-radius:30px;
         }
         .titleContainer {
-            margin: 25px 20px;
             position: relative;
             width: 200;
             height: 56px;
@@ -143,13 +140,12 @@ def main():
         .titleBar {
             position: relative;
             width: 2px;
-            height: 45px;
+            height: 38px;
             background-color: #091F5B;
-            margin-right: 7px;
         }
         .servTitle {
             font-weight: bold;
-            font-size: 25px;
+            font-size: 28px;
             color: #091F5B;
             margin-top: 3px;
             font-family: 'NanumSquareExtraBold', sans-serif !important; ;
