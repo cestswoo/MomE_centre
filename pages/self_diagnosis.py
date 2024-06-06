@@ -94,7 +94,7 @@ def main():
     
     # Sidebar menu
     with st.sidebar:
-        selected_menu = option_menu("MomE", ['산후우울증이란', 'K-EPDS', 'PHQ-9'],
+        selected_menu = option_menu("Option", ['산후우울증이란', 'K-EPDS', 'PHQ-9'],
                                     icons=['book', 'clipboard-data', 'clipboard-check'],
                                     menu_icon="baby", default_index=0,
                                     styles={
