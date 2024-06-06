@@ -248,24 +248,55 @@ def main():
                     st.video(video_info["link"])
                     st.write(video_info["description"])
 
+        st.write("")
+        st.write("")
+        st.write("")
         st.markdown('''
-        <a href="https://www.nmc.or.kr/nmc22762276/main/main.do">난임·우울증 상담센터 - 국립중앙의료원(전국)</a><br>
-        <a href="https://www.mindcare-for-family.kr/">강남세브란스병원(서울권역)</a><br>
-        <a href="https://happyfamily.dumc.or.kr/">동국대학교 일산병원(경기북부권역)</a><br>
-        <a href="https://happyfamily3375.or.kr/#none">인구보건복지협회 경기도지회(경기도권역)</a><br>
-        <a href="https://id-incheon.co.kr/">가천대 길병원(인천권역)</a><br>
-        <a href="http://www.hwc1234.co.kr/">현대여성아동병원(전남권역)</a><br>
-        <a href="https://happymoa.kr/">경상북도 안동의료원(경북권역)</a><br>
-        <a href="http://www.healthymom.or.kr/">경북대학교 병원(대구권역)</a><br>
-        <a href="https://www.childcare.go.kr/?menuno=1">임신육아종합포털(아이사랑)</a><br>
-        <a href="www.familynet.or.kr">가족센터 1577-9337</a><br>
-        <a href="https://www.129.go.kr/index.do">보건복지부 보건복지상담센터 129</a><br>
-        <a href="tel:15770199">정신건강 위기상담전화 1577-0199</a><br>
-        <a href="tel:15889191">한국생명의전화 1588-9191</a>
+            <style>
+            .link-container {
+                margin-bottom: 10px;
+            }
+            a {
+                text-decoration: none;  /* Remove underline from links */
+                color: #000000;  /* Link color */
+            }
+            a:hover {
+                color: #007BFF;  /* Change color on hover */
+            }
+            h3 {
+                font-size: 20px;  /* Reduce the font size of h3 headers */
+            }
+            </style>
         ''', unsafe_allow_html=True)
 
+        st.divider()
 
-        
+        # Layout with 3 columns
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.markdown('<h3>난임·우울증</h3>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="https://www.nmc.or.kr/nmc22762276/main/main.do">국립중앙의료원(전국)</a></div>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="https://www.mindcare-for-family.kr/">강남세브란스병원(서울권역)</a></div>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="https://happyfamily.dumc.or.kr/">동국대 일산병원(경기북부권역)</a></div>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="https://happyfamily3375.or.kr/#none">인구보건복지협회(경기도권역)</a></div>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="https://id-incheon.co.kr/">가천대 길병원(인천권역)</a></div>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="http://www.hwc1234.co.kr/">현대여성아동병원(전남권역)</a></div>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="https://happymoa.kr/">안동의료원(경북권역)</a></div>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="http://www.healthymom.or.kr/">경북대 병원(대구권역)</a></div>', unsafe_allow_html=True)
+
+        with col2:
+            st.markdown('<h3>임신·육아</h3>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="https://www.childcare.go.kr/?menuno=1">임신육아종합포털</a></div>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="http://www.familynet.or.kr">가족센터(1577-9337)</a></div>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="https://www.129.go.kr/index.do">보건복지부상담센터(전국)</a></div>', unsafe_allow_html=True)
+
+        with col3:
+            st.markdown('<h3>정신건강</h3>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container"><a href="https://www.lifeline.or.kr/">한국생명의전화(1588-9191)</a></div>', unsafe_allow_html=True)
+            st.markdown('<div class="link-container">위기상담전화(1577-0199)</a></div>', unsafe_allow_html=True)
+    
+
         
     
     # 에딘버러 tab
