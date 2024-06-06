@@ -85,40 +85,6 @@ def question_block(text, answer_option, key):
     answer = st.radio("", options=list(answer_option.keys()), key=key, help=" ")
     return answer_option[answer]  # Return the integer score
 
-# Styling
-st.markdown(
-    """
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
-    <style>
-        * {
-            font-family: 'NanumSquare';
-        }
-        .stApp{
-            background: #FFF9EF;
-        }
-        .header {
-            color: #FF69B4;
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            font-family: 'NanumSquareAcb', sans-serif !important;
-        }
-        .intro-box {
-            background-color: #FFF9EF;
-            color: #091F5B;
-            padding: 5px;
-            border-radius: 30px;
-            margin-bottom: 15px;
-        }
-        .intro-text {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 def main():
 
     user = st.session_state.get('logged_in_user', '')  # session_state에서 사용자 이름 가져오기
@@ -138,13 +104,15 @@ def main():
 
     # 산후우울증이란 tab
     if selected_menu == '산후우울증이란':
-        st.header("산후우울증이란")
         st.markdown(
     """
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <style>
         * {
-            font-family: 'NanumSquare', sans-serif !important;
+            font-family: 'NanumSquare';
+        }
+        .stApp{
+            background: #FFF9EF;
         }
         .container{
             background-color: #f3f3f3;
@@ -155,7 +123,7 @@ def main():
             border-radius:10px;
         }
         .container1{
-            background-color: #f3f3f3;
+            background-color: #FFF9EF;
             width: 340px;
             height:260px;
             padding: 20px;
@@ -173,6 +141,7 @@ def main():
         .servTitle {
             font-weight: bold;
             font-size: 25px;
+            color: #091F5B;
         }
     </style>
     """,
