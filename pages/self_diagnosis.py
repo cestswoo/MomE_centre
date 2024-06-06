@@ -94,12 +94,21 @@ def main():
     
     # Sidebar menu
     with st.sidebar:
+        st.markdown("""
+        <style>
+            [data-testid="stSidebar"] {
+                background-color: #D0E3FF;
+            }
+        </style>
+        """, unsafe_allow_html=True)
         selected_menu = option_menu("MomE", ['산후우울증이란', 'K-EPDS', 'PHQ-9'],
                                     icons=['book', 'clipboard-data', 'clipboard-check'],
                                     menu_icon="baby", default_index=0,
                                     styles={
                                         "icon": {"font-size": "23px"},
-                                        "title": {"font-weight": "bold"}
+                                        "title": {"font-weight": "bold"},
+                                        "nav-link-selected": {"background-color": "#D0E3FF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
+                                        "container": {"background-color": "#D0E3FF", "color":"#FFF9EF"}
                                     })
 
     # 산후우울증이란 tab
@@ -114,26 +123,10 @@ def main():
         .stApp{
             background: #FFF9EF;
         }
-        .container{
-            background-color: #f3f3f3;
-            width: 340px;
-            height:220px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius:10px;
-        }
         .container1{
             background-color: #FFF9EF;
             width: 340px;
             height:260px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius:10px;
-        }
-        .container2{
-            background-color: #f3f3f3;
-            width: 705px;
-            height:300px;
             padding: 20px;
             margin-bottom: 15px;
             border-radius:10px;
@@ -292,9 +285,6 @@ def main():
                 '대부분 그렇음': 3
             }
 
-            
-
-     
             q1 = question_block(f"**1. 우스운 것이 눈에 잘 띄고 웃을 수 있었다.**", answer_option, key='q1')
             st.divider()
             q2 = question_block(f'**2. 즐거운 기대감에 어떤 일을 손꼽아 기다렸다.**', answer_option, key='q2')
