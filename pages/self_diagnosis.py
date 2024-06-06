@@ -128,7 +128,7 @@ def main():
             width: 340px;
             height:240px;
             border-radius:30px;
-            padding: 10px;
+            padding: 20px;
         }
         .titleContainer {
             position: relative;
