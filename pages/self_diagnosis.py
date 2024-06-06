@@ -140,7 +140,7 @@ def main():
         }
         .titleBar {
             position: relative;
-            width: 2.5px;
+            width: 3px;
             height: 32px;
             background-color: #091F5B;
             margin-right: 5px;
@@ -149,7 +149,7 @@ def main():
             font-weight: bold;
             font-size: 28px;
             color: #091F5B;
-            margin-top: 3px;
+            margin-top: 10px;
             font-family: 'NanumSquareExtraBold', sans-serif !important; ;
         }
     </style>
