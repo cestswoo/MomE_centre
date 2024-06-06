@@ -94,13 +94,6 @@ def main():
     
     # Sidebar menu
     with st.sidebar:
-        st.markdown("""
-        <style>
-            [data-testid="stSidebar"] {
-                background-color: #D0E3FF;
-            }
-        </style>
-        """, unsafe_allow_html=True)
         selected_menu = option_menu("MomE", ['산후우울증이란', 'K-EPDS', 'PHQ-9'],
                                     icons=['book', 'clipboard-data', 'clipboard-check'],
                                     menu_icon="baby", default_index=0,
@@ -149,7 +142,7 @@ def main():
             font-weight: bold;
             font-size: 28px;
             color: #091F5B;
-            margin-top: 10px;
+            margin-top: 15px;
             font-family: 'NanumSquareExtraBold', sans-serif !important; ;
         }
     </style>
@@ -605,7 +598,7 @@ def main():
     with st.sidebar:
         st.markdown("""
         <style>
-        [data-testid="stSidebar"] * {
+        [data-testid="stSidebar"] {
             background-color: #EDF0F5;
         }
         </style>
