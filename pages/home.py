@@ -157,7 +157,7 @@ st.markdown(
         margin: 20px 0px 40px 0px;
     }
     .img2Container {
-        margin: 20px 0px 20px 25px;
+        margin: 40px 0px 40px 25px;
         border-radius: 30px;
     }
     .img3Container {
