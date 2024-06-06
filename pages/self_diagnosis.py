@@ -128,6 +128,7 @@ def main():
             width: 340px;
             height:240px;
             border-radius:30px;
+            padding: 10px;
         }
         .titleContainer {
             position: relative;
@@ -139,9 +140,10 @@ def main():
         }
         .titleBar {
             position: relative;
-            width: 2px;
-            height: 38px;
+            width: 2.5px;
+            height: 32px;
             background-color: #091F5B;
+            margin-right: 5px;
         }
         .servTitle {
             font-weight: bold;
