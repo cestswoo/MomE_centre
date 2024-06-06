@@ -127,19 +127,13 @@ def edit_post(post_id, image, post, timestamp, is_public):
     if st.button("저장", key=f"save_post_{post_id}"):
         new_post = edited_post
         new_is_public = 1 if edited_is_public else 0
-        new_image = edited_image.read() if edited_image else None
-        update_post(post_id, new_post, new_is_public, new_image)
+        update_post(post_id, new_post, new_is_public)
         st.success("게시물이 성공적으로 수정되었습니다.")
         st.rerun()
     return post, image, timestamp, is_public
 
-def update_post(post_id, new_post, new_is_public, new_image):
-    if new_image:
-        c.execute('UPDATE poststable SET post = ?, is_public = ?, image = ? WHERE rowid = ?', 
-                  (new_post, new_is_public, new_image, post_id))
-    else:
-        c.execute('UPDATE poststable SET post = ?, is_public = ? WHERE rowid = ?', 
-                  (new_post, new_is_public, post_id))
+def update_post(post_id, new_post, new_is_public):
+    c.execute('UPDATE poststable SET post = ?, is_public = ? WHERE rowid = ?', (new_post, new_is_public, post_id))
     conn.commit()
 
 def delete_post(post_id):
