@@ -124,7 +124,7 @@ def main():
             background: #FFF9EF;
         }
         .container1{
-            background-color: #FFF9EF;
+            background-color: #D0E3FF;
             width: 340px;
             height:260px;
             padding: 20px;
