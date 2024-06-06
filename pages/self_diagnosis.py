@@ -641,7 +641,6 @@ def main():
                                 "nav-link-selected": {"background-color": "#D0E3FF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
                                 "container": {"background-color": "#D0E3FF", "color":"#FFF9EF"}
                         })
-                            })
 
         # Page navigation
         if menu == 'Diary':
