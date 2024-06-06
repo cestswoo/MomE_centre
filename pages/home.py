@@ -154,7 +154,7 @@ st.markdown(
         height: 50px;
     }
     .imgContainer{
-        margin: 20px 0px 20px 0px;
+        margin: 20px 0px 40px 0px;
     }
     .img2Container {
         margin: 20px 0px 20px 25px;
