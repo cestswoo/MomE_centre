@@ -599,7 +599,7 @@ def main():
         st.markdown("""
         <style>
         [data-testid="stSidebar"] {
-            background-color: #EDF0F5;
+            background-color: #D0E3FF;
         }
         </style>
         """, unsafe_allow_html=True)
