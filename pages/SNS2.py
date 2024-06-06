@@ -158,6 +158,36 @@ def main():
         * {
             font-family: 'NanumSquare', sans-serif !important;
         }
+        .stTabs [data-baseweb="tab-list"] 
+            button [data-testid="stMarkdownContainer"] p {
+            font-size:16px;
+            color: #091F5B;
+            font-family: 'NanumSquareAceb', sans-serif !important;
+            }
+            div[data-testid="stTabs"] button[aria-selected="true"]::after {
+                content: "";
+                display: block;
+                border-bottom: 4px solid #ffffff;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+            }
+             div[data-testid="stTabs"] div[role="tablist"] {
+                background-color: #ffffff;
+                padding: 10px;
+                border-radius: 30px 30px 0px 0px;
+            }
+            div[data-testid="stTabs"] button[aria-selected="true"] {
+                background-color: #EDF0F5;
+                color: white;
+                border-radius: 30px;
+                padding: 0pc 5px;
+            }
+            div[data-testid="stTabs"] button {
+                color: white;
+                background-color: #ffffff;
+            }
         </style>
         """,
         unsafe_allow_html=True
