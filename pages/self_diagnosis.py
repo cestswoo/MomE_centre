@@ -130,6 +130,7 @@ def main():
             display: flex;
             flex-direction: row;
             align-items: center;
+            margin-bottom:10px;
         }
         .titleBar {
             position: relative;
@@ -143,7 +144,7 @@ def main():
             font-size: 28px;
             color: #091F5B;
             margin-top: 15px;
-            font-family: 'NanumSquareExtraBold', sans-serif !important; ;
+            font-family: 'NanumSquareExtraBold', sans-serif !important;
         }
     </style>
     """,
