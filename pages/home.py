@@ -392,7 +392,7 @@ with st.sidebar:
         </style>
     """, unsafe_allow_html=True)
     
-    menu = option_menu("MomE", ['Home', 'Diary', "MOM'ents", '하루 자가진단', 'LogOut'],
+    menu = option_menu("MomE", ['Home', 'Diary', "Mom'ents", '하루 자가진단', 'LogOut'],
                         icons=['bi bi-house', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=0,
                         styles={
