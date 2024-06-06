@@ -205,7 +205,7 @@ def load_image(image_path):
         return None
 
 image_path = "./media/homeImg.jpg"
-Img1_path = './media/Img1.jpg'
+Img1_path = './media/Img1.png'
 Img2_path = './media/Img2.jpg'
 Img3_path = './media/Img3.jpg'
 Img4_path = './media/Img4.jpg'
