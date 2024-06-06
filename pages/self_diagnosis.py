@@ -91,30 +91,28 @@ st.markdown(
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <style>
         * {
-            font-family: 'NanumSquare', sans-serif !important;
+            font-family: 'NanumSquare';
+        }
+        .stApp{
+            background: #FFF9EF;
         }
         .header {
             color: #FF69B4;
             font-size: 36px;
             font-weight: bold;
             margin-bottom: 20px;
+            font-family: 'NanumSquareAcb', sans-serif !important;
         }
         .intro-box {
-            background-color: #fbecf7;
-            color: #000000;
-            padding: 20px;
-            border-radius: 10px;
+            background-color: #FFF9EF;
+            color: #091F5B;
+            padding: 5px;
+            border-radius: 30px;
             margin-bottom: 15px;
         }
         .intro-text {
             font-size: 20px;
             margin-bottom: 20px;
-        }
-        .result {
-            background-color: #FFC0CB;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
         }
     </style>
     """,
@@ -640,6 +638,9 @@ def main():
                             styles={
                                 "icon": {"font-size": "23px"},
                                 "title": {"font-weight": "bold"}
+                                "nav-link-selected": {"background-color": "#D0E3FF", "color":"#091F5B", "font-family":"'NanumSquareAceb', sans-serif !important"},
+                                "container": {"background-color": "#D0E3FF", "color":"#FFF9EF"}
+                        })
                             })
 
         # Page navigation
