@@ -146,6 +146,22 @@ def main():
             margin-top: 15px;
             font-family: 'NanumSquareExtraBold', sans-serif !important;
         }
+        .stTabs [data-baseweb="tab-list"] 
+            button [data-testid="stMarkdownContainer"] p {
+            font-size:16px;
+            color: #091F5B;
+            font-family: 'NanumSquareAceb', sans-serif !important;
+            }
+             div[data-testid="stTabs"] div[role="tablist"] {
+                background-color: #FFF9EF;
+                padding: 10px;
+            }
+            div[data-testid="stTabs"] button[aria-selected="true"] {
+                background-color: #EDF0F5;
+                color: white;
+                border-radius: 30px;
+                padding: 0px 5px;
+            }
     </style>
     """,
     unsafe_allow_html=True
