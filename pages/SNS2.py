@@ -226,7 +226,6 @@ with st.sidebar:
         <style>
         [data-testid="stSidebar"] {
             background-color: #D0E3FF;
-            "font-family":"'NanumSquareAceb', sans-serif !important"
         }
         </style>
     """, unsafe_allow_html=True)
