@@ -229,7 +229,7 @@ with st.sidebar:
         }
         </style>
     """, unsafe_allow_html=True)
-    menu = option_menu("MomE", ['Home','Diary', "Mom'ents",'하루 자가진단','LogOut'],
+    menu = option_menu("MomE", ['Home','Diary', "Mom'ents",'Self-Check','LogOut'],
                         icons=['bi bi-house', 'bi bi-book', 'bi bi-chat-square-heart', 'bi bi-clipboard-plus', 'box-arrow-in-right'],
                         menu_icon="baby", default_index=2,
                         styles={
@@ -242,7 +242,7 @@ with st.sidebar:
     # 선택된 메뉴에 따라 페이지 변경
     if menu == 'Diary':
         st.switch_page("pages/diary_page.py")
-    elif menu == '하루 자가진단':
+    elif menu == 'Self-Check':
         st.switch_page("pages/self_diagnosis.py")
     elif menu == 'Home':
         st.switch_page("pages/home.py")
