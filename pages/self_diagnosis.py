@@ -549,7 +549,6 @@ def main():
                     st.write("")
 
             st.divider()
-            st.subheader("Result Record")
             results = get_results(user, "phq9")
             if results:
                 result_df = pd.DataFrame(results, columns=["날짜", "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "총점"])
