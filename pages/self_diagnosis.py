@@ -300,7 +300,7 @@ def main():
         with sub_tab1:
             # Date selection
             st.write("[ Test 실시 방법 ]")
-            st.write("- 문항을 너무 오래 생각하지 말고 즉각적으로 솔직하게 응답하시면 됩니다.\n - 현재 기분이 아니라 지난 2주일 동안의 기분​​을 가장 잘 나타낸다고 생각되는 문항의 번호를 선택하시면 됩니다.")
+            st.write("- 문항을 너무 오래 생각하지 말고 즉각적으로 솔직하게 응답하시면 됩니다.\n - 현재 기분이 아니라 지난 1주일 동안의 기분​​을 가장 잘 나타낸다고 생각되는 문항의 번호를 선택하시면 됩니다.")
             st.divider()
 
             selected_date = st.date_input("오늘의 날짜를 선택해 주세요", value=datetime.now())
@@ -549,6 +549,7 @@ def main():
                     st.write("")
 
             st.divider()
+            st.subheader("Result Record")
             results = get_results(user, "phq9")
             if results:
                 result_df = pd.DataFrame(results, columns=["날짜", "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "총점"])
